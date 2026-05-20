@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redolense — Execution Systems for Growing Businesses</title>
+<meta name="description" content="Execution systems for growing businesses. WhatsApp, TikTok, M-Pesa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS — Light & Dark
+============================================================ */
+:root {
+  --bg:      #DCE8F2;  --bg-lift: #E7F0F9;  --bg-deep: #CED9E5;
+  --s-out:  -7px -7px 16px rgba(255,255,255,.92),  7px  7px 20px rgba(132,170,208,.62);
+  --s-sm:   -4px -4px  9px rgba(255,255,255,.90),  4px  4px 11px rgba(132,170,208,.56);
+  --s-in:  inset -4px -4px 9px rgba(255,255,255,.90), inset 4px 4px 11px rgba(116,160,200,.52);
+  --s-btn:  -3px -3px  7px rgba(255,255,255,.55),  3px  3px 11px rgba(16,82,172,.44);
+  --blue: #1268CC;  --blue-b: #1880EE;
+  --blue-dim: rgba(18,104,204,.08);  --blue-mid: rgba(18,104,204,.20);
+  --btn-grad: linear-gradient(140deg,#1268CC,#1880EE);
+  --btn-h:    linear-gradient(140deg,#1880EE,#1E96FF);
+  --t0:#0A1C2E; --t1:#3C5870; --t2:#789AB6;
+  --dot-c: rgba(18,104,204,.11);  --nav-blur: rgba(220,232,242,.90);
+  --div: rgba(132,170,208,.25);
+  --r:16px; --r2:10px; --r3:8px; --mw:1140px;
+}
+html.dark {
+  --bg:#0B1422; --bg-lift:#121E30; --bg-deep:#070D18;
+  --s-out: -6px -6px 15px rgba(26,56,108,.40), 6px 6px 20px rgba(0,0,0,.74);
+  --s-sm:  -4px -4px  9px rgba(26,56,108,.32), 4px 4px 11px rgba(0,0,0,.64);
+  --s-in:  inset -4px -4px 9px rgba(26,56,108,.26), inset 4px 4px 11px rgba(0,0,0,.70);
+  --s-btn: -3px -3px  7px rgba(18,48,104,.44), 3px 3px 11px rgba(0,0,0,.64);
+  --blue:#3D9BFF; --blue-b:#55ABFF;
+  --blue-dim:rgba(61,155,255,.10); --blue-mid:rgba(61,155,255,.24);
+  --btn-grad:linear-gradient(140deg,#1878E0,#2A9AFF);
+  --btn-h:   linear-gradient(140deg,#2A9AFF,#42B4FF);
+  --t0:#E2EEF8; --t1:#6688A4; --t2:#384E66;
+  --dot-c:rgba(61,155,255,.09); --nav-blur:rgba(11,20,34,.93);
+  --div:rgba(26,56,108,.38);
+}
+html.ready *, html.ready *::before, html.ready *::after {
+  transition: background-color .38s ease, color .28s ease,
+    box-shadow .38s ease, border-color .28s ease, opacity .25s ease !important;
+}
+
+/* ============================================================
+   RESET + BASE
+============================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--t0);
+  font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  opacity:0;transition:opacity .4s ease;
+}
+body.loaded{opacity:1}
+h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;line-height:1.1;font-optical-sizing:auto;color:var(--t0)}
+.label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.muted{color:var(--t1)}
+.container{max-width:var(--mw);margin:0 auto;padding:0 32px}
+.section{padding:104px 0}
+.section-alt{padding:104px 0;background:var(--bg-deep)}
+
+/* ============================================================
+   SCROLL PROGRESS
+============================================================ */
+#progress{
+  position:fixed;top:0;left:0;height:2px;width:0%;
+  background:var(--btn-grad);z-index:500;
+  transition:width .1s linear;
+}
+
+/* ============================================================
+   NAV
+============================================================ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  padding:20px 0;
+  transition:padding .3s,background .35s,box-shadow .35s;
+}
+#nav.scrolled{
+  background:var(--nav-blur);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  box-shadow:0 2px 24px rgba(0,0,0,.10);padding:13px 0;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:var(--mw);margin:0 auto;padding:0 32px}
+.nav-logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.3rem;color:var(--t0);text-decoration:none;letter-spacing:-.03em}
+.nav-logo em{font-style:normal;color:var(--blue)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:var(--t1);text-decoration:none;font-size:14px;font-weight:400;position:relative;padding-bottom:2px}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:2px;background:var(--blue);border-radius:1px;transform:scaleX(0);transition:transform .2s}
+.nav-links a.active,
+.nav-links a:hover{color:var(--blue)}
+.nav-links a.active::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:14px}
+
+/* Theme toggle */
+.theme-toggle{display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;padding:0}
+.t-lbl{font-size:11px;font-weight:600;color:var(--t2);font-family:'DM Sans'}
+.t-track{width:48px;height:25px;border-radius:100px;background:var(--bg-deep);box-shadow:var(--s-in);position:relative;flex-shrink:0}
+.t-thumb{position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:var(--bg-lift);box-shadow:var(--s-sm);display:flex;align-items:center;justify-content:center;font-size:10px;line-height:1;transition:transform .35s cubic-bezier(.34,1.56,.64,1) !important}
+html.dark .t-thumb{transform:translateX(23px)}
+.i-sun,.i-moon{position:absolute;transition:opacity .25s ease !important}
+.i-sun{opacity:1}.i-moon{opacity:0}
+html.dark .i-sun{opacity:0} html.dark .i-moon{opacity:1}
+
+.nav-cta{padding:9px 20px;border-radius:var(--r3);background:var(--btn-grad);color:#fff;font-size:13px;font-weight:700;text-decoration:none;font-family:'Bricolage Grotesque',sans-serif;box-shadow:var(--s-btn)}
+.nav-cta:hover{background:var(--btn-h);transform:translateY(-1px)}
+.nav-cta:active{box-shadow:var(--s-in)!important;transform:translateY(0)!important}
+
+/* Hamburger */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;background:var(--bg-lift);border:none;border-radius:var(--r2);box-shadow:var(--s-sm);cursor:pointer;padding:11px}
+.hamburger span{display:block;width:100%;height:2px;background:var(--t0);border-radius:2px;transition:transform .3s,opacity .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.hamburger:active{box-shadow:var(--s-in)!important}
+@media(max-width:960px){.hamburger{display:flex}.nav-links{display:none}.nav-right .t-lbl{display:none}}
+
+/* Mobile drawer */
+.mob-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:398;opacity:0;pointer-events:none;transition:opacity .3s}
+.mob-overlay.open{opacity:1;pointer-events:all}
+.mob-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:280px;z-index:399;
+  background:var(--bg-lift);box-shadow:var(--s-out);
+  transform:translateX(100%);transition:transform .35s cubic-bezier(.34,1.2,.64,1);
+  display:flex;flex-direction:column;padding:28px;
+}
+.mob-drawer.open{transform:translateX(0)}
+.mob-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
+.mob-logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.2rem;color:var(--t0)}
+.mob-logo em{font-style:normal;color:var(--blue)}
+.mob-close{width:36px;height:36px;background:var(--bg-deep);border:none;border-radius:50%;box-shadow:var(--s-sm);cursor:pointer;font-size:16px;color:var(--t1);display:flex;align-items:center;justify-content:center}
+.mob-close:active{box-shadow:var(--s-in)!important}
+.mob-nav{list-style:none;display:flex;flex-direction:column;gap:6px}
+.mob-nav a{display:block;padding:14px 18px;border-radius:var(--r2);background:var(--bg-deep);box-shadow:var(--s-in);color:var(--t0);text-decoration:none;font-weight:600;font-size:15px;transition:color .2s}
+.mob-nav a:active{box-shadow:var(--s-sm)!important}
+.mob-nav a:hover{color:var(--blue)}
+.mob-bottom{margin-top:auto}
+.mob-wa{display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:var(--r2);background:var(--btn-grad);color:#fff;text-decoration:none;font-weight:700;font-size:14px;font-family:'Bricolage Grotesque',sans-serif;box-shadow:var(--s-btn);margin-top:24px}
+
+/* ============================================================
+   HERO
+============================================================ */
+#hero{min-height:100vh;display:flex;align-items:center;padding:140px 0 80px;position:relative;overflow:hidden}
+.hero-dots{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,var(--dot-c) 1.5px,transparent 1.5px);background-size:36px 36px;mask-image:radial-gradient(ellipse 70% 80% at 58% 38%,black 10%,transparent 68%);-webkit-mask-image:radial-gradient(ellipse 70% 80% at 58% 38%,black 10%,transparent 68%)}
+.hero-glow{position:absolute;top:5%;left:44%;transform:translateX(-50%);width:840px;height:500px;pointer-events:none;background:radial-gradient(ellipse,var(--blue-dim) 0%,transparent 68%)}
+.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;position:relative;z-index:1}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;margin-bottom:36px;padding:8px 18px;background:var(--bg-lift);border-radius:100px;box-shadow:var(--s-sm);font-size:12.5px;color:var(--blue);font-weight:600}
+.pill-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:blink 2.2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
+.hero-h1{font-size:clamp(3.2rem,6.5vw,5.8rem);font-weight:800;letter-spacing:-.048em;line-height:1.0;margin-bottom:24px}
+.hero-h1 .hl{color:var(--blue);position:relative;display:inline}
+.hero-h1 .hl::after{content:'';position:absolute;bottom:.08em;left:0;right:0;height:3px;background:var(--blue);border-radius:2px;opacity:.3}
+.hero-sub{font-size:1.05rem;color:var(--t1);max-width:460px;line-height:1.85;margin-bottom:44px;font-weight:300}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+
+/* Buttons — with :active press states */
+.btn-fill{display:inline-flex;align-items:center;gap:8px;background:var(--btn-grad);color:#fff;padding:14px 30px;border-radius:var(--r3);font-size:14px;font-weight:700;text-decoration:none;font-family:'Bricolage Grotesque',sans-serif;box-shadow:var(--s-btn)}
+.btn-fill:hover{background:var(--btn-h);transform:translateY(-2px)}
+.btn-fill:active{box-shadow:var(--s-in)!important;transform:translateY(1px)!important}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:var(--bg-lift);color:var(--t1);padding:14px 28px;border-radius:var(--r3);font-size:14px;font-weight:500;text-decoration:none;box-shadow:var(--s-sm)}
+.btn-ghost:hover{box-shadow:var(--s-out);color:var(--t0)}
+.btn-ghost:active{box-shadow:var(--s-in)!important;transform:translateY(1px)!important}
+
+/* Tilted stat card */
+.hero-right{display:flex;justify-content:center}
+.stat-card{background:var(--bg-lift);border-radius:22px;box-shadow:var(--s-out);padding:32px;width:100%;max-width:350px;transform:rotate(1.8deg) translateY(-8px);transition:transform .4s ease}
+.stat-card:hover{transform:rotate(0deg) translateY(0)}
+.sc-lbl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:20px}
+.sc-items{display:flex;flex-direction:column;gap:12px}
+.sc-item{display:flex;align-items:center;gap:14px;padding:15px 17px;background:var(--bg-deep);border-radius:var(--r2);box-shadow:var(--s-in)}
+.sc-icon{width:38px;height:38px;background:var(--btn-grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;box-shadow:var(--s-btn)}
+.sc-n{font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--t0)}
+.sc-n em{font-style:normal;color:var(--blue)}
+.sc-l{font-size:11.5px;color:var(--t2);margin-top:3px}
+.sc-cta{display:block;margin-top:20px;padding:13px;background:var(--btn-grad);color:#fff;text-align:center;border-radius:var(--r3);font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:700;text-decoration:none;box-shadow:var(--s-btn)}
+.sc-cta:hover{background:var(--btn-h);transform:translateY(-1px)}
+.sc-cta:active{box-shadow:var(--s-in)!important;transform:translateY(0)!important}
+
+/* ============================================================
+   MARQUEE
+============================================================ */
+.band{background:var(--bg-lift);overflow:hidden;padding:14px 0;box-shadow:var(--s-in)}
+.band-track{display:flex;gap:56px;animation:march 28s linear infinite;width:max-content}
+.b-item{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--t1);white-space:nowrap;font-weight:500}
+.b-dot{color:var(--blue);font-size:7px}
+@keyframes march{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============================================================
+   WHY KENYA IS DIFFERENT
+============================================================ */
+.kenya-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:52px}
+.kenya-card{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:32px;position:relative;overflow:hidden;transition:box-shadow .25s,transform .2s}
+.kenya-card:hover{box-shadow:var(--s-out);transform:translateY(-2px)}
+.kenya-card::before{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:var(--blue-dim);border-radius:50%}
+.kenya-icon{font-size:2rem;margin-bottom:12px;position:relative;z-index:1}
+.kenya-num{font-family:'Bricolage Grotesque',sans-serif;font-size:2.8rem;font-weight:800;letter-spacing:-.04em;color:var(--blue);line-height:1;margin-bottom:8px}
+.kenya-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:10px;color:var(--t0)}
+.kenya-body{font-size:13.5px;color:var(--t1);line-height:1.7}
+
+/* ============================================================
+   PROBLEM
+============================================================ */
+.prob-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:start}
+.prob-h{font-size:clamp(1.7rem,3.2vw,2.3rem);font-weight:800;letter-spacing:-.03em;margin-top:14px;line-height:1.15}
+.prob-intro{font-size:15px;color:var(--t1);line-height:1.85;margin-bottom:12px}
+.prob-cards{margin-top:28px;display:flex;flex-direction:column;gap:13px}
+.prob-card{display:flex;gap:15px;padding:19px 21px;background:var(--bg-lift);border-radius:var(--r2);box-shadow:var(--s-sm);transition:box-shadow .25s}
+.prob-card:hover{box-shadow:var(--s-out)}
+.prob-card:active{box-shadow:var(--s-in)!important}
+.p-icon{width:34px;height:34px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(18,104,204,.09);border-radius:9px;font-size:13px;color:var(--blue);font-weight:900}
+html.dark .p-icon{background:rgba(61,155,255,.10)}
+.p-t{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:14px;margin-bottom:4px}
+.p-d{font-size:13px;color:var(--t1);line-height:1.55}
+
+/* ============================================================
+   TESTIMONIALS
+============================================================ */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.testi-card{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:32px;position:relative;transition:box-shadow .25s,transform .2s}
+.testi-card:hover{box-shadow:var(--s-out);transform:translateY(-2px)}
+.testi-q{font-family:'Bricolage Grotesque',sans-serif;font-size:4rem;font-weight:800;color:var(--blue);opacity:.18;line-height:.8;margin-bottom:16px}
+.testi-text{font-size:14px;color:var(--t1);line-height:1.75;margin-bottom:20px;font-style:italic}
+.testi-metric{display:inline-block;padding:5px 14px;background:var(--blue-dim);border-radius:100px;font-size:12px;font-weight:700;color:var(--blue);margin-bottom:14px}
+.testi-client{font-size:12px;color:var(--t2);font-weight:600;letter-spacing:.04em}
+
+/* ============================================================
+   SERVICES — with pricing toggle
+============================================================ */
+.svc-top{margin-bottom:16px}
+.svc-top h2{font-size:clamp(2rem,4vw,2.9rem);letter-spacing:-.035em;margin-top:14px}
+
+/* Pricing toggle */
+.price-toggle-wrap{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:52px;margin-top:32px}
+.ptl{font-size:14px;font-weight:600;color:var(--t2);transition:color .2s}
+.ptl.on{color:var(--blue)}
+.pt-track{width:50px;height:26px;border-radius:100px;background:var(--bg-deep);box-shadow:var(--s-in);position:relative;cursor:pointer;flex-shrink:0}
+.pt-thumb{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--btn-grad);box-shadow:var(--s-btn);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.pt-track.annual .pt-thumb{transform:translateX(24px)}
+.save-tag{padding:3px 10px;background:var(--blue-dim);border-radius:100px;font-size:11px;font-weight:700;color:var(--blue)}
+
+.svc-grid{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:20px;align-items:start}
+.svc-card{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:34px;position:relative;transition:box-shadow .25s,transform .2s}
+.svc-card:hover{box-shadow:var(--s-out);transform:translateY(-2px)}
+.svc-card:active{box-shadow:var(--s-in)!important}
+.svc-card.star{box-shadow:var(--s-out);border-top:3px solid var(--blue);padding-top:40px}
+.star-pin{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--btn-grad);color:#fff;font-size:10px;font-weight:800;font-family:'Bricolage Grotesque',sans-serif;padding:4px 18px;border-radius:100px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;box-shadow:0 4px 14px rgba(18,104,204,.32)}
+.svc-num{font-family:'Bricolage Grotesque',sans-serif;font-size:3.4rem;font-weight:800;letter-spacing:-.04em;color:var(--blue-dim);line-height:1;margin-bottom:12px}
+html.dark .svc-num{color:rgba(61,155,255,.12)}
+.svc-card:hover .svc-num,.svc-card.star .svc-num{color:var(--blue-mid)}
+.svc-tier{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.svc-name{font-family:'Bricolage Grotesque',sans-serif;font-size:1.9rem;font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
+.svc-tag{font-size:13px;color:var(--t1);margin-bottom:24px;line-height:1.55}
+.svc-price{margin-bottom:6px}
+.svc-pn{font-family:'Bricolage Grotesque',sans-serif;font-size:2.1rem;font-weight:800;letter-spacing:-.035em}
+.svc-pp{font-size:14px;color:var(--t1);margin-left:2px}
+.svc-note{font-size:11.5px;color:var(--t2);margin-bottom:18px;min-height:18px}
+.svc-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.svc-list li{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:var(--t1)}
+.ck{width:18px;height:18px;flex-shrink:0;background:var(--btn-grad);border-radius:5px;display:flex;align-items:center;justify-content:center;margin-top:1px;font-size:10px;color:#fff;box-shadow:0 2px 7px rgba(18,104,204,.28)}
+.svc-btn{display:block;text-align:center;padding:13px;border-radius:var(--r3);font-size:14px;font-weight:700;font-family:'Bricolage Grotesque',sans-serif;text-decoration:none;cursor:pointer}
+.svc-btn-g{background:var(--bg);color:var(--t0);box-shadow:var(--s-sm)}
+.svc-btn-g:hover{box-shadow:var(--s-out);color:var(--blue)}
+.svc-btn-g:active{box-shadow:var(--s-in)!important}
+.svc-btn-f{background:var(--btn-grad);color:#fff;box-shadow:var(--s-btn)}
+.svc-btn-f:hover{background:var(--btn-h)}
+.svc-btn-f:active{box-shadow:var(--s-in)!important}
+
+.oneoff{margin-top:52px}
+.oneoff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+.o-card{background:var(--bg-lift);border-radius:var(--r2);box-shadow:var(--s-sm);padding:22px;transition:box-shadow .25s}
+.o-card:hover{box-shadow:var(--s-out)}
+.o-card:active{box-shadow:var(--s-in)!important}
+.o-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:14px;margin-bottom:7px}
+.o-desc{font-size:12.5px;color:var(--t1);margin-bottom:14px;line-height:1.55}
+.o-price{font-size:13px;color:var(--blue);font-weight:700}
+
+/* ============================================================
+   PROCESS
+============================================================ */
+.proc-h{margin-bottom:60px}
+.proc-h h2{font-size:clamp(2rem,3.8vw,2.7rem);letter-spacing:-.035em;margin-top:14px;max-width:580px}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.proc-card{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:28px;transition:box-shadow .25s,transform .2s}
+.proc-card:nth-child(even){margin-top:28px}
+.proc-card:hover{box-shadow:var(--s-out);transform:translateY(-2px)}
+.pn{width:38px;height:38px;background:var(--btn-grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:13px;color:#fff;margin-bottom:18px;box-shadow:0 4px 10px rgba(18,104,204,.26)}
+.pt-c{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:15px;margin-bottom:10px}
+.pd{font-size:13px;color:var(--t1);line-height:1.65}
+
+/* ============================================================
+   WORK
+============================================================ */
+/* Featured work block — full width */
+.work-featured{background:var(--bg-lift);border-radius:24px;box-shadow:var(--s-out);overflow:hidden;margin-top:48px}
+.work-feat-inner{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.work-feat-content{padding:52px}
+.wf-lbl{font-size:11px;color:var(--t2);margin-bottom:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.wf-title{font-size:clamp(1.5rem,2.8vw,1.9rem);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:14px}
+.wf-desc{font-size:14px;color:var(--t1);line-height:1.8;margin-bottom:24px}
+.wf-outcomes{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.wf-out{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:var(--t1)}
+.wf-arr{color:var(--blue);font-weight:800;flex-shrink:0}
+
+/* Before/After screenshots */
+.work-feat-visual{padding:32px;background:var(--bg-deep);border-left:1px solid var(--div);display:flex;flex-direction:column;justify-content:center;gap:14px}
+.ba-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t2);margin-bottom:6px}
+.browser-mock{border-radius:10px;overflow:hidden;box-shadow:var(--s-sm)}
+.b-chrome{background:#E0E4E8;display:flex;align-items:center;gap:8px;padding:7px 12px}
+html.dark .b-chrome{background:#1C2A3A}
+.b-dots{display:flex;gap:4px}
+.b-dots span{width:8px;height:8px;border-radius:50%}
+.b-dots span:nth-child(1){background:#FF5F57}
+.b-dots span:nth-child(2){background:#FEBC2E}
+.b-dots span:nth-child(3){background:#28C840}
+.b-url{font-size:10px;color:var(--t2);margin-left:4px;font-family:monospace;background:var(--bg-lift);padding:2px 10px;border-radius:4px;flex:1;text-align:center}
+html.dark .b-url{background:var(--bg-deep)}
+
+/* Before mockup — intentionally cluttered */
+.mock-before{background:#F0EEEB;padding:0;font-family:serif;min-height:160px}
+.mb-nav{background:#1A3A6C;color:#fff;padding:7px 10px;font-size:8.5px;display:flex;justify-content:space-between;align-items:center}
+.mb-nav-links{display:flex;gap:8px;font-size:7.5px}
+.mb-nav-links a{color:rgba(255,255,255,.7);text-decoration:underline}
+.mb-banner{background:#C8C0B8;height:48px;display:flex;align-items:center;justify-content:center;font-size:7.5px;color:#666;font-style:italic}
+.mb-body{padding:8px 10px}
+.mb-title{font-size:10px;font-weight:bold;color:#333;margin-bottom:4px;line-height:1.3}
+.mb-text{font-size:7.5px;color:#555;line-height:1.5;margin-bottom:6px}
+.mb-cols{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.mb-box{background:#E8E4DF;border:1px solid #CCC;padding:5px;font-size:7px;color:#666;text-align:center}
+
+/* After mockup — clean redesign */
+.mock-after{background:#FFF;padding:0;min-height:160px}
+.ma-nav{background:#fff;border-bottom:1px solid #EEE;padding:7px 10px;display:flex;justify-content:space-between;align-items:center}
+.ma-logo{font-family:sans-serif;font-size:9.5px;font-weight:700;color:#1A3A6C;letter-spacing:-.3px}
+.ma-links{display:flex;gap:10px;font-size:7px;color:#888}
+.ma-hero{background:linear-gradient(135deg,#1A3A6C,#2A5A8C);padding:16px 10px}
+.ma-hero-h{font-size:10px;font-weight:700;color:#fff;margin-bottom:4px;font-family:sans-serif;line-height:1.3}
+.ma-hero-s{font-size:7px;color:rgba(255,255,255,.75);margin-bottom:8px;line-height:1.5}
+.ma-hero-btn{display:inline-block;background:#E84C30;color:#fff;padding:3px 9px;font-size:7.5px;font-weight:700;border-radius:3px;font-family:sans-serif}
+.ma-cards{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:10px}
+.ma-card{background:#F8FAFC;border-radius:5px;padding:7px;border:1px solid #E8EFF6}
+.ma-card-t{font-size:8px;font-weight:700;color:#1A3A6C;font-family:sans-serif;margin-bottom:2px}
+.ma-card-d{font-size:6.5px;color:#888;line-height:1.4}
+
+/* Photo placeholder inside work */
+.photo-ph{background:var(--bg-deep);border:2px dashed var(--blue-mid);border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 20px;text-align:center;color:var(--t2)}
+.ph-icon{font-size:2rem;margin-bottom:12px;opacity:.4}
+.ph-lbl{font-size:12px;font-weight:700;color:var(--t2)}
+.ph-sub{font-size:10.5px;color:var(--t2);margin-top:4px;opacity:.7}
+
+/* Other work cards */
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+.work-card{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);overflow:hidden;transition:box-shadow .25s,transform .2s}
+.work-card:hover{box-shadow:var(--s-out);transform:translateY(-2px)}
+.wc-visual{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.wc-content{padding:28px}
+.wc-tag{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.wc-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:-.02em;margin-bottom:10px}
+.wc-desc{font-size:13px;color:var(--t1);line-height:1.65;margin-bottom:16px}
+.wc-chips{display:flex;flex-wrap:wrap;gap:6px}
+.wc-chip{padding:3px 10px;background:var(--bg-deep);border-radius:100px;font-size:10px;color:var(--blue);font-weight:700;box-shadow:var(--s-in)}
+
+/* Steward Nexus visual */
+.sn-visual{background:linear-gradient(135deg,#1A2A1E,#2A4A32);width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px}
+.sn-logo-text{font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+.sn-sub{font-size:9px;color:rgba(255,255,255,.5);letter-spacing:.08em;text-transform:uppercase}
+
+/* Baseline visual */
+.fi-visual{background:linear-gradient(135deg,#0A1820,#0E2840);width:100%;height:100%;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.fi-map{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(58,155,255,.18) 1.5px,transparent 1.5px);background-size:20px 20px;opacity:.6}
+.fi-dot{width:8px;height:8px;border-radius:50%;background:#3A9BFF;box-shadow:0 0 12px rgba(58,155,255,.6);position:absolute}
+.fi-label{font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:800;color:#fff;position:relative;z-index:1;text-align:center}
+.fi-label span{display:block;font-size:9px;color:rgba(255,255,255,.5);font-family:'DM Sans';font-weight:400;margin-top:4px;letter-spacing:.08em;text-transform:uppercase}
+
+/* ============================================================
+   ABOUT
+============================================================ */
+.about-grid{display:grid;grid-template-columns:.75fr 2fr;gap:64px;align-items:start}
+.about-card{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-out);padding:26px}
+.about-dots{width:100%;height:72px;margin-bottom:18px;background-color:var(--bg-deep);background-image:radial-gradient(circle,var(--dot-c) 1.5px,transparent 1.5px);background-size:16px 16px;border-radius:var(--r2);box-shadow:var(--s-in)}
+.about-mono{font-family:'Bricolage Grotesque',sans-serif;font-size:3.2rem;font-weight:800;color:var(--blue);opacity:.18;line-height:1}
+.about-nm{font-family:'Bricolage Grotesque',sans-serif;font-size:1.15rem;font-weight:800;letter-spacing:-.025em;margin-top:14px}
+.about-role{font-size:13px;color:var(--blue);margin-top:4px;font-weight:500}
+.about-creds{margin-top:18px;display:flex;flex-direction:column;gap:6px}
+.cred{padding:5px 13px;background:var(--bg-deep);border-radius:100px;font-size:11px;color:var(--blue);font-weight:600;box-shadow:var(--s-in);display:inline-block;width:fit-content}
+.about-links{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+.about-link{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--bg-deep);border-radius:var(--r2);box-shadow:var(--s-in);text-decoration:none;color:var(--t0);font-size:12px;font-weight:600;transition:color .2s}
+.about-link:hover{color:var(--blue)}
+.about-link:active{box-shadow:var(--s-sm)!important}
+.about-h{font-size:clamp(1.7rem,3.5vw,2.4rem);letter-spacing:-.03em;margin-bottom:28px;line-height:1.12}
+.about-body{font-size:15px;color:var(--t1);line-height:1.85}
+.about-body p{margin-bottom:20px}
+
+/* SDG emblem — designed moment */
+.sdg-wrap{margin-top:28px;padding:20px 24px;background:var(--bg-deep);border-radius:var(--r2);box-shadow:var(--s-in);display:flex;align-items:flex-start;gap:16px}
+.sdg-emblem{width:44px;height:44px;flex-shrink:0;background:var(--btn-grad);border-radius:50%;box-shadow:var(--s-btn);display:flex;align-items:center;justify-content:center;font-size:18px}
+.sdg-text{font-style:italic;color:var(--t2);font-size:13px;line-height:1.7}
+.sdg-latin{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:13px;color:var(--blue);font-style:normal;margin-bottom:4px;display:block;letter-spacing:.02em}
+
+/* ============================================================
+   BLOG / INSIGHTS
+============================================================ */
+/* Featured pillar article */
+.blog-featured{
+  display:grid;grid-template-columns:1fr 200px;gap:0;
+  background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-out);
+  overflow:hidden;text-decoration:none;margin-top:48px;margin-bottom:18px;
+  transition:box-shadow .25s,transform .2s;
+}
+.blog-featured:hover{transform:translateY(-3px)}
+.blog-featured:active{box-shadow:var(--s-in)!important;transform:translateY(0)!important}
+.blog-feat-body{padding:42px 48px}
+.blog-feat-side{
+  background:var(--bg-deep);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;border-left:1px solid var(--div);
+}
+.blog-feat-side::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,var(--dot-c) 1.5px,transparent 1.5px);
+  background-size:20px 20px;
+}
+.blog-feat-inner{position:relative;z-index:1;text-align:center}
+.blog-feat-flag{font-size:2.6rem;display:block;margin-bottom:12px}
+.blog-feat-badge{
+  display:inline-block;padding:5px 16px;
+  background:var(--btn-grad);color:#fff;
+  border-radius:100px;font-size:10px;font-weight:800;
+  font-family:'Bricolage Grotesque',sans-serif;
+  letter-spacing:.08em;text-transform:uppercase;
+  box-shadow:var(--s-btn);white-space:nowrap;
+}
+.blog-pillar-tag{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.blog-pillar-read{padding:2px 8px;background:var(--blue-dim);border-radius:100px}
+.blog-pillar-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(1.35rem,2.6vw,1.85rem);letter-spacing:-.035em;line-height:1.12;margin-bottom:14px;color:var(--t0)}
+.blog-pillar-excerpt{font-size:14px;color:var(--t1);line-height:1.8;margin-bottom:24px;max-width:600px;font-weight:300}
+.blog-pillar-cta{font-size:13px;color:var(--blue);font-weight:700;display:flex;align-items:center;gap:6px}
+
+/* Spoke grid — 3 columns */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:0}
+.blog-card{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:26px;transition:box-shadow .25s,transform .2s;text-decoration:none;display:block}
+.blog-card:hover{box-shadow:var(--s-out);transform:translateY(-2px)}
+.blog-card:active{box-shadow:var(--s-in)!important;transform:translateY(0)!important}
+.blog-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:13px;display:flex;align-items:center;gap:8px}
+.blog-read{padding:2px 8px;background:var(--blue-dim);border-radius:100px}
+.blog-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:-.02em;line-height:1.2;margin-bottom:10px;color:var(--t0)}
+.blog-excerpt{font-size:13px;color:var(--t1);line-height:1.65;margin-bottom:18px;font-weight:300}
+.blog-cta{font-size:13px;color:var(--blue);font-weight:700;display:flex;align-items:center;gap:6px}
+
+/* ============================================================
+   TOOLS
+============================================================ */
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
+.tool-card{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:25px;transition:box-shadow .25s,transform .2s}
+.tool-card:hover{box-shadow:var(--s-out);transform:translateY(-2px)}
+.ts{display:inline-block;padding:3px 11px;border-radius:100px;font-size:10px;font-weight:700;margin-bottom:13px;letter-spacing:.06em;text-transform:uppercase}
+.ts-live{background:rgba(22,163,74,.10);color:#16a34a}
+.ts-beta{background:var(--blue-dim);color:var(--blue)}
+.ts-soon{background:var(--bg-deep);color:var(--t2);box-shadow:var(--s-in)}
+.t-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.t-desc{font-size:13px;color:var(--t1);line-height:1.65}
+
+/* ============================================================
+   CONTACT
+============================================================ */
+#contact{padding:104px 0;text-align:center;background:var(--bg);position:relative;overflow:hidden}
+.c-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:620px;height:400px;pointer-events:none;background:radial-gradient(ellipse,var(--blue-dim) 0%,transparent 65%)}
+.c-dots{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,var(--dot-c) 1.5px,transparent 1.5px);background-size:36px 36px;mask-image:radial-gradient(ellipse 55% 65% at 50% 55%,black,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 55% 65% at 50% 55%,black,transparent 75%)}
+.c-h{font-size:clamp(2.6rem,5.5vw,4.2rem);font-weight:800;letter-spacing:-.045em;line-height:1.0;margin-bottom:18px}
+.c-h span{color:var(--blue)}
+.c-sub{font-size:1.05rem;color:var(--t1);max-width:400px;margin:0 auto 48px;line-height:1.8;font-weight:300}
+
+/* Contact card */
+.c-card{max-width:560px;margin:0 auto;background:var(--bg-lift);border-radius:24px;box-shadow:var(--s-out);padding:40px;text-align:left}
+.c-card-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.15rem;margin-bottom:8px;text-align:center}
+.c-card-sub{font-size:13px;color:var(--t1);text-align:center;margin-bottom:28px}
+
+/* Quick inquiry form */
+.qi-form{display:flex;flex-direction:column;gap:14px}
+.qi-input{background:var(--bg-deep);border:none;border-radius:var(--r2);padding:13px 18px;font-size:14px;color:var(--t0);font-family:'DM Sans';box-shadow:var(--s-in);outline:none;width:100%}
+.qi-input::placeholder{color:var(--t2)}
+.qi-select{background:var(--bg-deep);border:none;border-radius:var(--r2);padding:13px 18px;font-size:14px;color:var(--t1);font-family:'DM Sans';box-shadow:var(--s-in);outline:none;width:100%;cursor:pointer;-webkit-appearance:none;appearance:none}
+.qi-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.qi-wa-btn{width:100%;padding:15px;border-radius:var(--r3);background:var(--btn-grad);color:#fff;border:none;cursor:pointer;font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;box-shadow:var(--s-btn);margin-top:6px;display:flex;align-items:center;justify-content:center;gap:10px}
+.qi-wa-btn:hover{background:var(--btn-h);transform:translateY(-1px)}
+.qi-wa-btn:active{box-shadow:var(--s-in)!important;transform:translateY(0)!important}
+.c-divider{text-align:center;font-size:12px;color:var(--t2);margin:20px 0;position:relative}
+.c-divider::before,.c-divider::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:var(--div)}
+.c-divider::before{left:0} .c-divider::after{right:0}
+.c-opts-row{display:flex;gap:10px;flex-wrap:wrap}
+.c-opt{flex:1;min-width:120px;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;background:var(--bg-deep);border-radius:var(--r3);text-decoration:none;color:var(--t0);font-size:13px;font-weight:500;box-shadow:var(--s-sm);transition:all .2s}
+.c-opt:hover{box-shadow:var(--s-out);color:var(--blue)}
+.c-opt:active{box-shadow:var(--s-in)!important}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
+.ft-top{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:40px;padding-bottom:40px;border-bottom:1px solid var(--div)}
+.ft-brand .ft-logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.3rem;color:var(--t0)}
+.ft-brand .ft-logo em{font-style:normal;color:var(--blue)}
+.ft-tagline{font-size:13px;color:var(--t1);margin-top:10px;line-height:1.65;max-width:220px}
+.ft-col-title{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t2);margin-bottom:16px}
+.ft-col-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.ft-col-links a{font-size:13.5px;color:var(--t1);text-decoration:none;transition:color .2s}
+.ft-col-links a:hover{color:var(--blue)}
+.ft-socials{display:flex;flex-direction:column;gap:10px}
+.ft-social{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-lift);border-radius:var(--r2);box-shadow:var(--s-sm);text-decoration:none;color:var(--t0);font-size:13px;font-weight:500;transition:all .2s}
+.ft-social:hover{box-shadow:var(--s-out);color:var(--blue)}
+.ft-social:active{box-shadow:var(--s-in)!important}
+.ft-social-icon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.ft-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft-copy{font-size:12px;color:var(--t2)}
+
+/* ============================================================
+   WHATSAPP FLOAT
+============================================================ */
+.wa-float{
+  position:fixed;bottom:28px;right:28px;z-index:250;
+  opacity:0;transform:translateY(16px) scale(.9);
+  pointer-events:none;
+  transition:opacity .4s ease,transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.wa-float.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
+.wa-btn{
+  display:flex;align-items:center;gap:10px;
+  background:linear-gradient(140deg,#25D366,#1DA851);
+  color:#fff;padding:14px 20px;border-radius:100px;
+  text-decoration:none;font-family:'Bricolage Grotesque',sans-serif;
+  font-size:14px;font-weight:700;
+  box-shadow:-4px -4px 10px rgba(255,255,255,.30),4px 4px 14px rgba(0,100,50,.40);
+  transition:transform .2s,box-shadow .2s;
+}
+.wa-btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:-4px -4px 12px rgba(255,255,255,.35),5px 5px 18px rgba(0,100,50,.50)}
+.wa-btn:active{transform:translateY(0) scale(.97)!important;box-shadow:inset -3px -3px 8px rgba(255,255,255,.25),inset 3px 3px 8px rgba(0,80,40,.35)!important}
+.wa-icon{font-size:20px;line-height:1}
+.wa-label{white-space:nowrap}
+
+/* ============================================================
+   BOT WIDGET
+============================================================ */
+.bot-btn{
+  position:fixed;bottom:28px;left:28px;z-index:250;
+  width:54px;height:54px;border-radius:50%;
+  background:var(--bg-lift);box-shadow:var(--s-out);
+  border:none;cursor:pointer;font-size:22px;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .2s,box-shadow .2s;
+  opacity:0;transform:translateY(16px) scale(.9);pointer-events:none;
+}
+.bot-btn.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
+.bot-btn:hover{transform:scale(1.06);box-shadow:var(--s-out)}
+.bot-btn:active{box-shadow:var(--s-in)!important;transform:scale(.95)!important}
+.bot-badge{position:absolute;top:2px;right:2px;width:12px;height:12px;background:#4ade80;border-radius:50%;border:2px solid var(--bg-lift);animation:blink 2.5s ease-in-out infinite}
+
+.chat-win{
+  position:fixed;bottom:96px;left:28px;width:330px;
+  background:var(--bg-lift);border-radius:20px;box-shadow:var(--s-out);
+  display:flex;flex-direction:column;overflow:hidden;z-index:250;
+  transform:scale(.9) translateY(20px);opacity:0;pointer-events:none;
+  transition:all .3s cubic-bezier(.34,1.2,.64,1);
+}
+.chat-win.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+.chat-head{background:var(--btn-grad);padding:14px 18px;display:flex;align-items:center;gap:10px}
+.ch-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;flex-shrink:0}
+.ch-info{flex:1}
+.ch-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:14px;color:#fff}
+.ch-sub{font-size:10px;color:rgba(255,255,255,.7);margin-top:1px}
+.ch-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:18px;cursor:pointer;padding:4px;line-height:1}
+.ch-close:hover{color:#fff}
+.chat-msgs{height:300px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.chat-msgs::-webkit-scrollbar{width:3px}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--blue-mid);border-radius:2px}
+.msg{max-width:88%;border-radius:14px;padding:9px 13px;font-size:13px;line-height:1.55;word-wrap:break-word}
+.msg-bot{background:var(--bg-deep);box-shadow:var(--s-sm);color:var(--t0);border-bottom-left-radius:4px;align-self:flex-start}
+.msg-usr{background:var(--btn-grad);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.typing-ind{display:flex;gap:4px;padding:10px 13px;align-items:center;align-self:flex-start}
+.typing-ind span{width:6px;height:6px;background:var(--t2);border-radius:50%;animation:typ 1.2s ease-in-out infinite}
+.typing-ind span:nth-child(2){animation-delay:.2s}
+.typing-ind span:nth-child(3){animation-delay:.4s}
+@keyframes typ{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-6px);opacity:1}}
+.chat-inp-wrap{padding:10px;border-top:1px solid var(--div);background:var(--bg-deep);display:flex;gap:8px;align-items:center}
+.chat-inp{flex:1;background:var(--bg-lift);border:none;border-radius:100px;padding:9px 15px;font-size:13px;color:var(--t0);box-shadow:var(--s-in);outline:none;font-family:'DM Sans'}
+.chat-inp::placeholder{color:var(--t2)}
+.chat-send{width:34px;height:34px;border-radius:50%;background:var(--btn-grad);border:none;cursor:pointer;font-size:13px;color:#fff;box-shadow:var(--s-btn);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.chat-send:active{box-shadow:var(--s-in)!important;transform:scale(.93)!important}
+
+/* ============================================================
+   FADE IN
+============================================================ */
+.fi{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease !important}
+.fi.v{opacity:1;transform:translateY(0)}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media(max-width:960px){
+  .hero-inner,.work-feat-inner{grid-template-columns:1fr}
+  .hero-right,.case-side{display:none}
+  .svc-grid{grid-template-columns:1fr}
+  .prob-grid{grid-template-columns:1fr;gap:44px}
+  .proc-grid{grid-template-columns:1fr 1fr}
+  .proc-card:nth-child(even){margin-top:0}
+  .testi-grid{grid-template-columns:1fr}
+  .kenya-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .oneoff-grid{grid-template-columns:1fr 1fr}
+  .tools-grid{grid-template-columns:1fr 1fr}
+  .blog-grid{grid-template-columns:1fr}
+  .blog-featured{grid-template-columns:1fr}
+  .blog-feat-side{display:none}
+  .work-grid{grid-template-columns:1fr}
+  .work-feat-visual{border-left:none;border-top:1px solid var(--div)}
+  .ft-top{grid-template-columns:1fr}
+  .qi-row{grid-template-columns:1fr}
+  .c-opts-row{flex-direction:column}
+  .chat-win{left:12px;right:12px;width:auto}
+  .bot-btn{left:12px;bottom:20px}
+  .wa-float{right:12px;bottom:20px}
+}
+@media(max-width:560px){
+  .oneoff-grid,.tools-grid,.proc-grid{grid-template-columns:1fr}
+  .container{padding:0 20px}
+  .wa-label{display:none}
+  .wa-btn{padding:14px;border-radius:50%;width:54px;height:54px}
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="progress"></div>
+
+<!-- MOBILE OVERLAY + DRAWER -->
+<div class="mob-overlay" id="mobOverlay"></div>
+<div class="mob-drawer" id="mobDrawer">
+  <div class="mob-top">
+    <div class="mob-logo">Redo<em>lense</em></div>
+    <button class="mob-close" id="mobClose">✕</button>
+  </div>
+  <ul class="mob-nav">
+    <li><a href="#why-kenya" class="mob-link">Why us</a></li>
+    <li><a href="#services" class="mob-link">Services</a></li>
+    <li><a href="#work" class="mob-link">Work</a></li>
+    <li><a href="#about" class="mob-link">About</a></li>
+    <li><a href="#insights" class="mob-link">Insights</a></li>
+    <li><a href="#tools" class="mob-link">Tools</a></li>
+    <li><a href="#contact" class="mob-link">Contact</a></li>
+  </ul>
+  <div class="mob-bottom">
+    <a href="https://wa.me/254726900026" class="mob-wa" target="_blank">
+      💬 WhatsApp us
+    </a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Redo<em>lense</em></a>
+    <ul class="nav-links">
+      <li><a href="#why-kenya">Why us</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">
+        <span class="t-lbl" id="tLbl">Dark</span>
+        <div class="t-track">
+          <div class="t-thumb"><span class="i-sun">☀️</span><span class="i-moon">🌙</span></div>
+        </div>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="#contact" class="nav-cta">Book a call →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================================================================
+     HERO  [page: index]
+================================================================ -->
+<section id="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="fi">
+        <div class="hero-pill">
+          <span class="pill-dot"></span>
+          2 of 3 client slots open this month
+        </div>
+        <h1 class="hero-h1">
+          <span class="hl">Well-crafted systems</span><br>for businesses<br>that scale.
+        </h1>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-fill">Book a discovery call →</a>
+          <a href="#services" class="btn-ghost">See packages</a>
+        </div>
+      </div>
+      <div class="hero-right fi">
+        <div class="stat-card">
+          <div class="sc-lbl">Why Redolense</div>
+          <div class="sc-items">
+            <div class="sc-item"><div class="sc-icon">🏭</div><div><div class="sc-n">9<em>+</em></div><div class="sc-l">Industries served</div></div></div>
+            <div class="sc-item"><div class="sc-icon">🛠️</div><div><div class="sc-n">6<em>yr</em></div><div class="sc-l">Engineering-led practice</div></div></div>
+            <div class="sc-item"><div class="sc-icon">⚡</div><div><div class="sc-n">&lt;<em>14d</em></div><div class="sc-l">First call to first deliverable</div></div></div>
+          </div>
+          <a href="#contact" class="sc-cta">Start with a discovery call →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="band">
+  <div class="band-track">
+    <span class="b-item"><span class="b-dot">●</span>WhatsApp Automation</span>
+    <span class="b-item"><span class="b-dot">●</span>TikTok-First Strategy</span>
+    <span class="b-item"><span class="b-dot">●</span>M-Pesa Native Funnels</span>
+    <span class="b-item"><span class="b-dot">●</span>SEO & Content Marketing</span>
+    <span class="b-item"><span class="b-dot">●</span>Brand Identity</span>
+    <span class="b-item"><span class="b-dot">●</span>Video Production</span>
+    <span class="b-item"><span class="b-dot">●</span>AI-Powered Tools</span>
+    <span class="b-item"><span class="b-dot">●</span>Lead Capture Systems</span>
+    <span class="b-item"><span class="b-dot">●</span>Website Design & Dev</span>
+    <span class="b-item"><span class="b-dot">●</span>Growth Consulting</span>
+    <span class="b-item"><span class="b-dot">●</span>CRM Setup</span>
+    <span class="b-item"><span class="b-dot">●</span>WhatsApp Automation</span>
+    <span class="b-item"><span class="b-dot">●</span>TikTok-First Strategy</span>
+    <span class="b-item"><span class="b-dot">●</span>M-Pesa Native Funnels</span>
+    <span class="b-item"><span class="b-dot">●</span>SEO & Content Marketing</span>
+    <span class="b-item"><span class="b-dot">●</span>Brand Identity</span>
+    <span class="b-item"><span class="b-dot">●</span>Video Production</span>
+    <span class="b-item"><span class="b-dot">●</span>AI-Powered Tools</span>
+    <span class="b-item"><span class="b-dot">●</span>Lead Capture Systems</span>
+    <span class="b-item"><span class="b-dot">●</span>Website Design & Dev</span>
+    <span class="b-item"><span class="b-dot">●</span>Growth Consulting</span>
+    <span class="b-item"><span class="b-dot">●</span>CRM Setup</span>
+  </div>
+</div>
+
+<!-- ================================================================
+     WHY KENYA IS DIFFERENT  [page: why-kenya]
+================================================================ -->
+<section class="section-alt" id="why-kenya">
+  <div class="container">
+    <p class="label fi">Why platform matters</p>
+    <h2 class="fi" style="font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-.035em;margin-top:14px;max-width:680px">The channels your customers actually use — most agencies don't know this. We live it.</h2>
+    <p class="muted fi" style="margin-top:14px;max-width:540px;line-height:1.8;font-size:15px">Your customers are on specific platforms, with specific behaviours and economics. Generic agencies guess. We build for where they actually are.</p>
+    <div class="kenya-grid">
+      <div class="kenya-card fi">
+        <div class="kenya-icon">🎵</div>
+        <div class="kenya-num">#1</div>
+        <div class="kenya-title">TikTok is your distribution</div>
+        <div class="kenya-body">TikTok has surpassed Facebook in daily active users in the 18–34 demographic — your primary spending cohort. Your next 1,000 customers are on their For You page right now, not waiting for a Google ad.</div>
+      </div>
+      <div class="kenya-card fi">
+        <div class="kenya-icon">💬</div>
+        <div class="kenya-num">67%</div>
+        <div class="kenya-title">WhatsApp is your CRM</div>
+        <div class="kenya-body">Most B2B deals close on WhatsApp — not email, not in a boardroom. Your follow-up system needs to live in the chat thread, not a spreadsheet you'll never open again.</div>
+      </div>
+      <div class="kenya-card fi">
+        <div class="kenya-icon">🤝</div>
+        <div class="kenya-num">3×</div>
+        <div class="kenya-title">Referral is your media</div>
+        <div class="kenya-body">Consumers trust a recommendation from their network 3× more than any ad or Google review. We build systems that activate that referral loop at scale — automatically, not manually.</div>
+      </div>
+      <div class="kenya-card fi">
+        <div class="kenya-icon">📱</div>
+        <div class="kenya-num">60%</div>
+        <div class="kenya-title">Mobile money is your checkout</div>
+        <div class="kenya-body">Mobile money dominates digital payments across high-growth markets. If your funnel doesn't end where your customers actually pay, you're losing them at the last and most important step.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     PROBLEM
+================================================================ -->
+<section class="section" id="problem">
+  <div class="container">
+    <div class="prob-grid">
+      <div>
+        <p class="label fi">The problem</p>
+        <h2 class="prob-h fi">Most businesses are invisible online — not because they're bad at business, but because no one built them a system.</h2>
+      </div>
+      <div>
+        <p class="prob-intro fi">Most growing businesses are running on hustle — chasing leads manually, posting inconsistently, and hoping the website does something. It's not a discipline problem. It's a systems problem.</p>
+        <p class="prob-intro fi" style="margin-bottom:0">Redolense builds the infrastructure that turns scattered effort into compounding results.</p>
+        <div class="prob-cards">
+          <div class="prob-card fi"><div class="p-icon">✕</div><div><div class="p-t">No funnel, no system</div><div class="p-d">You're following up manually on WhatsApp, losing leads between conversations you never recorded anywhere.</div></div></div>
+          <div class="prob-card fi"><div class="p-icon">✕</div><div><div class="p-t">No content machine</div><div class="p-d">You post when you remember, go silent for weeks, and wonder why your engagement dropped to zero.</div></div></div>
+          <div class="prob-card fi"><div class="p-icon">✕</div><div><div class="p-t">No digital presence</div><div class="p-d">Your Google result is a Facebook page from 2020 you forgot existed. That's your first impression.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     TESTIMONIALS
+================================================================ -->
+<section class="section-alt" id="testimonials">
+  <div class="container">
+    <p class="label fi">Social proof</p>
+    <h2 class="fi" style="font-size:clamp(1.9rem,3.8vw,2.6rem);letter-spacing:-.035em;margin-top:14px">Results our clients are seeing.</h2>
+    <div class="testi-grid">
+
+      <div class="testi-card fi">
+        <div class="testi-q">"</div>
+        <div class="testi-text">The WhatsApp automation changed how we handle leads entirely. We went from losing inquiries in old chats to closing them systematically, same day.</div>
+        <div class="testi-metric">34% reduction in lost leads</div>
+        <div class="testi-client">Confidential · Nairobi Restaurant Group 🇰🇪</div>
+      </div>
+      <div class="testi-card fi">
+        <div class="testi-q">"</div>
+        <div class="testi-text">In 60 days of TikTok content we generated more qualified inquiries than the entire previous year of word-of-mouth referrals combined.</div>
+        <div class="testi-metric">15+ qualified leads/month from TikTok</div>
+        <div class="testi-client">Confidential · Kenyan Fintech 🇰🇪</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SERVICES  [page: services]
+================================================================ -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="svc-top">
+      <p class="label fi">What we build</p>
+      <h2 class="fi">Pick your starting point.<br>We build from there.</h2>
+      <p class="muted fi" style="margin-top:14px;max-width:460px;line-height:1.8;font-size:15px">Signal gets you visible. Engine gets you growing. System makes you unbeatable.</p>
+    </div>
+
+    <div class="svc-grid">
+      <div class="svc-card fi">
+        <div class="svc-num">01</div>
+        <div class="svc-tier">Tier 01</div>
+        <div class="svc-name">Signal</div>
+        <div class="svc-tag">Your foundation. Get discovered, get credible, get started.</div>
+        <div class="svc-price">
+          <span class="svc-pn" style="font-size:1.15rem;letter-spacing:-.02em">Request a quote</span>
+        </div>
+        <ul class="svc-list">
+          <li><span class="ck">✓</span>Custom 5-page website, live in 10 days</li>
+          <li><span class="ck">✓</span>Google SEO setup & on-page optimisation</li>
+          <li><span class="ck">✓</span>WhatsApp Business profile & auto-reply</li>
+          <li><span class="ck">✓</span>1 social channel — 8 posts/month</li>
+          <li><span class="ck">✓</span>Monthly performance report</li>
+          <li><span class="ck">✓</span>1× strategy call/month</li>
+        </ul>
+        <a href="#contact" class="svc-btn svc-btn-g">Request a quote →</a>
+      </div>
+
+      <div class="svc-card star fi">
+        <div class="star-pin">Most Popular</div>
+        <div class="svc-num">02</div>
+        <div class="svc-tier">Tier 02</div>
+        <div class="svc-name">Engine</div>
+        <div class="svc-tag">The machine. Content, leads, and automation working together.</div>
+        <div class="svc-price">
+          <span class="svc-pn" style="font-size:1.15rem;letter-spacing:-.02em">Request a quote</span>
+        </div>
+        <ul class="svc-list">
+          <li><span class="ck">✓</span>Everything in Signal</li>
+          <li><span class="ck">✓</span>TikTok + Instagram — 16 posts/month</li>
+          <li><span class="ck">✓</span>2 SEO blog posts/month</li>
+          <li><span class="ck">✓</span>WhatsApp automation — lead capture + follow-up</li>
+          <li><span class="ck">✓</span>M-Pesa payment link integration</li>
+          <li><span class="ck">✓</span>Monthly strategy session (90 min)</li>
+        </ul>
+        <a href="#contact" class="svc-btn svc-btn-f">Request a quote →</a>
+      </div>
+
+      <div class="svc-card fi">
+        <div class="svc-num">03</div>
+        <div class="svc-tier">Tier 03</div>
+        <div class="svc-name">System</div>
+        <div class="svc-tag">Full infrastructure. You run the business. We run the machine.</div>
+        <div class="svc-price">
+          <span class="svc-pn" style="font-size:1.15rem;letter-spacing:-.02em">Request a quote</span>
+        </div>
+        <ul class="svc-list">
+          <li><span class="ck">✓</span>Everything in Engine</li>
+          <li><span class="ck">✓</span>2 brand / corporate videos per month</li>
+          <li><span class="ck">✓</span>Full WhatsApp sales funnel (Fuata)</li>
+          <li><span class="ck">✓</span>CRM setup & management</li>
+          <li><span class="ck">✓</span>Custom AI marketing tool</li>
+          <li><span class="ck">✓</span>Weekly strategy calls</li>
+        </ul>
+        <a href="#contact" class="svc-btn svc-btn-g">Request a quote →</a>
+      </div>
+    </div>
+
+    <div class="oneoff">
+      <p class="label fi">One-off projects</p>
+      <div class="oneoff-grid">
+        <div class="o-card fi"><div class="o-name">Brand Identity</div><div class="o-desc">Logo, visual system, brand guidelines. Built to last a decade.</div><div class="o-price">Request a quote →</div></div>
+        <div class="o-card fi"><div class="o-name">Website Design & Dev</div><div class="o-desc">Fast, SEO-ready, mobile-first. Your asset, your domain.</div><div class="o-price">Request a quote →</div></div>
+        <div class="o-card fi"><div class="o-name">Corporate Video</div><div class="o-desc">Brand films, explainers, launches. DaVinci Resolve.</div><div class="o-price">Request a quote →</div></div>
+        <div class="o-card fi"><div class="o-name">WhatsApp Funnel (Fuata)</div><div class="o-desc">First message to M-Pesa Paybill. No CRM required.</div><div class="o-price">Request a quote →</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     PROCESS
+================================================================ -->
+<section class="section-alt" id="process">
+  <div class="container">
+    <div class="proc-h">
+      <p class="label fi">How we work</p>
+      <h2 class="fi">No 8-week onboarding.<br>No guesswork.</h2>
+      <p class="muted fi" style="margin-top:14px;max-width:360px;line-height:1.8">First call to first deliverable in under two weeks.</p>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-card fi"><div class="pn">01</div><div class="pt-c">Discovery Call</div><div class="pd">30 minutes. We understand your business, your customer, and your revenue gap. No pitch — just honest diagnosis.</div></div>
+      <div class="proc-card fi"><div class="pn">02</div><div class="pt-c">System Audit</div><div class="pd">We audit your digital presence, content, and lead flow. Plain-language report: what's broken, what to fix first.</div></div>
+      <div class="proc-card fi"><div class="pn">03</div><div class="pt-c">Build & Deploy</div><div class="pd">We build your systems — website, content, automation. Everything documented and handed to you as a permanent asset.</div></div>
+      <div class="proc-card fi"><div class="pn">04</div><div class="pt-c">Measure & Refine</div><div class="pd">Monthly data reviews. We track what moves — leads, conversions, reach — and adjust the system accordingly.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     WORK  [page: work]
+================================================================ -->
+<section class="section" id="work">
+  <div class="container">
+    <p class="label fi">Work</p>
+    <h2 class="fi" style="font-size:clamp(1.9rem,3.8vw,2.6rem);letter-spacing:-.035em;margin-top:14px">Systems we've built.<br>Results we can show.</h2>
+
+    <!-- Other work cards -->
+    <div class="work-grid">
+      <!-- Steward Nexus -->
+      <div class="work-card fi">
+        <div class="wc-visual">
+          <div class="sn-visual">
+            <div class="sn-logo-text">Steward Nexus</div>
+            <div class="sn-sub">Faith · Business · Community</div>
+          </div>
+        </div>
+        <div class="wc-content">
+          <div class="wc-tag">Platform Build · Nairobi</div>
+          <div class="wc-title">Steward Nexus — Faith & Business Community Platform</div>
+          <div class="wc-desc">Full digital ecosystem for a faith-and-business community. Website, email infrastructure, and a Supabase-backed Company OS PWA for member management and resource delivery.</div>
+          <div class="wc-chips">
+            <span class="wc-chip">Netlify</span>
+            <span class="wc-chip">Supabase</span>
+            <span class="wc-chip">Brevo</span>
+            <span class="wc-chip">Zoho Mail</span>
+            <span class="wc-chip">PWA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Baseline -->
+      <div class="work-card fi">
+        <div class="wc-visual">
+          <div class="fi-visual">
+            <div class="fi-map"></div>
+            <div class="fi-dot" style="top:35%;left:40%"></div>
+            <div class="fi-dot" style="top:55%;left:60%;width:6px;height:6px;opacity:.7"></div>
+            <div class="fi-dot" style="top:45%;left:30%;width:5px;height:5px;opacity:.5"></div>
+            <div class="fi-label">Baseline<span>Data Collection Platform</span></div>
+          </div>
+        </div>
+        <div class="wc-content">
+          <div class="wc-tag">SaaS · Data Platform</div>
+          <div class="wc-title">Baseline — Structured Data Collection Platform</div>
+          <div class="wc-desc">Multi-page SPA for structured data collection — Leaflet maps, Recharts visualizations, custom survey builder, and a submission analysis engine. Built for organisations that run programs in the field.</div>
+          <div class="wc-chips">
+            <span class="wc-chip">React</span>
+            <span class="wc-chip">Leaflet</span>
+            <span class="wc-chip">Recharts</span>
+            <span class="wc-chip">Firebase</span>
+            <span class="wc-chip">SPA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     ABOUT  [page: about]
+================================================================ -->
+<section class="section-alt" id="about">
+  <div class="container">
+    <div class="about-grid" style="grid-template-columns:1fr">
+      <div>
+        <p class="label fi">About Redolense</p>
+        <h2 class="about-h fi">Built for businesses<br>that scale.</h2>
+        <div class="about-body fi">
+          <p>Redolense was founded by Joemark Mureithi — a Design Engineer and Technical Program Manager with six years of cross-industry execution spanning cleantech, manufacturing, agriculture, healthcare, urban infrastructure, commercial vehicles, and creative media. Built in Nairobi. Delivered globally.</p>
+          <p>The name draws from Latin: <em>redolens</em> — to carry the essence of something, to give off the scent of what you are. Your brand radiates an impression whether you engineer it or not. Redolense engineers it with precision.</p>
+          <p>Engineering discipline applied to growth — requirements analysis, process design, iterative testing, measurement.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     BLOG / INSIGHTS  [page: insights]
+================================================================ -->
+<section class="section" id="insights">
+  <div class="container">
+    <p class="label fi">Insights</p>
+    <h2 class="fi" style="font-size:clamp(1.9rem,3.8vw,2.6rem);letter-spacing:-.035em;margin-top:14px">Thinking out loud about<br>digital growth.</h2>
+    <p class="muted fi" style="margin-top:14px;max-width:480px;line-height:1.8;font-size:15px">Four articles. One argument: digital growth runs on different rules than most agencies admit — and the businesses winning right now know exactly which ones.</p>
+
+    <!-- PILLAR ARTICLE — featured -->
+    <a href="blog-tiktok.html" class="blog-featured fi">
+      <div class="blog-feat-body">
+        <div class="blog-pillar-tag">
+          <span>🎵 TikTok</span>
+          <span class="blog-pillar-read">6 min read</span>
+        </div>
+        <div class="blog-pillar-title">TikTok Overtook Facebook in 2024. Most Businesses Missed It.</div>
+        <div class="blog-pillar-excerpt">The algorithm shifted. The 18–34 demographic moved. The window for building an unassailable free audience is open — for roughly 18 more months. After that, you pay to reach people competitors built for free.</div>
+        <div class="blog-pillar-cta">Read the full article <span>→</span></div>
+      </div>
+      <div class="blog-feat-side">
+        <div class="blog-feat-inner">
+          <span class="blog-feat-badge">Pillar Article</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 3 SPOKE ARTICLES -->
+    <div class="blog-grid">
+      <a href="blog-whatsapp.html" class="blog-card fi">
+        <div class="blog-tag">
+          <span>💬 WhatsApp</span>
+          <span class="blog-read">7 min read</span>
+        </div>
+        <div class="blog-title">WhatsApp Is Your CRM, Your Sales Floor, and Your Customer Service Desk. Are You Using It Like One?</div>
+        <div class="blog-excerpt">Most businesses lose leads every night on WhatsApp — not because they respond slowly, but because they have no system. Here's the five-step architecture that fixes it.</div>
+        <div class="blog-cta">Read article <span>→</span></div>
+      </a>
+      <a href="blog-mpesa.html" class="blog-card fi">
+        <div class="blog-tag">
+          <span>📱 M-Pesa</span>
+          <span class="blog-read">6 min read</span>
+        </div>
+        <div class="blog-title">Your Sales Funnel Has a Broken Last Step. It Doesn't Accept M-Pesa.</div>
+        <div class="blog-excerpt">Mobile money is the dominant checkout across East Africa. If your sales funnel ends with a bank card link, you're selling to the exception — not the market.</div>
+        <div class="blog-cta">Read article <span>→</span></div>
+      </a>
+      <a href="blog-why-kenya-is-different.html" class="blog-card fi">
+        <div class="blog-tag">
+          <span>🌍 Digital Strategy</span>
+          <span class="blog-read">7 min read</span>
+        </div>
+        <div class="blog-title">Why Kenya's Digital Economy Operates on Different Rules</div>
+        <div class="blog-excerpt">WhatsApp, TikTok, M-Pesa, and community referral networks are the actual infrastructure. Here's what that means for your business.</div>
+        <div class="blog-cta">Read article <span>→</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     TOOLS  [page: tools]
+================================================================ -->
+<section class="section-alt" id="tools">
+  <div class="container">
+    <p class="label fi">AI Tools</p>
+    <h2 class="fi" style="font-size:clamp(1.9rem,3.8vw,2.7rem);letter-spacing:-.04em;margin-top:14px">The tools are catching up<br>to the strategy.</h2>
+    <p class="muted fi" style="margin-top:14px;max-width:480px;line-height:1.8;font-size:15px">Building execution tools for businesses — M-Pesa native, WhatsApp native, Swahili-ready.</p>
+    <div class="tools-grid">
+      <div class="tool-card fi"><span class="ts ts-live">Live</span><div class="t-name">Baseline</div><div class="t-desc">Maps, custom survey builder, and submission analysis — built for organisations that collect and act on field data.</div></div>
+      <div class="tool-card fi"><span class="ts ts-beta">Beta</span><div class="t-name">Fuata — WhatsApp Funnel</div><div class="t-desc">WhatsApp-native sales automation. Qualifies leads, delivers value, ends with an M-Pesa payment link. No CRM required.</div></div>
+      <div class="tool-card fi"><span class="ts ts-soon">Coming soon</span><div class="t-name">Business Vitals Calculator</div><div class="t-desc">Plain-language diagnosis of exactly where your business is leaking — and what to fix first.</div></div>
+      <div class="tool-card fi"><span class="ts ts-soon">Coming soon</span><div class="t-name">TikTok Script Generator</div><div class="t-desc">Ready-to-film scripts in English or Swahili, optimised for East African audiences.</div></div>
+      <div class="tool-card fi"><span class="ts ts-soon">Coming soon</span><div class="t-name">M-Pesa Checkout Builder</div><div class="t-desc">Build a shareable M-Pesa checkout flow via WhatsApp link. No developer, no Daraja API headaches.</div></div>
+      <div class="tool-card fi"><span class="ts ts-soon">Coming soon</span><div class="t-name">Brand Voice Audit</div><div class="t-desc">Paste your captions or website copy. Clear readout of what your brand sounds like — and how to sharpen it.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     CONTACT  [page: contact]
+================================================================ -->
+<section id="contact">
+  <div class="c-glow"></div>
+  <div class="c-dots"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <p class="label fi">Get started</p>
+    <h2 class="c-h fi" style="margin-top:14px">Ready to build your<br><span>execution system</span>?</h2>
+    <p class="c-sub fi">Start with a discovery call. 30 minutes. No pitch — just an honest conversation about where your business is and what it needs.</p>
+
+    <div class="c-card fi">
+      <div class="c-card-title">Send us a message</div>
+      <div class="c-card-sub">We'll get back within 2 hours on WhatsApp.</div>
+      <div class="qi-form">
+        <div class="qi-row">
+          <input class="qi-input" id="qi-name" type="text" placeholder="Your name">
+          <input class="qi-input" id="qi-biz" type="text" placeholder="Business name">
+        </div>
+        <select class="qi-select" id="qi-need">
+          <option value="" disabled selected>What do you need?</option>
+          <option>Website Design & Dev</option>
+          <option>WhatsApp Automation / Fuata</option>
+          <option>TikTok & Social Media</option>
+          <option>Brand Identity</option>
+          <option>Corporate Video</option>
+          <option>Full Growth Package (Engine/System)</option>
+          <option>Just exploring — tell me more</option>
+        </select>
+        <button class="qi-wa-btn" id="qiBtn">
+          <span>💬</span> Send via WhatsApp
+        </button>
+      </div>
+      <div class="c-divider">or reach us directly</div>
+      <div class="c-opts-row">
+        <a href="https://wa.me/254726900026" class="c-opt" target="_blank"><span>💬</span>WhatsApp</a>
+        <a href="mailto:joemarkmureithi@gmail.com" class="c-opt"><span>✉️</span>Email</a>
+        <a href="https://www.linkedin.com/in/joemark-mureithi/" class="c-opt" target="_blank"><span>🔗</span>LinkedIn</a>
+      </div>
+    </div>
+    <p style="margin-top:28px;font-size:12px;color:var(--t2)">Available globally · Remote-first</p>
+  </div>
+</section>
+
+<!-- ================================================================
+     FOOTER
+================================================================ -->
+<footer>
+  <div class="container">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="ft-logo">Redo<em>lense</em></div>
+        <div class="ft-tagline">Execution systems for growing businesses. Built where your customers actually are.</div>
+      </div>
+      <div>
+        <div class="ft-col-title">Navigate</div>
+        <ul class="ft-col-links">
+          <li><a href="#why-kenya">Why us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#insights">Insights</a></li>
+          <li><a href="#tools">Tools</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-col-title">Connect</div>
+        <div class="ft-socials">
+          <a href="https://www.linkedin.com/in/joemark-mureithi/" class="ft-social" target="_blank">
+            <div class="ft-social-icon" style="background:#0A66C2;color:#fff">in</div>
+            Joemark Mureithi
+          </a>
+          <a href="mailto:joemarkmureithi@gmail.com" class="ft-social">
+            <div class="ft-social-icon" style="background:var(--blue);color:#fff;font-size:12px">✉</div>
+            joemarkmureithi@gmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <div class="ft-copy">© 2026 Redolense Ltd.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ================================================================
+     WHATSAPP FLOAT
+================================================================ -->
+
+
+<div class="wa-float" id="waFloat">
+  <a href="https://wa.me/254726900026?text=Hi%2C%20I%20found%20Redolense%20online%20and%20I%27d%20like%20to%20learn%20more" class="wa-btn" target="_blank">
+    <span class="wa-icon">💬</span>
+    <span class="wa-label">Chat on WhatsApp</span>
+  </a>
+</div>
+
+<!-- ================================================================
+     BOT WIDGET
+================================================================ -->
+<button class="bot-btn" id="botBtn" aria-label="Chat with Redolense">
+  🤖
+  <span class="bot-badge"></span>
+</button>
+
+<div class="chat-win" id="chatWin">
+  <div class="chat-head">
+    <div class="ch-dot"></div>
+    <div class="ch-info">
+      <div class="ch-name">Redolense</div>
+      <div class="ch-sub">Ask me anything about our services</div>
+    </div>
+    <button class="ch-close" id="chatClose">✕</button>
+  </div>
+  <div class="chat-msgs" id="chatMsgs">
+    <div class="msg msg-bot">Hi there 👋 I'm the Redolense assistant. Ask me about our services or how we can help your business grow.</div>
+  </div>
+  <div class="chat-inp-wrap">
+    <input class="chat-inp" id="chatInp" type="text" placeholder="Ask anything…">
+    <button class="chat-send" id="chatSend">→</button>
+  </div>
+</div>
+
+<!-- ================================================================
+     SCRIPTS
+================================================================ -->
+<script>
+/* ---- Page entry ---- */
+requestAnimationFrame(() => requestAnimationFrame(() => {
+  document.body.classList.add('loaded');
+  setTimeout(() => document.documentElement.classList.add('ready'), 200);
+}));
+
+/* ---- Theme ---- */
+const root = document.documentElement;
+const tBtn = document.getElementById('themeBtn');
+const tLbl = document.getElementById('tLbl');
+function applyTheme(dark) {
+  root.classList.toggle('dark', dark);
+  tLbl.textContent = dark ? 'Light' : 'Dark';
+}
+const saved = localStorage.getItem('rdl-theme');
+const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+applyTheme(saved ? saved === 'dark' : sysDark);
+tBtn.addEventListener('click', () => {
+  const going = !root.classList.contains('dark');
+  applyTheme(going);
+  localStorage.setItem('rdl-theme', going ? 'dark' : 'light');
+});
+
+/* ---- Nav scroll ---- */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), {passive:true});
+
+/* ---- Scroll progress ---- */
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  prog.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+}, {passive:true});
+
+/* ---- Scrollspy ---- */
+const navAs = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section[id]');
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navAs.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, {rootMargin:'-35% 0px -60% 0px'});
+sections.forEach(s => spy.observe(s));
+
+/* ---- Mobile nav ---- */
+const ham = document.getElementById('hamburger');
+const drawer = document.getElementById('mobDrawer');
+const overlay = document.getElementById('mobOverlay');
+const mobClose = document.getElementById('mobClose');
+function openDrawer() { drawer.classList.add('open'); overlay.classList.add('open'); ham.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeDrawer() { drawer.classList.remove('open'); overlay.classList.remove('open'); ham.classList.remove('open'); document.body.style.overflow=''; }
+ham.addEventListener('click', () => drawer.classList.contains('open') ? closeDrawer() : openDrawer());
+overlay.addEventListener('click', closeDrawer);
+mobClose.addEventListener('click', closeDrawer);
+document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', closeDrawer));
+document.addEventListener('keydown', e => e.key === 'Escape' && closeDrawer());
+
+/* ---- WhatsApp & Bot float visibility ---- */
+const waFloat = document.getElementById('waFloat');
+const botBtn = document.getElementById('botBtn');
+function showFloats() {
+  waFloat.classList.add('visible');
+  botBtn.classList.add('visible');
+}
+setTimeout(showFloats, 3000);
+const heroSection = document.getElementById('hero');
+new IntersectionObserver(([e]) => { if (!e.isIntersecting) showFloats(); }, {threshold:0.1}).observe(heroSection);
+
+
+
+/* ---- WhatsApp quick inquiry ---- */
+document.getElementById('qiBtn').addEventListener('click', () => {
+  const name = document.getElementById('qi-name').value.trim();
+  const biz  = document.getElementById('qi-biz').value.trim();
+  const need = document.getElementById('qi-need').value;
+  const msg  = `Hi Redolense 👋\n\nName: ${name||'(not provided)'}\nBusiness: ${biz||'(not provided)'}\nI need: ${need||'General enquiry'}\n\nI found you online and would like to learn more.`;
+  window.open(`https://wa.me/254726900026?text=${encodeURIComponent(msg)}`, '_blank');
+});
+
+/* ---- Fade-in on scroll ---- */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const siblings = [...e.target.parentElement.querySelectorAll('.fi')];
+      const idx = siblings.indexOf(e.target);
+      setTimeout(() => e.target.classList.add('v'), Math.min(idx * 80, 320));
+      io.unobserve(e.target);
+    }
+  });
+}, {threshold:0.08, rootMargin:'0px 0px -28px 0px'});
+document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+/* ---- Bot chat ---- */
+const chatWin = document.getElementById('chatWin');
+const chatMsgs = document.getElementById('chatMsgs');
+const chatInp = document.getElementById('chatInp');
+const chatSend = document.getElementById('chatSend');
+
+botBtn.addEventListener('click', () => chatWin.classList.toggle('open'));
+document.getElementById('chatClose').addEventListener('click', () => chatWin.classList.remove('open'));
+
+const BOT_SYSTEM = `You are the Redolense assistant — concise, warm, and execution-focused.
+
+Redolense is a digital growth company founded by Joemark Mureithi (Design Engineer, TPM, PMP Certified, BSc Mechanical Engineering JKUAT).
+
+SERVICES:
+- Signal: Foundation tier — 5-page website, SEO, WhatsApp Business, 1 social channel, monthly report, strategy call
+- Engine: Growth tier — Everything in Signal + TikTok/Instagram (16 posts), 2 blog posts, WhatsApp automation, M-Pesa integration, strategy session
+- System: Full infrastructure — Everything in Engine + 2 brand videos/month, full WhatsApp funnel (Fuata), CRM, custom marketing tool, weekly calls
+- One-off projects: Brand Identity | Website Design & Dev | Corporate Video | WhatsApp Funnel (Fuata)
+- Pricing: Request a quote via WhatsApp or email — we accept M-Pesa and online payments
+
+PROCESS: Discovery Call (30min) → System Audit → Build & Deploy → Measure & Refine. First deliverable under 14 days.
+
+CONTACT: WhatsApp (link on site) | joemarkmureithi@gmail.com | linkedin.com/in/joemark-mureithi
+
+CLIENTS: Steward Nexus (faith-and-business community platform), Baseline (structured data collection SaaS for field programs).
+
+STYLE: Keep responses under 120 words. Be specific. Reference M-Pesa, WhatsApp, TikTok naturally where relevant. End with a clear next step. Never invent information not in this prompt.`;
+
+let history = [];
+
+function addMsg(text, isUser) {
+  const div = document.createElement('div');
+  div.className = `msg ${isUser ? 'msg-usr' : 'msg-bot'}`;
+  div.textContent = text;
+  chatMsgs.appendChild(div);
+  chatMsgs.scrollTop = chatMsgs.scrollHeight;
+  return div;
+}
+
+function showTyping() {
+  const t = document.createElement('div');
+  t.className = 'typing-ind';
+  t.innerHTML = '<span></span><span></span><span></span>';
+  t.id = 'typingInd';
+  chatMsgs.appendChild(t);
+  chatMsgs.scrollTop = chatMsgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typingInd');
+  if (t) t.remove();
+}
+
+async function sendBotMsg() {
+  const text = chatInp.value.trim();
+  if (!text) return;
+  chatInp.value = '';
+  addMsg(text, true);
+  history.push({role:'user', content:text});
+  showTyping();
+  chatSend.disabled = true;
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:300,
+        system:BOT_SYSTEM,
+        messages:history.slice(-10)
+      })
+    });
+    const data = await res.json();
+    removeTyping();
+    const reply = data.content?.[0]?.text || "Apologies, I hit a snag. Reach us via the contact section.";
+    addMsg(reply, false);
+    history.push({role:'assistant', content:reply});
+  } catch {
+    removeTyping();
+    addMsg("Connection issue — reach us via WhatsApp or email from the contact section.", false);
+  } finally {
+    chatSend.disabled = false;
+  }
+}
+
+chatSend.addEventListener('click', sendBotMsg);
+chatInp.addEventListener('keydown', e => e.key === 'Enter' && !e.shiftKey && sendBotMsg());
+</script>
+</body>
+</html>
