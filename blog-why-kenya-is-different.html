@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Why Kenya's Digital Economy Operates on Different Rules — Redolense</title>
-<meta name="description" content="Kenya's digital economy isn't underdeveloped — it's fully developed for Kenya. WhatsApp, TikTok, M-Pesa, and referral networks are the actual infrastructure. Here's what that means for your business.">
+<title>Why Kenya's Digital Economy Operates on Different Rules; Redolense</title>
+<meta name="description" content="Kenya's digital economy isn't underdeveloped: it's fully developed for Kenya. WhatsApp, TikTok, M-Pesa, and referral networks are the actual infrastructure. Here's what that means for your business.">
 <meta property="og:title" content="Why Kenya's Digital Economy Operates on Different Rules">
 <meta property="og:description" content="Kenya's digital market runs on WhatsApp, TikTok, M-Pesa, and community trust networks. Here's what that means for your business.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,7 +67,15 @@ html.dark .i-sun{opacity:0} html.dark .i-moon{opacity:1}
 
 /* HERO */
 .article-hero{padding:160px 0 72px;position:relative;overflow:hidden}
-.article-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,var(--dot-c) 1.5px,transparent 1.5px);background-size:36px 36px;mask-image:radial-gradient(ellipse 80% 60% at 50% 20%,black,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 20%,black,transparent 70%)}
+.article-hero::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:linear-gradient(to bottom,
+    rgba(0,0,0,.0) 0%,
+    rgba(0,0,0,.0) 35%,
+    rgba(7,17,31,.55) 60%,
+    rgba(7,17,31,.92) 100%
+  );
+}
 .article-hero-inner{max-width:760px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
 .article-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--bg-lift);border-radius:100px;box-shadow:var(--s-sm);font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;margin-bottom:28px}
 .article-title{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;letter-spacing:-.045em;line-height:1.05;margin-bottom:24px}
@@ -109,7 +117,7 @@ html.dark .i-sun{opacity:0} html.dark .i-moon{opacity:1}
 .article-divider{width:48px;height:3px;background:var(--btn-grad);border-radius:2px;margin:48px 0}
 
 /* AUTHOR BIO SECTION */
-.author-bio{padding:40px;background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);margin:0 32px 60px;max-width:760px;margin-left:auto;margin-right:auto;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start}
+.author-bio{padding:40px;background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);margin:0 32px 60px;max-width:760px;margin-left:auto;margin-right:auto;display:grid;grid-template-columns:1fr;gap:24px;align-items:start}
 .bio-avatar{width:72px;height:72px;border-radius:50%;background:var(--btn-grad);box-shadow:var(--s-btn);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px;color:#fff;flex-shrink:0}
 .bio-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:4px}
 .bio-title{font-size:13px;color:var(--blue);margin-bottom:12px;font-weight:500}
@@ -149,6 +157,18 @@ footer{border-top:1px solid var(--div);padding:28px 32px;display:flex;align-item
   .article-hero-inner,.article-body,.related,.author-bio{padding-left:20px;padding-right:20px}
   .nav-inner{padding:0 20px}
 }
+html.dark .article-hero::before{background:linear-gradient(to bottom,rgba(7,17,31,.48) 0%,rgba(7,17,31,.86) 100%)}
+html:not(.dark) .article-hero::before{
+  background:linear-gradient(to bottom,
+    rgba(0,0,0,.0) 0%,
+    rgba(0,0,0,.0) 35%,
+    rgba(10,28,46,.45) 60%,
+    rgba(10,28,46,.88) 100%
+  );
+  mask-image:none;-webkit-mask-image:none;
+}
+.hero-below{background:var(--bg);padding:32px 0 0;text-align:center}.hero-below .ameta,.hero-below .article-meta{justify-content:center}.hero-below .asub,.hero-below .article-sub{margin:0 auto}
+.article-title{color:#fff!important;text-shadow:0 2px 12px rgba(0,0,0,.45)}
 </style>
 </head>
 <body>
@@ -167,7 +187,7 @@ footer{border-top:1px solid var(--div);padding:28px 32px;display:flex;align-item
 </nav>
 
 <!-- HERO -->
-<div class="article-hero">
+<div class="article-hero" style="background-image:url('images/hero-kenya.webp');background-size:cover;background-position:center 30%">
   <div class="article-hero-inner">
     <div class="article-tag">
       <span>Kenya · Digital Strategy</span>
@@ -175,13 +195,17 @@ footer{border-top:1px solid var(--div);padding:28px 32px;display:flex;align-item
       <span>7 min read</span>
     </div>
     <h1 class="article-title">Why Kenya's Digital Economy Operates on Different Rules</h1>
-    <p class="article-sub">Kenya's digital market isn't underdeveloped — it's fully developed for Kenya. WhatsApp, TikTok, M-Pesa, and community referral networks are the actual infrastructure. Agencies that don't know this build systems that don't work.</p>
+  </div>
+</div>
+<div class="hero-below">
+  <div class="hero-inner">
+    <p class="article-sub">Kenya's digital market isn't underdeveloped: it's fully developed for Kenya. WhatsApp, TikTok, M-Pesa, and community referral networks are the actual infrastructure. Agencies that don't know this build systems that don't work.</p>
     <div class="article-meta">
       <div class="article-author">
         <div class="author-avatar">MM</div>
         <div>
           <div class="author-name">Joemark Mureithi</div>
-          <div class="author-role">Founder, Redolense</div>
+          <div class="author-role">Redolense</div>
         </div>
       </div>
       <div class="meta-divider"></div>
@@ -194,7 +218,7 @@ footer{border-top:1px solid var(--div);padding:28px 32px;display:flex;align-item
 <div style="max-width:760px;margin:0 auto;padding:0 32px">
   <div class="stat-block">
     <div class="sb-item"><div class="sb-num">67%</div><div class="sb-label">of Kenyan B2B deals close on WhatsApp</div></div>
-    <div class="sb-item"><div class="sb-num">#1</div><div class="sb-label">TikTok — Kenya's top daily-active platform</div></div>
+    <div class="sb-item"><div class="sb-num">#1</div><div class="sb-label">TikTok; Kenya's top daily-active platform</div></div>
     <div class="sb-item"><div class="sb-num">60%</div><div class="sb-label">of Kenya's GDP flows through M-Pesa</div></div>
     <div class="sb-item"><div class="sb-num">3×</div><div class="sb-label">WhatsApp group trust vs. Google reviews</div></div>
   </div>
@@ -205,7 +229,7 @@ footer{border-top:1px solid var(--div);padding:28px 32px;display:flex;align-item
 
   <p>Let me start with a conversation I have regularly.</p>
 
-  <p>A Nairobi business owner — a restaurant in Westlands, a clinic in Karen, a logistics company in Industrial Area — comes to me frustrated. They paid a digital agency KES 80,000 for a website, Facebook ads, and a "content strategy." Three months later: minimal new business, a Facebook page with 200 likes from people who have never used their service, and a website that looks professional but generates zero inquiries.</p>
+  <p>A Nairobi business owner: a restaurant in Westlands, a clinic in Karen, a logistics company in Industrial Area: comes to me frustrated. They paid a digital agency KES 80,000 for a website, Facebook ads, and a "content strategy." Three months later: minimal new business, a Facebook page with 200 likes from people who have never used their service, and a website that looks professional but generates zero inquiries.</p>
 
   <p>The work wasn't necessarily bad. The strategy wasn't fraudulent. The problem was simpler and more damaging than either of those things: whoever built it was working from a template designed for London or Johannesburg or New York. And Kenya doesn't work like any of those places.</p>
 
@@ -217,7 +241,7 @@ footer{border-top:1px solid var(--div);padding:28px 32px;display:flex;align-item
 
   <p>In most Western markets, WhatsApp is a personal communication tool. Business happens via email. Leads are tracked in Salesforce. Deals close on video calls. Customer service runs through ticketing systems. The professional and the personal are kept deliberately separate.</p>
 
-  <p>In Kenya, this separation doesn't exist — and fighting it is expensive.</p>
+  <p>In Kenya, this separation doesn't exist: and fighting it is expensive.</p>
 
   <p>The average Kenyan business closes deals on WhatsApp. Not just small deals. Enterprise contracts, property transactions, procurement negotiations, financial arrangements. The WhatsApp broadcast list is your newsletter. The WhatsApp group is your customer community. The WhatsApp DM is where objections get handled, questions get answered, and payment links get sent.</p>
 
@@ -225,7 +249,7 @@ footer{border-top:1px solid var(--div);padding:28px 32px;display:flex;align-item
     <p>"67% of Kenyan B2B sales close on WhatsApp. Not in a boardroom. Not via email. On a chat thread."</p>
   </div>
 
-  <p>What this means practically: if your marketing system ends at "contact us via the website form," you've built the wrong last mile. Kenyan buyers don't fill in forms. They message. They get an answer, they ask a follow-up, they ask for the Paybill number. Your entire funnel needs to work inside that sequence — not around it.</p>
+  <p>What this means practically: if your marketing system ends at "contact us via the website form," you've built the wrong last mile. Kenyan buyers don't fill in forms. They message. They get an answer, they ask a follow-up, they ask for the Paybill number. Your entire funnel needs to work inside that sequence: not around it.</p>
 
   <p>The agencies that get this wrong build elegant websites with contact forms that generate zero inquiries. The businesses that get it right have a WhatsApp link in the first line of every piece of communication, an auto-responder that qualifies the lead in under 60 seconds, and a human follow-up within defined hours. The technology for this exists and is affordable. The discipline to build it is what most agencies skip.</p>
 
@@ -237,17 +261,17 @@ footer{border-top:1px solid var(--div);padding:28px 32px;display:flex;align-item
 
   <h2>TikTok Reached a Tipping Point in Kenya That Most Businesses Haven't Noticed Yet.</h2>
 
-  <p>The data is uncomfortable for Facebook loyalists: TikTok now surpasses Facebook in daily active users in the 18–34 Kenyan demographic — the primary spending and decision-making cohort for most consumer-facing businesses. This is not a projection. It happened.</p>
+  <p>The data is uncomfortable for Facebook loyalists: TikTok now surpasses Facebook in daily active users in the 18–34 Kenyan demographic: the primary spending and decision-making cohort for most consumer-facing businesses. This is not a projection. It happened.</p>
 
-  <p>This matters for a reason that goes beyond reach. The TikTok algorithm is genuinely democratic in a way Facebook's hasn't been for a decade. A business with 200 followers can generate 80,000 views on a single video if the content is strong. Facebook penalises this — their business model requires you to pay for reach you used to get organically.</p>
+  <p>This matters for a reason that goes beyond reach. The TikTok algorithm is genuinely democratic in a way Facebook's hasn't been for a decade. A business with 200 followers can generate 80,000 views on a single video if the content is strong. Facebook penalises this: their business model requires you to pay for reach you used to get organically.</p>
 
-  <p>The opportunity window in Kenya is narrow in a specific way. TikTok for Kenyan business is roughly where Instagram was in 2018 — the majority of businesses haven't committed to it, competition for audience attention is low relative to what it will become, and the early movers are accumulating reach that will be genuinely difficult to compete with in 24 months.</p>
+  <p>The opportunity window in Kenya is narrow in a specific way. TikTok for Kenyan business is roughly where Instagram was in 2018: the majority of businesses haven't committed to it, competition for audience attention is low relative to what it will become, and the early movers are accumulating reach that will be genuinely difficult to compete with in 24 months.</p>
 
   <div class="pull-quote">
     <p>"If you're not producing consistent TikTok content, your competitors are building a distribution advantage over you right now. Not in the future. Now."</p>
   </div>
 
-  <p>The mistake most businesses make is thinking about TikTok as an entertainment platform. For Kenyan SMEs, it is a discovery mechanism. A well-structured 60-second video addressing a specific, painful problem that your target customer has — shot on a phone, posted consistently — will outperform most paid advertising campaigns at a fraction of the cost. The content strategy is a system. The production is learnable. The discipline is the hard part.</p>
+  <p>The mistake most businesses make is thinking about TikTok as an entertainment platform. For Kenyan SMEs, it is a discovery mechanism. A well-structured 60-second video addressing a specific, painful problem that your target customer has: shot on a phone, posted consistently: will outperform most paid advertising campaigns at a fraction of the cost. The content strategy is a system. The production is learnable. The discipline is the hard part.</p>
 
   <div class="article-divider"></div>
 
@@ -261,9 +285,9 @@ footer{border-top:1px solid var(--div);padding:28px 32px;display:flex;align-item
     <p>"The correct architecture is: WhatsApp inquiry → digital proposal → M-Pesa Paybill → payment confirmation → service delivery. Every step can be automated. Most businesses are doing none of it automatically."</p>
   </div>
 
-  <p>The businesses winning in this environment have M-Pesa integrated at the point of commitment — not buried in the footer, not listed as one of seven payment options, but positioned as the natural, expected endpoint of every sales conversation. They have automated payment confirmation messages. They have onboarding sequences triggered by payment receipt. The entire flow is engineered to reduce the time between "yes, I want this" and "payment received" to under three minutes.</p>
+  <p>The businesses winning in this environment have M-Pesa integrated at the point of commitment: not buried in the footer, not listed as one of seven payment options, but positioned as the natural, expected endpoint of every sales conversation. They have automated payment confirmation messages. They have onboarding sequences triggered by payment receipt. The entire flow is engineered to reduce the time between "yes, I want this" and "payment received" to under three minutes.</p>
 
-  <p>Most Kenyan SMEs are managing this manually — chasing payment confirmations, sending links via WhatsApp, following up days later. This is the gap. Closing it doesn't require enterprise software. It requires the discipline to build the system once.</p>
+  <p>Most Kenyan SMEs are managing this manually: chasing payment confirmations, sending links via WhatsApp, following up days later. This is the gap. Closing it doesn't require enterprise software. It requires the discipline to build the system once.</p>
 
   <div class="highlight">
     <p><strong>The practical implication:</strong> M-Pesa integration is not a feature. It is the foundation of any Kenyan digital sales system. If your checkout doesn't end with a Paybill number, it doesn't end.</p>
@@ -273,11 +297,11 @@ footer{border-top:1px solid var(--div);padding:28px 32px;display:flex;align-item
 
   <h2>Word of Mouth in Kenya Is Structural, Not Incidental.</h2>
 
-  <p>In high-advertising-penetration markets, word of mouth is a bonus — a small amplifier on top of a paid and owned media strategy. In Kenya, word of mouth is still the primary trust mechanism, and it operates in a very specific way: through WhatsApp groups.</p>
+  <p>In high-advertising-penetration markets, word of mouth is a bonus: a small amplifier on top of a paid and owned media strategy. In Kenya, word of mouth is still the primary trust mechanism, and it operates in a very specific way: through WhatsApp groups.</p>
 
-  <p>The average urban Kenyan professional belongs to 20–40 WhatsApp groups. Neighbourhood groups, alumni networks, church communities, Chama investment circles, industry forums, school parents' groups. When someone wants a recommendation — for a doctor, a contractor, a school, a digital agency — the instinct is not to Google it. The instinct is to send a voice note to two or three of those groups. A response comes within 20 minutes. That recommendation carries more weight than any Google review, any ad, any website.</p>
+  <p>The average urban Kenyan professional belongs to 20–40 WhatsApp groups. Neighbourhood groups, alumni networks, church communities, Chama investment circles, industry forums, school parents' groups. When someone wants a recommendation: for a doctor, a contractor, a school, a digital agency: the instinct is not to Google it. The instinct is to send a voice note to two or three of those groups. A response comes within 20 minutes. That recommendation carries more weight than any Google review, any ad, any website.</p>
 
-  <p>This has enormous implications for how businesses should think about customer experience. Every client you serve is a node in a network of 20–40 active groups. One extraordinary experience doesn't just generate a five-star review — it generates a recommendation in dozens of conversations you'll never see and can't track. One bad experience does the same, faster, and with more detail.</p>
+  <p>This has enormous implications for how businesses should think about customer experience. Every client you serve is a node in a network of 20–40 active groups. One extraordinary experience doesn't just generate a five-star review: it generates a recommendation in dozens of conversations you'll never see and can't track. One bad experience does the same, faster, and with more detail.</p>
 
   <div class="pull-quote">
     <p>"The Nairobi consumer trusts their WhatsApp group three times more than they trust Google reviews. You are not marketing to individuals. You are marketing to networks."</p>
@@ -289,13 +313,13 @@ footer{border-top:1px solid var(--div);padding:28px 32px;display:flex;align-item
 
   <h2>The Implication for Your Business</h2>
 
-  <p>Kenya's digital economy is not broken. It is not underdeveloped. It is fully developed — for Kenya. It runs on WhatsApp, TikTok, M-Pesa, and community trust networks built over decades of relationship-first commerce. The businesses growing fastest right now are the ones that have built their digital infrastructure around these realities rather than importing a Western template and wondering why it doesn't convert.</p>
+  <p>Kenya's digital economy is not broken. It is not underdeveloped. It is fully developed: for Kenya. It runs on WhatsApp, TikTok, M-Pesa, and community trust networks built over decades of relationship-first commerce. The businesses growing fastest right now are the ones that have built their digital infrastructure around these realities rather than importing a Western template and wondering why it doesn't convert.</p>
 
   <p>The question for your business is not "are we on social media?" The question is: Is our system built for how Kenyan customers actually discover, evaluate, trust, and pay for products and services?</p>
 
   <p>If the answer is no, or if you're not sure, that is where the conversation starts.</p>
 
-  <p>The businesses growing fastest right now are building systems designed for how their market actually works — not importing a Western template and wondering why it doesn't convert.</p>
+  <p>The businesses growing fastest right now are building systems designed for how their market actually works: not importing a Western template and wondering why it doesn't convert.</p>
 
 </article>
 
@@ -304,8 +328,8 @@ footer{border-top:1px solid var(--div);padding:28px 32px;display:flex;align-item
   <div class="bio-avatar">MM</div>
   <div>
     <div class="bio-name">Joemark Mureithi</div>
-    <div class="bio-title">Founder, Redolense</div>
-    <div class="bio-text">Design Engineer and Technical Program Manager with six years of cross-industry execution across nine industries. PMP Certified. BSc Mechanical Engineering, JKUAT. Founder of Redolense — execution systems for growing businesses.</div>
+    <div class="bio-title">Redolense</div>
+    <div class="bio-text">Product Builder and Design Engineer. Six years, nine industries, PMP Certified. I apply the same discipline I use to design physical products to building digital growth infrastructure; structured, testable, built to last.</div>
     <div class="bio-links">
       <a href="https://wa.me/254726900026" class="bio-link" target="_blank">💬 WhatsApp</a>
       <a href="https://www.linkedin.com/in/joemark-mureithi/" class="bio-link" target="_blank">🔗 LinkedIn</a>
@@ -334,7 +358,7 @@ footer{border-top:1px solid var(--div);padding:28px 32px;display:flex;align-item
 <!-- CTA BAND -->
 <div class="cta-band">
   <h2>Ready to build for<br>how Kenya actually works?</h2>
-  <p>Start with a 30-minute discovery call. No pitch — just an honest conversation about where your business is and what it needs.</p>
+  <p>Start with a 30-minute discovery call. No pitch: just an honest conversation about where your business is and what it needs.</p>
   <a href="https://wa.me/254726900026?text=Hi%2C%20I%20read%20the%20Why%20Kenya%20is%20Different%20article%20and%20want%20to%20discuss%20my%20business" class="cta-btn" target="_blank">💬 Start on WhatsApp →</a>
 </div>
 
@@ -358,6 +382,38 @@ applyTheme(saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: 
 tBtn.addEventListener('click', () => { const g = !root.classList.contains('dark'); applyTheme(g); localStorage.setItem('rdl-theme', g ? 'dark' : 'light'); });
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), {passive:true});
+
+/* ── Counter animation ─────────────────────────────── */
+(function(){
+  function animateCount(el){
+    const raw = el.dataset.target || el.textContent.trim();
+    el.dataset.target = raw;
+    const num = parseFloat(raw);
+    if(isNaN(num)) return;
+    const suffix = raw.replace(/[\d.]/g,'');
+    const isFloat = raw.includes('.');
+    const dur = 1600;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now-start)/dur,1);
+      const e = 1-Math.pow(1-p,3); // ease-out cubic
+      const v = num*e;
+      el.textContent = (isFloat ? v.toFixed(1) : Math.round(v)) + suffix;
+      if(p<1) requestAnimationFrame(tick);
+    }
+    el.textContent = (isFloat?'0.0':'0')+suffix;
+    requestAnimationFrame(tick);
+  }
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.sb-n').forEach(animateCount);
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.35});
+  document.querySelectorAll('.stat-row').forEach(r=>io.observe(r));
+})();
 </script>
 </body>
 </html>

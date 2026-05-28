@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Redolense — Execution Systems for Growing Businesses</title>
+<title>Redolense · Execution Systems for Growing Businesses</title>
 <meta name="description" content="Execution systems for growing businesses. WhatsApp, TikTok, M-Pesa.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   TOKENS — Light & Dark
+   TOKENS; Light & Dark
 ============================================================ */
 :root {
   --bg:      #DCE8F2;  --bg-lift: #E7F0F9;  --bg-deep: #CED9E5;
@@ -149,7 +149,7 @@ html.dark .i-sun{opacity:0} html.dark .i-moon{opacity:1}
 #hero{min-height:100vh;display:flex;align-items:center;padding:140px 0 80px;position:relative;overflow:hidden}
 .hero-dots{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,var(--dot-c) 1.5px,transparent 1.5px);background-size:36px 36px;mask-image:radial-gradient(ellipse 70% 80% at 58% 38%,black 10%,transparent 68%);-webkit-mask-image:radial-gradient(ellipse 70% 80% at 58% 38%,black 10%,transparent 68%)}
 .hero-glow{position:absolute;top:5%;left:44%;transform:translateX(-50%);width:840px;height:500px;pointer-events:none;background:radial-gradient(ellipse,var(--blue-dim) 0%,transparent 68%)}
-.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;position:relative;z-index:1}
+.hero-overlay{position:absolute;inset:0;z-index:0;pointer-events:none}.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;position:relative;z-index:1}
 .hero-pill{display:inline-flex;align-items:center;gap:8px;margin-bottom:36px;padding:8px 18px;background:var(--bg-lift);border-radius:100px;box-shadow:var(--s-sm);font-size:12.5px;color:var(--blue);font-weight:600}
 .pill-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:blink 2.2s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
@@ -159,7 +159,7 @@ html.dark .i-sun{opacity:0} html.dark .i-moon{opacity:1}
 .hero-sub{font-size:1.05rem;color:var(--t1);max-width:460px;line-height:1.85;margin-bottom:44px;font-weight:300}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
 
-/* Buttons — with :active press states */
+/* Buttons: with :active press states */
 .btn-fill{display:inline-flex;align-items:center;gap:8px;background:var(--btn-grad);color:#fff;padding:14px 30px;border-radius:var(--r3);font-size:14px;font-weight:700;text-decoration:none;font-family:'Bricolage Grotesque',sans-serif;box-shadow:var(--s-btn)}
 .btn-fill:hover{background:var(--btn-h);transform:translateY(-2px)}
 .btn-fill:active{box-shadow:var(--s-in)!important;transform:translateY(1px)!important}
@@ -206,8 +206,7 @@ html.dark .i-sun{opacity:0} html.dark .i-moon{opacity:1}
 /* ============================================================
    PROBLEM
 ============================================================ */
-.prob-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:start}
-.prob-h{font-size:clamp(1.7rem,3.2vw,2.3rem);font-weight:800;letter-spacing:-.03em;margin-top:14px;line-height:1.15}
+.prob-grid{display:grid;grid-template-columns:.42fr .58fr;gap:48px;align-items:center},2.3rem);font-weight:800;letter-spacing:-.03em;margin-top:14px;line-height:1.15}
 .prob-intro{font-size:15px;color:var(--t1);line-height:1.85;margin-bottom:12px}
 .prob-cards{margin-top:28px;display:flex;flex-direction:column;gap:13px}
 .prob-card{display:flex;gap:15px;padding:19px 21px;background:var(--bg-lift);border-radius:var(--r2);box-shadow:var(--s-sm);transition:box-shadow .25s}
@@ -230,7 +229,7 @@ html.dark .p-icon{background:rgba(61,155,255,.10)}
 .testi-client{font-size:12px;color:var(--t2);font-weight:600;letter-spacing:.04em}
 
 /* ============================================================
-   SERVICES — with pricing toggle
+   SERVICES: with pricing toggle
 ============================================================ */
 .svc-top{margin-bottom:16px}
 .svc-top h2{font-size:clamp(2rem,4vw,2.9rem);letter-spacing:-.035em;margin-top:14px}
@@ -296,7 +295,7 @@ html.dark .svc-num{color:rgba(61,155,255,.12)}
 /* ============================================================
    WORK
 ============================================================ */
-/* Featured work block — full width */
+/* Featured work block: full width */
 .work-featured{background:var(--bg-lift);border-radius:24px;box-shadow:var(--s-out);overflow:hidden;margin-top:48px}
 .work-feat-inner{display:grid;grid-template-columns:1fr 1fr;gap:0}
 .work-feat-content{padding:52px}
@@ -321,7 +320,7 @@ html.dark .b-chrome{background:#1C2A3A}
 .b-url{font-size:10px;color:var(--t2);margin-left:4px;font-family:monospace;background:var(--bg-lift);padding:2px 10px;border-radius:4px;flex:1;text-align:center}
 html.dark .b-url{background:var(--bg-deep)}
 
-/* Before mockup — intentionally cluttered */
+/* Before mockup: intentionally cluttered */
 .mock-before{background:#F0EEEB;padding:0;font-family:serif;min-height:160px}
 .mb-nav{background:#1A3A6C;color:#fff;padding:7px 10px;font-size:8.5px;display:flex;justify-content:space-between;align-items:center}
 .mb-nav-links{display:flex;gap:8px;font-size:7.5px}
@@ -333,7 +332,7 @@ html.dark .b-url{background:var(--bg-deep)}
 .mb-cols{display:grid;grid-template-columns:1fr 1fr;gap:4px}
 .mb-box{background:#E8E4DF;border:1px solid #CCC;padding:5px;font-size:7px;color:#666;text-align:center}
 
-/* After mockup — clean redesign */
+/* After mockup: clean redesign */
 .mock-after{background:#FFF;padding:0;min-height:160px}
 .ma-nav{background:#fff;border-bottom:1px solid #EEE;padding:7px 10px;display:flex;justify-content:space-between;align-items:center}
 .ma-logo{font-family:sans-serif;font-size:9.5px;font-weight:700;color:#1A3A6C;letter-spacing:-.3px}
@@ -396,7 +395,7 @@ html.dark .b-url{background:var(--bg-deep)}
 .about-body{font-size:15px;color:var(--t1);line-height:1.85}
 .about-body p{margin-bottom:20px}
 
-/* SDG emblem — designed moment */
+/* SDG emblem: designed moment */
 .sdg-wrap{margin-top:28px;padding:20px 24px;background:var(--bg-deep);border-radius:var(--r2);box-shadow:var(--s-in);display:flex;align-items:flex-start;gap:16px}
 .sdg-emblem{width:44px;height:44px;flex-shrink:0;background:var(--btn-grad);border-radius:50%;box-shadow:var(--s-btn);display:flex;align-items:center;justify-content:center;font-size:18px}
 .sdg-text{font-style:italic;color:var(--t2);font-size:13px;line-height:1.7}
@@ -416,15 +415,11 @@ html.dark .b-url{background:var(--bg-deep)}
 .blog-featured:active{box-shadow:var(--s-in)!important;transform:translateY(0)!important}
 .blog-feat-body{padding:42px 48px}
 .blog-feat-side{
-  background:var(--bg-deep);
-  display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;border-left:1px solid var(--div);
+  overflow:hidden;
+  position:relative;
 }
-.blog-feat-side::before{
-  content:'';position:absolute;inset:0;
-  background-image:radial-gradient(circle,var(--dot-c) 1.5px,transparent 1.5px);
-  background-size:20px 20px;
-}
+.blog-feat-img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;min-height:220px;transition:transform .4s ease}
+.blog-featured:hover .blog-feat-img{transform:scale(1.04)}
 .blog-feat-inner{position:relative;z-index:1;text-align:center}
 .blog-feat-flag{font-size:2.6rem;display:block;margin-bottom:12px}
 .blog-feat-badge{
@@ -441,9 +436,9 @@ html.dark .b-url{background:var(--bg-deep)}
 .blog-pillar-excerpt{font-size:14px;color:var(--t1);line-height:1.8;margin-bottom:24px;max-width:600px;font-weight:300}
 .blog-pillar-cta{font-size:13px;color:var(--blue);font-weight:700;display:flex;align-items:center;gap:6px}
 
-/* Spoke grid — 3 columns */
+/* Spoke grid, 3 columns */
 .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:0}
-.blog-card{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:26px;transition:box-shadow .25s,transform .2s;text-decoration:none;display:block}
+.blog-card{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:0;overflow:hidden;transition:box-shadow .25s,transform .2s;text-decoration:none;display:block}.blog-card-img{width:100%;height:185px;object-fit:cover;object-position:center 30%;display:block;transition:transform .4s ease}.blog-card:hover .blog-card-img{transform:scale(1.04)}.blog-card-body{padding:22px}
 .blog-card:hover{box-shadow:var(--s-out);transform:translateY(-2px)}
 .blog-card:active{box-shadow:var(--s-in)!important;transform:translateY(0)!important}
 .blog-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:13px;display:flex;align-items:center;gap:8px}
@@ -546,11 +541,11 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
 ============================================================ */
 .bot-btn{
   position:fixed;bottom:28px;left:28px;z-index:250;
-  width:54px;height:54px;border-radius:50%;
-  background:var(--bg-lift);box-shadow:var(--s-out);
-  border:none;cursor:pointer;font-size:22px;
+  width:56px;height:56px;border-radius:50%;
+  background:var(--btn-grad);box-shadow:var(--s-btn);
+  border:none;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  transition:transform .2s,box-shadow .2s;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;
   opacity:0;transform:translateY(16px) scale(.9);pointer-events:none;
 }
 .bot-btn.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
@@ -629,6 +624,11 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
   .wa-label{display:none}
   .wa-btn{padding:14px;border-radius:50%;width:54px;height:54px}
 }
+html.dark .hero-overlay{background:linear-gradient(135deg,rgba(7,17,31,.72) 0%,rgba(7,17,31,.42) 55%,rgba(7,17,31,.68) 100%)}
+html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242,.82) 0%,rgba(220,232,242,.55) 55%,rgba(220,232,242,.82) 100%)}
+.prob-img-wrap{border-radius:var(--r);overflow:hidden;box-shadow:var(--s-out);position:relative}
+.prob-img{width:100%;height:100%;min-height:420px;object-fit:cover;object-position:center;display:block}
+.prob-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(18,104,204,.08),transparent 60%);pointer-events:none}
 </style>
 </head>
 <body>
@@ -668,6 +668,7 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
       <li><a href="#services">Services</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#insights">Insights</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
@@ -688,8 +689,9 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
 <!-- ================================================================
      HERO  [page: index]
 ================================================================ -->
-<section id="hero">
-  <div class="hero-dots"></div>
+<section id="hero" style="background-image:url('images/hero-main.webp');background-size:cover;background-position:center 40%">
+  <div class="hero-overlay"></div>
+  <div class="hero-dots" style="opacity:.35"></div>
   <div class="hero-glow"></div>
   <div class="container">
     <div class="hero-inner">
@@ -755,26 +757,26 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
 <section class="section-alt" id="why-kenya">
   <div class="container">
     <p class="label fi">Why platform matters</p>
-    <h2 class="fi" style="font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-.035em;margin-top:14px;max-width:680px">The channels your customers actually use — most agencies don't know this. We live it.</h2>
+    <h2 class="fi" style="font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-.035em;margin-top:14px;max-width:680px">The channels your customers actually use: most agencies don't know this. We live it.</h2>
     <p class="muted fi" style="margin-top:14px;max-width:540px;line-height:1.8;font-size:15px">Your customers are on specific platforms, with specific behaviours and economics. Generic agencies guess. We build for where they actually are.</p>
     <div class="kenya-grid">
       <div class="kenya-card fi">
         <div class="kenya-icon">🎵</div>
         <div class="kenya-num">#1</div>
         <div class="kenya-title">TikTok is your distribution</div>
-        <div class="kenya-body">TikTok has surpassed Facebook in daily active users in the 18–34 demographic — your primary spending cohort. Your next 1,000 customers are on their For You page right now, not waiting for a Google ad.</div>
+        <div class="kenya-body">TikTok has surpassed Facebook in daily active users in the 18–34 demographic: your primary spending cohort. Your next 1,000 customers are on their For You page right now, not waiting for a Google ad.</div>
       </div>
       <div class="kenya-card fi">
         <div class="kenya-icon">💬</div>
         <div class="kenya-num">67%</div>
         <div class="kenya-title">WhatsApp is your CRM</div>
-        <div class="kenya-body">Most B2B deals close on WhatsApp — not email, not in a boardroom. Your follow-up system needs to live in the chat thread, not a spreadsheet you'll never open again.</div>
+        <div class="kenya-body">Most B2B deals close on WhatsApp: not email, not in a boardroom. Your follow-up system needs to live in the chat thread, not a spreadsheet you'll never open again.</div>
       </div>
       <div class="kenya-card fi">
         <div class="kenya-icon">🤝</div>
         <div class="kenya-num">3×</div>
         <div class="kenya-title">Referral is your media</div>
-        <div class="kenya-body">Consumers trust a recommendation from their network 3× more than any ad or Google review. We build systems that activate that referral loop at scale — automatically, not manually.</div>
+        <div class="kenya-body">Consumers trust a recommendation from their network 3× more than any ad or Google review. We build systems that activate that referral loop at scale: automatically, not manually.</div>
       </div>
       <div class="kenya-card fi">
         <div class="kenya-icon">📱</div>
@@ -792,12 +794,15 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
 <section class="section" id="problem">
   <div class="container">
     <div class="prob-grid">
-      <div>
-        <p class="label fi">The problem</p>
-        <h2 class="prob-h fi">Most businesses are invisible online — not because they're bad at business, but because no one built them a system.</h2>
+      <div class="prob-img-wrap fi">
+        <img src="images/problem.webp" class="prob-img" alt="Business without systems" loading="lazy">
       </div>
       <div>
-        <p class="prob-intro fi">Most growing businesses are running on hustle — chasing leads manually, posting inconsistently, and hoping the website does something. It's not a discipline problem. It's a systems problem.</p>
+        <p class="label fi">The problem</p>
+        <h2 class="prob-h fi">Most businesses are invisible online: not because they're bad at business, but because no one built them a system.</h2>
+      </div>
+      <div>
+        <p class="prob-intro fi">Most growing businesses are running on hustle: chasing leads manually, posting inconsistently, and hoping the website does something. It's not a discipline problem. It's a systems problem.</p>
         <p class="prob-intro fi" style="margin-bottom:0">Redolense builds the infrastructure that turns scattered effort into compounding results.</p>
         <div class="prob-cards">
           <div class="prob-card fi"><div class="p-icon">✕</div><div><div class="p-t">No funnel, no system</div><div class="p-d">You're following up manually on WhatsApp, losing leads between conversations you never recorded anywhere.</div></div></div>
@@ -851,14 +856,12 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
         <div class="svc-tier">Tier 01</div>
         <div class="svc-name">Signal</div>
         <div class="svc-tag">Your foundation. Get discovered, get credible, get started.</div>
-        <div class="svc-price">
-          <span class="svc-pn" style="font-size:1.15rem;letter-spacing:-.02em">Request a quote</span>
-        </div>
+        <div style="font-size:12px;color:var(--t2);margin-bottom:18px;font-weight:500">Monthly retainer · Cancel anytime · First deliverable in 14 days</div>
         <ul class="svc-list">
           <li><span class="ck">✓</span>Custom 5-page website, live in 10 days</li>
           <li><span class="ck">✓</span>Google SEO setup & on-page optimisation</li>
           <li><span class="ck">✓</span>WhatsApp Business profile & auto-reply</li>
-          <li><span class="ck">✓</span>1 social channel — 8 posts/month</li>
+          <li><span class="ck">✓</span>1 social channel, 8 posts/month</li>
           <li><span class="ck">✓</span>Monthly performance report</li>
           <li><span class="ck">✓</span>1× strategy call/month</li>
         </ul>
@@ -871,14 +874,12 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
         <div class="svc-tier">Tier 02</div>
         <div class="svc-name">Engine</div>
         <div class="svc-tag">The machine. Content, leads, and automation working together.</div>
-        <div class="svc-price">
-          <span class="svc-pn" style="font-size:1.15rem;letter-spacing:-.02em">Request a quote</span>
-        </div>
+        <div style="font-size:12px;color:var(--t2);margin-bottom:18px;font-weight:500">Monthly retainer · Cancel anytime · First deliverable in 14 days</div>
         <ul class="svc-list">
           <li><span class="ck">✓</span>Everything in Signal</li>
-          <li><span class="ck">✓</span>TikTok + Instagram — 16 posts/month</li>
+          <li><span class="ck">✓</span>TikTok + Instagram, 16 posts/month</li>
           <li><span class="ck">✓</span>2 SEO blog posts/month</li>
-          <li><span class="ck">✓</span>WhatsApp automation — lead capture + follow-up</li>
+          <li><span class="ck">✓</span>WhatsApp automation: lead capture + follow-up</li>
           <li><span class="ck">✓</span>M-Pesa payment link integration</li>
           <li><span class="ck">✓</span>Monthly strategy session (90 min)</li>
         </ul>
@@ -890,9 +891,7 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
         <div class="svc-tier">Tier 03</div>
         <div class="svc-name">System</div>
         <div class="svc-tag">Full infrastructure. You run the business. We run the machine.</div>
-        <div class="svc-price">
-          <span class="svc-pn" style="font-size:1.15rem;letter-spacing:-.02em">Request a quote</span>
-        </div>
+        <div style="font-size:12px;color:var(--t2);margin-bottom:18px;font-weight:500">Monthly retainer · Cancel anytime · First deliverable in 14 days</div>
         <ul class="svc-list">
           <li><span class="ck">✓</span>Everything in Engine</li>
           <li><span class="ck">✓</span>2 brand / corporate videos per month</li>
@@ -929,10 +928,10 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
       <p class="muted fi" style="margin-top:14px;max-width:360px;line-height:1.8">First call to first deliverable in under two weeks.</p>
     </div>
     <div class="proc-grid">
-      <div class="proc-card fi"><div class="pn">01</div><div class="pt-c">Discovery Call</div><div class="pd">30 minutes. We understand your business, your customer, and your revenue gap. No pitch — just honest diagnosis.</div></div>
+      <div class="proc-card fi"><div class="pn">01</div><div class="pt-c">Discovery Call</div><div class="pd">30 minutes. We understand your business, your customer, and your revenue gap. No pitch: just honest diagnosis.</div></div>
       <div class="proc-card fi"><div class="pn">02</div><div class="pt-c">System Audit</div><div class="pd">We audit your digital presence, content, and lead flow. Plain-language report: what's broken, what to fix first.</div></div>
-      <div class="proc-card fi"><div class="pn">03</div><div class="pt-c">Build & Deploy</div><div class="pd">We build your systems — website, content, automation. Everything documented and handed to you as a permanent asset.</div></div>
-      <div class="proc-card fi"><div class="pn">04</div><div class="pt-c">Measure & Refine</div><div class="pd">Monthly data reviews. We track what moves — leads, conversions, reach — and adjust the system accordingly.</div></div>
+      <div class="proc-card fi"><div class="pn">03</div><div class="pt-c">Build & Deploy</div><div class="pd">We build your systems: website, content, automation. Everything documented and handed to you as a permanent asset.</div></div>
+      <div class="proc-card fi"><div class="pn">04</div><div class="pt-c">Measure & Refine</div><div class="pd">Monthly data reviews. We track what moves: leads, conversions, reach: and adjust the system accordingly.</div></div>
     </div>
   </div>
 </section>
@@ -944,6 +943,85 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
   <div class="container">
     <p class="label fi">Work</p>
     <h2 class="fi" style="font-size:clamp(1.9rem,3.8vw,2.6rem);letter-spacing:-.035em;margin-top:14px">Systems we've built.<br>Results we can show.</h2>
+
+
+    <!-- IH-FoA Featured -->
+    <div class="work-featured fi">
+      <div class="work-feat-inner">
+        <div class="work-feat-content">
+          <div class="wf-lbl">Industrial Hygiene Forensics of Americus, LLC · Georgia, USA 🇺🇸</div>
+          <h3 class="wf-title">From invisible to credible: a full digital rebuild for a US forensic consultancy.</h3>
+          <p class="wf-desc">IH-FoA had deep technical expertise. Their old Wix site didn't reflect it: generic, cluttered, zero hierarchy. We rebuilt everything from brief to live in 12 days.</p>
+
+          <!-- PageSpeed Score Badges -->
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px">
+            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:10px;padding:10px 14px;text-align:center;min-width:62px">
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:#00B34A;line-height:1">100</div>
+              <div style="font-size:9px;color:var(--t2);margin-top:3px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Performance</div>
+            </div>
+            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:10px;padding:10px 14px;text-align:center;min-width:62px">
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:#00B34A;line-height:1">94</div>
+              <div style="font-size:9px;color:var(--t2);margin-top:3px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Accessibility</div>
+            </div>
+            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:10px;padding:10px 14px;text-align:center;min-width:62px">
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:#00B34A;line-height:1">100</div>
+              <div style="font-size:9px;color:var(--t2);margin-top:3px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Best Practices</div>
+            </div>
+            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:10px;padding:10px 14px;text-align:center;min-width:62px">
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:#00B34A;line-height:1">100</div>
+              <div style="font-size:9px;color:var(--t2);margin-top:3px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">SEO</div>
+            </div>
+            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:10px;padding:10px 14px;text-align:center;min-width:62px">
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:var(--blue);line-height:1">12d</div>
+              <div style="font-size:9px;color:var(--t2);margin-top:3px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Brief to Live</div>
+            </div>
+            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:10px;padding:10px 14px;text-align:center;min-width:62px">
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:var(--blue);line-height:1">9</div>
+              <div style="font-size:9px;color:var(--t2);margin-top:3px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Pages Built</div>
+            </div>
+          </div>
+
+          <img src="images/pagespeed.webp" alt="Google PageSpeed Insights, 100 Performance, 94 Accessibility, 100 Best Practices, 100 SEO" loading="lazy" style="width:100%;max-width:420px;border-radius:10px;box-shadow:var(--s-sm);margin-bottom:20px;display:block">
+
+          <div class="wf-outcomes">
+            <div class="wf-out"><span class="wf-arr">→</span>Full 9-page site: technically precise, professionally authoritative, 100/100 Google score on first build</div>
+            <div class="wf-out"><span class="wf-arr">→</span>OSHA crystalline silica blog ranking on Google, 487 organic visits in Month 1</div>
+            <div class="wf-out"><span class="wf-arr">→</span>Intelligence dashboard: live GEO score, AI visibility tracker, Lighthouse history, content analytics</div>
+            <div class="wf-out"><span class="wf-arr">→</span>6-month content &amp; LinkedIn authority programme in delivery</div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="https://ih-foa.com" class="btn-fill" style="font-size:13px;padding:12px 24px;display:inline-flex;align-items:center;gap:8px" target="_blank">View live site →</a>
+            <a href="https://wa.me/254726900026?text=Hi%2C%20I%20saw%20the%20IH-FoA%20case%20study%20and%20want%20to%20discuss%20a%20similar%20project" class="btn-ghost" style="font-size:13px;padding:12px 24px;display:inline-flex;align-items:center;gap:8px" target="_blank">Talk about your project →</a>
+          </div>
+        </div>
+
+        <div class="work-feat-visual">
+          <!-- BEFORE -->
+          <div>
+            <div class="ba-label">Before; Wix site</div>
+            <div class="browser-mock">
+              <div class="b-chrome">
+                <div class="b-dots"><span></span><span></span><span></span></div>
+                <div class="b-url">ihfoa.com · before</div>
+              </div>
+              <img src="images/ihfoa-before.webp" alt="IH-FoA old Wix site" style="width:100%;display:block;max-height:200px;object-fit:cover;object-position:top">
+            </div>
+          </div>
+
+          <!-- AFTER -->
+          <div>
+            <div class="ba-label">After: ih-foa.com</div>
+            <div class="browser-mock">
+              <div class="b-chrome">
+                <div class="b-dots"><span></span><span></span><span></span></div>
+                <div class="b-url">ih-foa.com · live</div>
+              </div>
+              <img src="images/ihfoa-after.webp" alt="IH-FoA new site" style="width:100%;display:block;max-height:200px;object-fit:cover;object-position:top">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Other work cards -->
     <div class="work-grid">
@@ -957,7 +1035,7 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
         </div>
         <div class="wc-content">
           <div class="wc-tag">Platform Build · Nairobi</div>
-          <div class="wc-title">Steward Nexus — Faith & Business Community Platform</div>
+          <div class="wc-title">Steward Nexus; Faith & Business Community Platform</div>
           <div class="wc-desc">Full digital ecosystem for a faith-and-business community. Website, email infrastructure, and a Supabase-backed Company OS PWA for member management and resource delivery.</div>
           <div class="wc-chips">
             <span class="wc-chip">Netlify</span>
@@ -982,8 +1060,8 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
         </div>
         <div class="wc-content">
           <div class="wc-tag">SaaS · Data Platform</div>
-          <div class="wc-title">Baseline — Structured Data Collection Platform</div>
-          <div class="wc-desc">Multi-page SPA for structured data collection — Leaflet maps, Recharts visualizations, custom survey builder, and a submission analysis engine. Built for organisations that run programs in the field.</div>
+          <div class="wc-title">Baseline; Structured Data Collection Platform</div>
+          <div class="wc-desc">Multi-page SPA for structured data collection; Leaflet maps, Recharts visualizations, custom survey builder, and a submission analysis engine. Built for organisations that run programs in the field.</div>
           <div class="wc-chips">
             <span class="wc-chip">React</span>
             <span class="wc-chip">Leaflet</span>
@@ -1002,14 +1080,30 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
 ================================================================ -->
 <section class="section-alt" id="about">
   <div class="container">
-    <div class="about-grid" style="grid-template-columns:1fr">
+    <div class="about-grid">
+      <div>
+        <p class="label fi">The founder</p>
+        <div class="about-card fi" style="margin-top:20px">
+          <img src="images/mark-mureithi.webp" alt="Joemark Mureithi; Founder, Redolense" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:12px;margin-bottom:20px;display:block;box-shadow:var(--s-sm)">
+          <div class="about-nm">Joemark Mureithi</div>
+          <div class="about-role">Founder, Redolense</div>
+          <div class="about-links">
+            <a href="https://www.linkedin.com/in/joemark-mureithi/" class="about-link" target="_blank">
+              <span>🔗</span> LinkedIn; Joemark Mureithi
+            </a>
+            <a href="https://wa.me/254726900026" class="about-link" target="_blank">
+              <span>💬</span> WhatsApp, +254 726 900 026
+            </a>
+          </div>
+        </div>
+      </div>
       <div>
         <p class="label fi">About Redolense</p>
         <h2 class="about-h fi">Built for businesses<br>that scale.</h2>
         <div class="about-body fi">
-          <p>Redolense was founded by Joemark Mureithi — a Design Engineer and Technical Program Manager with six years of cross-industry execution spanning cleantech, manufacturing, agriculture, healthcare, urban infrastructure, commercial vehicles, and creative media. Built in Nairobi. Delivered globally.</p>
-          <p>The name draws from Latin: <em>redolens</em> — to carry the essence of something, to give off the scent of what you are. Your brand radiates an impression whether you engineer it or not. Redolense engineers it with precision.</p>
-          <p>Engineering discipline applied to growth — requirements analysis, process design, iterative testing, measurement.</p>
+          <p>Product Builder and Design Engineer. Six years, nine industries, PMP Certified. I apply the same discipline I use to design physical products to building digital growth infrastructure; structured, testable, built to last.</p>
+          <p>The name draws from Latin: <em>redolens</em>, to carry the essence of something, to give off the scent of what you are. Your brand radiates an impression whether you engineer it or not. Redolense engineers it with precision.</p>
+          <p>Engineering discipline applied to growth: requirements analysis, process design, iterative testing, measurement.</p>
         </div>
 
       </div>
@@ -1024,9 +1118,9 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
   <div class="container">
     <p class="label fi">Insights</p>
     <h2 class="fi" style="font-size:clamp(1.9rem,3.8vw,2.6rem);letter-spacing:-.035em;margin-top:14px">Thinking out loud about<br>digital growth.</h2>
-    <p class="muted fi" style="margin-top:14px;max-width:480px;line-height:1.8;font-size:15px">Four articles. One argument: digital growth runs on different rules than most agencies admit — and the businesses winning right now know exactly which ones.</p>
+    <p class="muted fi" style="margin-top:14px;max-width:520px;line-height:1.8;font-size:15px">Six articles. One argument: digital growth runs on different rules than most practitioners admit: and the businesses winning right now know exactly which ones.</p>
 
-    <!-- PILLAR ARTICLE — featured -->
+    <!-- PILLAR ARTICLE: featured -->
     <a href="blog-tiktok.html" class="blog-featured fi">
       <div class="blog-feat-body">
         <div class="blog-pillar-tag">
@@ -1034,37 +1128,67 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
           <span class="blog-pillar-read">6 min read</span>
         </div>
         <div class="blog-pillar-title">TikTok Overtook Facebook in 2024. Most Businesses Missed It.</div>
-        <div class="blog-pillar-excerpt">The algorithm shifted. The 18–34 demographic moved. The window for building an unassailable free audience is open — for roughly 18 more months. After that, you pay to reach people competitors built for free.</div>
+        <div class="blog-pillar-excerpt">The algorithm shifted. The 18–34 demographic moved. The window for building an unassailable free audience is open: for roughly 18 more months. After that, you pay to reach people competitors built for free.</div>
         <div class="blog-pillar-cta">Read the full article <span>→</span></div>
       </div>
       <div class="blog-feat-side">
-        <div class="blog-feat-inner">
-          <span class="blog-feat-badge">Pillar Article</span>
-        </div>
+        <img src="images/hero-tiktok.webp" class="blog-feat-img" alt="TikTok Strategy" loading="lazy">
       </div>
     </a>
 
-    <!-- 3 SPOKE ARTICLES -->
+    <!-- 5 SPOKE ARTICLES -->
     <div class="blog-grid">
+      <a href="blog-geo.html" class="blog-card fi">
+        <img src="images/hero-geo.webp" class="blog-card-img" alt="GEO and AI Search" loading="lazy">
+        <div class="blog-card-body">
+        <div class="blog-tag">
+          <span>🤖 GEO &amp; AI Search</span>
+          <span class="blog-read">7 min read</span>
+        </div>
+        <div class="blog-title">SEO Is No Longer Enough. Here Is How to Make Your Business Visible to AI Search in 2026.</div>
+        <div class="blog-excerpt">Perplexity, ChatGPT, and Google AI Overviews now answer before the search results page. Most businesses are invisible to them. Here is how to get cited.</div>
+        <div class="blog-cta">Read article <span>→</span></div>
+      </div>
+      </a>
+      <a href="blog-linkedin.html" class="blog-card fi">
+        <img src="images/hero-linkedin.webp" class="blog-card-img" alt="LinkedIn SEO" loading="lazy">
+        <div class="blog-card-body">
+        <div class="blog-tag">
+          <span>🔗 LinkedIn</span>
+          <span class="blog-read">7 min read</span>
+        </div>
+        <div class="blog-title">LinkedIn Has the Best SEO of Any Social Platform. Here Is How to Use It.</div>
+        <div class="blog-excerpt">LinkedIn posts rank on Google within 24 hours. Your profile ranks for years. If you are treating it as a social network instead of a search engine, you are leaving qualified leads on the table.</div>
+        <div class="blog-cta">Read article <span>→</span></div>
+      </div>
+      </a>
       <a href="blog-whatsapp.html" class="blog-card fi">
+        <img src="images/hero-whatsapp.webp" class="blog-card-img" alt="WhatsApp Business" loading="lazy">
+        <div class="blog-card-body">
         <div class="blog-tag">
           <span>💬 WhatsApp</span>
           <span class="blog-read">7 min read</span>
         </div>
         <div class="blog-title">WhatsApp Is Your CRM, Your Sales Floor, and Your Customer Service Desk. Are You Using It Like One?</div>
-        <div class="blog-excerpt">Most businesses lose leads every night on WhatsApp — not because they respond slowly, but because they have no system. Here's the five-step architecture that fixes it.</div>
+        <div class="blog-excerpt">Most businesses lose leads every night on WhatsApp: not because they respond slowly, but because they have no system. Here's the five-step architecture that fixes it.</div>
         <div class="blog-cta">Read article <span>→</span></div>
+      </div>
       </a>
       <a href="blog-mpesa.html" class="blog-card fi">
+        <img src="images/hero-mpesa.webp" class="blog-card-img" alt="M-Pesa Funnels" loading="lazy">
+        <div class="blog-card-body">
         <div class="blog-tag">
           <span>📱 M-Pesa</span>
           <span class="blog-read">6 min read</span>
         </div>
         <div class="blog-title">Your Sales Funnel Has a Broken Last Step. It Doesn't Accept M-Pesa.</div>
-        <div class="blog-excerpt">Mobile money is the dominant checkout across East Africa. If your sales funnel ends with a bank card link, you're selling to the exception — not the market.</div>
+        <div class="blog-excerpt">Mobile money is the dominant checkout across East Africa. If your sales funnel ends with a bank card link, you're selling to the exception: not the market.</div>
         <div class="blog-cta">Read article <span>→</span></div>
+      </div>
       </a>
       <a href="blog-why-kenya-is-different.html" class="blog-card fi">
+        <img src="images/hero-kenya.webp" class="blog-card-img" alt="Kenya Digital Strategy" loading="lazy">
+        <div class="blog-card-body">
         <div class="blog-tag">
           <span>🌍 Digital Strategy</span>
           <span class="blog-read">7 min read</span>
@@ -1072,6 +1196,7 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
         <div class="blog-title">Why Kenya's Digital Economy Operates on Different Rules</div>
         <div class="blog-excerpt">WhatsApp, TikTok, M-Pesa, and community referral networks are the actual infrastructure. Here's what that means for your business.</div>
         <div class="blog-cta">Read article <span>→</span></div>
+      </div>
       </a>
     </div>
   </div>
@@ -1084,14 +1209,14 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
   <div class="container">
     <p class="label fi">AI Tools</p>
     <h2 class="fi" style="font-size:clamp(1.9rem,3.8vw,2.7rem);letter-spacing:-.04em;margin-top:14px">The tools are catching up<br>to the strategy.</h2>
-    <p class="muted fi" style="margin-top:14px;max-width:480px;line-height:1.8;font-size:15px">Building execution tools for businesses — M-Pesa native, WhatsApp native, Swahili-ready.</p>
+    <p class="muted fi" style="margin-top:14px;max-width:480px;line-height:1.8;font-size:15px">Building execution tools for businesses; M-Pesa native, WhatsApp native, Swahili-ready.</p>
     <div class="tools-grid">
-      <div class="tool-card fi"><span class="ts ts-live">Live</span><div class="t-name">Baseline</div><div class="t-desc">Maps, custom survey builder, and submission analysis — built for organisations that collect and act on field data.</div></div>
-      <div class="tool-card fi"><span class="ts ts-beta">Beta</span><div class="t-name">Fuata — WhatsApp Funnel</div><div class="t-desc">WhatsApp-native sales automation. Qualifies leads, delivers value, ends with an M-Pesa payment link. No CRM required.</div></div>
-      <div class="tool-card fi"><span class="ts ts-soon">Coming soon</span><div class="t-name">Business Vitals Calculator</div><div class="t-desc">Plain-language diagnosis of exactly where your business is leaking — and what to fix first.</div></div>
+      <div class="tool-card fi"><span class="ts ts-live">Live</span><div class="t-name">Baseline</div><div class="t-desc">Maps, custom survey builder, and submission analysis: built for organisations that collect and act on field data.</div></div>
+      <div class="tool-card fi"><span class="ts ts-beta">Beta</span><div class="t-name">Fuata; WhatsApp Funnel</div><div class="t-desc">WhatsApp-native sales automation. Qualifies leads, delivers value, ends with an M-Pesa payment link. No CRM required.</div></div>
+      <div class="tool-card fi"><span class="ts ts-soon">Coming soon</span><div class="t-name">Business Vitals Calculator</div><div class="t-desc">Plain-language diagnosis of exactly where your business is leaking: and what to fix first.</div></div>
       <div class="tool-card fi"><span class="ts ts-soon">Coming soon</span><div class="t-name">TikTok Script Generator</div><div class="t-desc">Ready-to-film scripts in English or Swahili, optimised for East African audiences.</div></div>
       <div class="tool-card fi"><span class="ts ts-soon">Coming soon</span><div class="t-name">M-Pesa Checkout Builder</div><div class="t-desc">Build a shareable M-Pesa checkout flow via WhatsApp link. No developer, no Daraja API headaches.</div></div>
-      <div class="tool-card fi"><span class="ts ts-soon">Coming soon</span><div class="t-name">Brand Voice Audit</div><div class="t-desc">Paste your captions or website copy. Clear readout of what your brand sounds like — and how to sharpen it.</div></div>
+      <div class="tool-card fi"><span class="ts ts-soon">Coming soon</span><div class="t-name">Brand Voice Audit</div><div class="t-desc">Paste your captions or website copy. Clear readout of what your brand sounds like: and how to sharpen it.</div></div>
     </div>
   </div>
 </section>
@@ -1105,7 +1230,7 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
   <div class="container" style="position:relative;z-index:1">
     <p class="label fi">Get started</p>
     <h2 class="c-h fi" style="margin-top:14px">Ready to build your<br><span>execution system</span>?</h2>
-    <p class="c-sub fi">Start with a discovery call. 30 minutes. No pitch — just an honest conversation about where your business is and what it needs.</p>
+    <p class="c-sub fi">Start with a discovery call. 30 minutes. No pitch: just an honest conversation about where your business is and what it needs.</p>
 
     <div class="c-card fi">
       <div class="c-card-title">Send us a message</div>
@@ -1123,7 +1248,7 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
           <option>Brand Identity</option>
           <option>Corporate Video</option>
           <option>Full Growth Package (Engine/System)</option>
-          <option>Just exploring — tell me more</option>
+          <option>Just exploring: tell me more</option>
         </select>
         <button class="qi-wa-btn" id="qiBtn">
           <span>💬</span> Send via WhatsApp
@@ -1198,7 +1323,9 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
      BOT WIDGET
 ================================================================ -->
 <button class="bot-btn" id="botBtn" aria-label="Chat with Redolense">
-  🤖
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" fill="white" opacity="0.95"/>
+  </svg>
   <span class="bot-badge"></span>
 </button>
 
@@ -1206,13 +1333,13 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
   <div class="chat-head">
     <div class="ch-dot"></div>
     <div class="ch-info">
-      <div class="ch-name">Redolense</div>
-      <div class="ch-sub">Ask me anything about our services</div>
+      <div class="ch-name">Redolense Assistant</div>
+      <div class="ch-sub">Typically replies in seconds</div>
     </div>
     <button class="ch-close" id="chatClose">✕</button>
   </div>
   <div class="chat-msgs" id="chatMsgs">
-    <div class="msg msg-bot">Hi there 👋 I'm the Redolense assistant. Ask me about our services or how we can help your business grow.</div>
+    <div class="msg msg-bot">Hi 👋 I'm the Redolense assistant. Ask me about our services, our work, or how we can help your business grow.</div>
   </div>
   <div class="chat-inp-wrap">
     <input class="chat-inp" id="chatInp" type="text" placeholder="Ask anything…">
@@ -1329,24 +1456,29 @@ const chatSend = document.getElementById('chatSend');
 botBtn.addEventListener('click', () => chatWin.classList.toggle('open'));
 document.getElementById('chatClose').addEventListener('click', () => chatWin.classList.remove('open'));
 
-const BOT_SYSTEM = `You are the Redolense assistant — concise, warm, and execution-focused.
+/* ── Anthropic API key: add yours from console.anthropic.com ── */
+const BOT_KEY = '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';
 
-Redolense is a digital growth company founded by Joemark Mureithi (Design Engineer, TPM, PMP Certified, BSc Mechanical Engineering JKUAT).
+const BOT_SYSTEM = `You are the Redolense assistant: concise, warm, and execution-focused. Built in Nairobi, delivering globally.
 
-SERVICES:
-- Signal: Foundation tier — 5-page website, SEO, WhatsApp Business, 1 social channel, monthly report, strategy call
-- Engine: Growth tier — Everything in Signal + TikTok/Instagram (16 posts), 2 blog posts, WhatsApp automation, M-Pesa integration, strategy session
-- System: Full infrastructure — Everything in Engine + 2 brand videos/month, full WhatsApp funnel (Fuata), CRM, custom marketing tool, weekly calls
-- One-off projects: Brand Identity | Website Design & Dev | Corporate Video | WhatsApp Funnel (Fuata)
-- Pricing: Request a quote via WhatsApp or email — we accept M-Pesa and online payments
+Redolense is a digital growth practice founded by Joemark Mureithi; Design Engineer, TPM, PMP Certified. Engineering discipline applied to business growth.
 
-PROCESS: Discovery Call (30min) → System Audit → Build & Deploy → Measure & Refine. First deliverable under 14 days.
+SERVICES (send a quote for pricing):
+- Signal: Foundation: website, SEO, WhatsApp Business setup, 1 social channel, monthly report
+- Engine: Growth; Signal + TikTok/Instagram content (16 posts), 2 blog posts, WhatsApp automation, M-Pesa integration
+- System: Full infrastructure; Engine + brand videos, WhatsApp funnel, CRM, custom tools, weekly calls
+- One-off: Brand Identity | Website build | Corporate Video | WhatsApp Funnel
+- Payments: M-Pesa and online payments accepted
 
-CONTACT: WhatsApp (link on site) | joemarkmureithi@gmail.com | linkedin.com/in/joemark-mureithi
+RESULTS: IH-FoA (Georgia, USA), 100/100 Google Performance, 100 SEO, 94 Accessibility, 9 pages built in 12 days. Organic blog traffic generating qualified inbound leads.
 
-CLIENTS: Steward Nexus (faith-and-business community platform), Baseline (structured data collection SaaS for field programs).
+INSIGHTS: We publish on GEO (AI search visibility), LinkedIn SEO, WhatsApp systems, TikTok strategy, and M-Pesa funnels: all at redolense.com/insights.
 
-STYLE: Keep responses under 120 words. Be specific. Reference M-Pesa, WhatsApp, TikTok naturally where relevant. End with a clear next step. Never invent information not in this prompt.`;
+PROCESS: Discovery call → Audit → Build & Deploy → Measure. First deliverable under 14 days.
+
+CONTACT: WhatsApp on this site | joemarkmureithi@gmail.com | linkedin.com/in/joemark-mureithi
+
+STYLE: Under 120 words. Specific. End with a clear next step. Never invent details not in this prompt.`;
 
 let history = [];
 
@@ -1384,9 +1516,14 @@ async function sendBotMsg() {
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key': BOT_KEY,
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
       body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
+        model:'claude-3-haiku-20240307',
         max_tokens:300,
         system:BOT_SYSTEM,
         messages:history.slice(-10)
@@ -1394,12 +1531,12 @@ async function sendBotMsg() {
     });
     const data = await res.json();
     removeTyping();
-    const reply = data.content?.[0]?.text || "Apologies, I hit a snag. Reach us via the contact section.";
+    const reply = data.content?.[0]?.text || "Sorry, I'm having a moment. Reach us directly on WhatsApp: link at the bottom right of the page.";
     addMsg(reply, false);
     history.push({role:'assistant', content:reply});
   } catch {
     removeTyping();
-    addMsg("Connection issue — reach us via WhatsApp or email from the contact section.", false);
+    addMsg("Connection issue: reach us via WhatsApp or email from the contact section.", false);
   } finally {
     chatSend.disabled = false;
   }

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Sales Funnel Has a Broken Last Step. It Doesn't Accept M-Pesa. — Redolense</title>
-<meta name="description" content="You've done everything right — great content, active WhatsApp, professional website. Then the customer hits the payment step and there's no M-Pesa option. They close the tab. You lose the sale.">
+<title>Your Sales Funnel Has a Broken Last Step. It Doesn't Accept M-Pesa.; Redolense</title>
+<meta name="description" content="You've done everything right: great content, active WhatsApp, professional website. Then the customer hits the payment step and there's no M-Pesa option. They close the tab. You lose the sale.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -31,9 +31,25 @@ h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;line-he
 html.dark .t-thumb{transform:translateX(23px)}
 .i-sun,.i-moon{position:absolute;transition:opacity .25s!important}.i-sun{opacity:1}.i-moon{opacity:0}
 html.dark .i-sun{opacity:0}html.dark .i-moon{opacity:1}
-.article-hero{padding:160px 0 68px;position:relative;overflow:hidden}
-.article-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,var(--dot-c) 1.5px,transparent 1.5px);background-size:36px 36px;mask-image:radial-gradient(ellipse 80% 60% at 50% 20%,black,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 20%,black,transparent 70%)}
-.hero-inner{max-width:760px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
+.article-hero{
+  position:relative;height:520px;overflow:hidden;
+  display:flex;align-items:center;
+  background-size:cover;background-position:center 30%;
+}
+@media(max-width:640px){.article-hero{height:380px}}
+.article-hero::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:linear-gradient(to bottom,
+    rgba(0,0,0,.0) 0%,
+    rgba(0,0,0,.0) 35%,
+    rgba(7,17,31,.55) 60%,
+    rgba(7,17,31,.92) 100%
+  );
+}
+.hero-inner{max-width:760px;margin:0 auto;padding:0 32px;position:relative;z-index:1;text-align:center}
+.atitle{color:#fff!important;text-shadow:0 2px 12px rgba(0,0,0,.45)}
+.atag{margin-bottom:16px}
+.hero-below{background:var(--bg);padding:32px 0 0;text-align:center}.hero-below .ameta,.hero-below .article-meta{justify-content:center}.hero-below .asub,.hero-below .article-sub{margin:0 auto}
 .atag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--bg-lift);border-radius:100px;box-shadow:var(--s-sm);font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;margin-bottom:28px}
 .atitle{font-size:clamp(2rem,4.8vw,3.4rem);font-weight:800;letter-spacing:-.045em;line-height:1.05;margin-bottom:22px}
 .asub{font-size:1.05rem;color:var(--t1);line-height:1.8;font-weight:300;margin-bottom:36px;max-width:640px}
@@ -78,7 +94,7 @@ html.dark .i-sun{opacity:0}html.dark .i-moon{opacity:1}
 .cost-table tr:last-child td{border-bottom:none}
 .cost-table td:first-child{font-weight:600;color:var(--t0)}
 .cost-table td em{font-style:normal;color:var(--blue);font-weight:700}
-.author-bio{max-width:760px;margin:0 auto 60px;padding:32px;background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+.author-bio{max-width:760px;margin:0 auto 60px;padding:32px;background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);display:grid;grid-template-columns:1fr;gap:20px;align-items:start}
 .bio-av{width:64px;height:64px;border-radius:50%;background:var(--btn-grad);box-shadow:var(--s-btn);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:19px;color:#fff;flex-shrink:0}
 .bio-nm{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1rem;margin-bottom:3px}
 .bio-rl{font-size:12px;color:var(--blue);margin-bottom:9px;font-weight:500}
@@ -103,6 +119,16 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
 .ft-logo em{font-style:normal;color:var(--blue)}
 .ft-copy{font-size:12px;color:var(--t2)}
 @media(max-width:640px){.stat-row-4{grid-template-columns:1fr 1fr}.rel-grid,.opt-grid{grid-template-columns:1fr}.author-bio{grid-template-columns:1fr}.bio-av{margin:0 auto}.hero-inner,.body,.related,.author-bio{padding-left:20px;padding-right:20px}.nav-inner{padding:0 20px}.stat-row{margin-left:20px;margin-right:20px}}
+html.dark .article-hero::before{background:linear-gradient(to bottom,rgba(7,17,31,.48) 0%,rgba(7,17,31,.86) 100%)}
+html:not(.dark) .article-hero::before{
+  background:linear-gradient(to bottom,
+    rgba(0,0,0,.0) 0%,
+    rgba(0,0,0,.0) 35%,
+    rgba(10,28,46,.45) 60%,
+    rgba(10,28,46,.88) 100%
+  );
+  mask-image:none;-webkit-mask-image:none;
+}
 </style>
 </head>
 <body>
@@ -120,15 +146,17 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
   </div>
 </nav>
 
-<div class="article-hero">
+<div class="article-hero" style="background-image:url('images/hero-mpesa.webp');background-size:cover;background-position:center 30%">
   <div class="hero-inner">
     <div class="atag">📱 M-Pesa & Payments · 6 min read</div>
     <h1 class="atitle">Your Sales Funnel Has a Broken Last Step. It Doesn't Accept M-Pesa.</h1>
+  </div>
+</div>
+<div class="hero-below">
+  <div class="hero-inner">
     <p class="asub">You've built something good. Good content, active WhatsApp, a professional website. The customer is ready to pay. Then they discover the only options are credit card and bank transfer. They close the tab. You never know they were there.</p>
     <div class="ameta">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="av">MM</div>
-        <div><div class="anm">Joemark Mureithi</div><div class="arl">Founder, Redolense</div></div>
+      <div><div class="anm">Joemark Mureithi</div><div class="arl">Redolense</div>
       </div>
       <div class="adiv"></div>
       <div class="ainfo">May 2026 · Nairobi, Kenya</div>
@@ -145,9 +173,9 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
 
 <article class="body" style="padding-top:48px">
 
-  <p>Consider the irony. You have a Kenyan business serving Kenyan customers, in a country where mobile money penetration is among the highest on the planet, where 22 million transactions happen on M-Pesa every single day — and your sales funnel does not accept M-Pesa.</p>
+  <p>Consider the irony. You have a Kenyan business serving Kenyan customers, in a country where mobile money penetration is among the highest on the planet, where 22 million transactions happen on M-Pesa every single day: and your sales funnel does not accept M-Pesa.</p>
 
-  <p>This is more common than it should be. And it is costing Kenyan businesses real money, every day, invisibly — because the customers who leave at the payment step do not tell you why. They just leave.</p>
+  <p>This is more common than it should be. And it is costing Kenyan businesses real money, every day, invisibly: because the customers who leave at the payment step do not tell you why. They just leave.</p>
 
   <div class="pull">
     <p>"The customers you lose at checkout don't send a complaint. They close the tab, find someone who accepts M-Pesa, and pay them. You never know the sale was there."</p>
@@ -159,7 +187,7 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
 
   <p>M-Pesa is not a Kenyan payment app. It is Kenya's financial system.</p>
 
-  <p>More than 30 million Kenyans actively use M-Pesa. Approximately 60% of Kenya's GDP — not just digital transactions, but the majority of the entire economy's value — flows through the platform in some form. The volume of mobile money transactions in Kenya exceeds the card payment transaction volumes of most Sub-Saharan African economies combined.</p>
+  <p>More than 30 million Kenyans actively use M-Pesa. Approximately 60% of Kenya's GDP: not just digital transactions, but the majority of the entire economy's value: flows through the platform in some form. The volume of mobile money transactions in Kenya exceeds the card payment transaction volumes of most Sub-Saharan African economies combined.</p>
 
   <p>Against this backdrop, credit card ownership in Kenya sits at roughly 4–5% of the adult population. Bank transfer for consumer purchases is slow, requires the customer to remember their banking app password, and carries a mental overhead that kills impulse decisions. For most Kenyan consumers, M-Pesa is not a payment option among many. It is the payment option. The only one they expect to use.</p>
 
@@ -181,7 +209,7 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
     <div class="opt-card">
       <div class="opt-name">M-Pesa Till Number</div>
       <div class="opt-best">Best for: Retail, one-off transactions, fastest setup</div>
-      <div class="opt-desc">A simpler version of Paybill. No account reference required — payment goes straight to your business number. Less traceability per transaction but faster to set up and easier for customers to use.</div>
+      <div class="opt-desc">A simpler version of Paybill. No account reference required: payment goes straight to your business number. Less traceability per transaction but faster to set up and easier for customers to use.</div>
       <div class="opt-setup">⏱ Setup: Same day via M-Pesa agent</div>
     </div>
     <div class="opt-card">
@@ -193,7 +221,7 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
     <div class="opt-card">
       <div class="opt-name">Daraja API</div>
       <div class="opt-best">Best for: Automated flows, SaaS, e-commerce</div>
-      <div class="opt-desc">Safaricom's developer API that enables programmatic M-Pesa integration — automated payment requests, real-time confirmation webhooks, and full payment flow automation. More setup required, but enables fully automated checkout without manual involvement.</div>
+      <div class="opt-desc">Safaricom's developer API that enables programmatic M-Pesa integration: automated payment requests, real-time confirmation webhooks, and full payment flow automation. More setup required, but enables fully automated checkout without manual involvement.</div>
       <div class="opt-setup">⏱ Setup: 1–3 weeks (developer + sandbox testing)</div>
     </div>
   </div>
@@ -213,7 +241,7 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
       <div class="af-icon">💬</div>
       <div>
         <div class="af-t">Customer enquiry arrives on WhatsApp</div>
-        <div class="af-d">Via TikTok link, website, Instagram bio, or word of mouth. The channel doesn't matter — the conversation starts here.</div>
+        <div class="af-d">Via TikTok link, website, Instagram bio, or word of mouth. The channel doesn't matter: the conversation starts here.</div>
         <div class="af-auto">⚡ Can be automated: greeting message fires within seconds</div>
       </div>
     </div>
@@ -228,7 +256,7 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
     <div class="af-step">
       <div class="af-icon">📱</div>
       <div>
-        <div class="af-t">Customer confirms — M-Pesa link sent immediately</div>
+        <div class="af-t">Customer confirms; M-Pesa link sent immediately</div>
         <div class="af-d">The moment the customer says "yes" or "I'll take it," the M-Pesa link is the next message. Not "I'll send an invoice later." Right now, in this conversation. The link pre-fills the amount where possible.</div>
         <div class="af-auto">⚡ Can be automated: triggered on specific keywords</div>
       </div>
@@ -236,7 +264,7 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
     <div class="af-step">
       <div class="af-icon">✅</div>
       <div>
-        <div class="af-t">Payment confirmed — automated onboarding begins</div>
+        <div class="af-t">Payment confirmed: automated onboarding begins</div>
         <div class="af-d">M-Pesa confirmation arrives. This triggers an automatic welcome message, a brief questionnaire or intake form, and a calendar link for the first call or delivery timeline. The customer feels taken care of before you've done any active work.</div>
         <div class="af-auto">⚡ Fully automatable via Daraja API webhook or manual trigger</div>
       </div>
@@ -267,9 +295,9 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
     </tbody>
   </table>
 
-  <p>The manual version — Paybill + M-Pesa Link + WhatsApp Business auto-replies — costs under KES 2,000 to set up and under KES 1,000/month to operate. It handles the most important part: the customer has a clear path to pay you, in the format they expect, without friction.</p>
+  <p>The manual version; Paybill + M-Pesa Link + WhatsApp Business auto-replies: costs under KES 2,000 to set up and under KES 1,000/month to operate. It handles the most important part: the customer has a clear path to pay you, in the format they expect, without friction.</p>
 
-  <p>The automated version — Africa's Talking API + Daraja webhook — costs KES 15,000–30,000 to build once and KES 3,000–5,000/month to run. It handles everything from first enquiry to payment confirmation without your manual involvement. For businesses doing more than 20 transactions per month, the time saving alone makes this economical.</p>
+  <p>The automated version; Africa's Talking API + Daraja webhook: costs KES 15,000–30,000 to build once and KES 3,000–5,000/month to run. It handles everything from first enquiry to payment confirmation without your manual involvement. For businesses doing more than 20 transactions per month, the time saving alone makes this economical.</p>
 
   <div class="hr-div"></div>
 
@@ -290,11 +318,10 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
 </article>
 
 <div class="author-bio" style="margin-left:auto;margin-right:auto">
-  <div class="bio-av">MM</div>
   <div>
     <div class="bio-nm">Joemark Mureithi</div>
-    <div class="bio-rl">Founder, Redolense</div>
-    <div class="bio-tx">Design Engineer and Technical Program Manager with six years of cross-industry execution. PMP Certified. Founder of Redolense — execution systems for growing businesses.</div>
+    <div class="bio-rl">Redolense</div>
+    <div class="bio-tx">Product Builder and Design Engineer. Six years, nine industries, PMP Certified. I apply the same discipline I use to design physical products to building digital growth infrastructure; structured, testable, built to last.</div>
     <div class="bio-links">
       <a href="https://wa.me/254726900026" class="bio-link" target="_blank">💬 WhatsApp</a>
       <a href="https://www.linkedin.com/in/joemark-mureithi/" class="bio-link" target="_blank">🔗 LinkedIn</a>
@@ -323,7 +350,7 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
 
 <div class="cta-band">
   <h2>Your funnel is losing sales<br>at the last step.</h2>
-  <p>We build M-Pesa-native payment flows that connect your WhatsApp conversations to a Paybill number — automatically, without your involvement.</p>
+  <p>We build M-Pesa-native payment flows that connect your WhatsApp conversations to a Paybill number: automatically, without your involvement.</p>
   <a href="https://wa.me/254726900026?text=Hi%20Redolense%20%F0%9F%91%8B%20I%20read%20your%20M-Pesa%20article%20and%20want%20to%20fix%20my%20payment%20flow" class="cta-btn" target="_blank">💬 Fix my payment flow →</a>
 </div>
 
@@ -341,6 +368,38 @@ applyTheme(saved?saved==='dark':window.matchMedia('(prefers-color-scheme: dark)'
 tBtn.addEventListener('click',()=>{const g=!root.classList.contains('dark');applyTheme(g);localStorage.setItem('rdl-theme',g?'dark':'light')});
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+/* ── Counter animation ─────────────────────────────── */
+(function(){
+  function animateCount(el){
+    const raw = el.dataset.target || el.textContent.trim();
+    el.dataset.target = raw;
+    const num = parseFloat(raw);
+    if(isNaN(num)) return;
+    const suffix = raw.replace(/[\d.]/g,'');
+    const isFloat = raw.includes('.');
+    const dur = 1600;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now-start)/dur,1);
+      const e = 1-Math.pow(1-p,3); // ease-out cubic
+      const v = num*e;
+      el.textContent = (isFloat ? v.toFixed(1) : Math.round(v)) + suffix;
+      if(p<1) requestAnimationFrame(tick);
+    }
+    el.textContent = (isFloat?'0.0':'0')+suffix;
+    requestAnimationFrame(tick);
+  }
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.sb-n').forEach(animateCount);
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.35});
+  document.querySelectorAll('.stat-row').forEach(r=>io.observe(r));
+})();
 </script>
 </body>
 </html>

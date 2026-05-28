@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WhatsApp Is Your CRM, Your Sales Floor, and Your Customer Service Desk — Redolense</title>
-<meta name="description" content="Most Kenyan businesses are losing leads on WhatsApp right now — not because they're slow, but because they have no system. Here's the architecture that fixes it.">
+<title>WhatsApp Is Your CRM, Your Sales Floor, and Your Customer Service Desk; Redolense</title>
+<meta name="description" content="Most Kenyan businesses are losing leads on WhatsApp right now: not because they're slow, but because they have no system. Here's the architecture that fixes it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -31,9 +31,25 @@ h1,h2,h3,h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;line-he
 html.dark .t-thumb{transform:translateX(23px)}
 .i-sun,.i-moon{position:absolute;transition:opacity .25s!important}.i-sun{opacity:1}.i-moon{opacity:0}
 html.dark .i-sun{opacity:0}html.dark .i-moon{opacity:1}
-.article-hero{padding:160px 0 68px;position:relative;overflow:hidden}
-.article-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,var(--dot-c) 1.5px,transparent 1.5px);background-size:36px 36px;mask-image:radial-gradient(ellipse 80% 60% at 50% 20%,black,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 20%,black,transparent 70%)}
-.hero-inner{max-width:760px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
+.article-hero{
+  position:relative;height:520px;overflow:hidden;
+  display:flex;align-items:center;
+  background-size:cover;background-position:center 30%;
+}
+@media(max-width:640px){.article-hero{height:380px}}
+.article-hero::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:linear-gradient(to bottom,
+    rgba(0,0,0,.0) 0%,
+    rgba(0,0,0,.0) 35%,
+    rgba(7,17,31,.55) 60%,
+    rgba(7,17,31,.92) 100%
+  );
+}
+.hero-inner{max-width:760px;margin:0 auto;padding:0 32px;position:relative;z-index:1;text-align:center}
+.atitle{color:#fff!important;text-shadow:0 2px 12px rgba(0,0,0,.45)}
+.atag{margin-bottom:16px}
+.hero-below{background:var(--bg);padding:32px 0 0;text-align:center}.hero-below .ameta,.hero-below .article-meta{justify-content:center}.hero-below .asub,.hero-below .article-sub{margin:0 auto}
 .atag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--bg-lift);border-radius:100px;box-shadow:var(--s-sm);font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;margin-bottom:28px}
 .atitle{font-size:clamp(2rem,4.8vw,3.4rem);font-weight:800;letter-spacing:-.045em;line-height:1.05;margin-bottom:22px}
 .asub{font-size:1.05rem;color:var(--t1);line-height:1.8;font-weight:300;margin-bottom:36px;max-width:640px}
@@ -72,7 +88,7 @@ html.dark .mk-x{background:rgba(220,80,80,.15)}
 .flow-step-i{font-size:1.5rem;margin-bottom:6px}
 .flow-step-t{font-size:11px;font-weight:700;color:var(--t0);font-family:'Bricolage Grotesque',sans-serif}
 .flow-arrow{font-size:18px;color:var(--blue);padding:0 6px;flex-shrink:0;opacity:.6}
-.author-bio{max-width:760px;margin:0 auto 60px;padding:32px;background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+.author-bio{max-width:760px;margin:0 auto 60px;padding:32px;background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);display:grid;grid-template-columns:1fr;gap:20px;align-items:start}
 .bio-av{width:64px;height:64px;border-radius:50%;background:var(--btn-grad);box-shadow:var(--s-btn);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:19px;color:#fff;flex-shrink:0}
 .bio-nm{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1rem;margin-bottom:3px}
 .bio-rl{font-size:12px;color:var(--blue);margin-bottom:9px;font-weight:500}
@@ -97,6 +113,16 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
 .ft-logo em{font-style:normal;color:var(--blue)}
 .ft-copy{font-size:12px;color:var(--t2)}
 @media(max-width:640px){.stat-row{grid-template-columns:1fr 1fr}.rel-grid{grid-template-columns:1fr}.author-bio{grid-template-columns:1fr}.bio-av{margin:0 auto}.hero-inner,.body,.related,.author-bio{padding-left:20px;padding-right:20px}.nav-inner{padding:0 20px}.stat-row{margin-left:20px;margin-right:20px}.flow{gap:4px}.flow-arrow{display:none}}
+html.dark .article-hero::before{background:linear-gradient(to bottom,rgba(7,17,31,.48) 0%,rgba(7,17,31,.86) 100%)}
+html:not(.dark) .article-hero::before{
+  background:linear-gradient(to bottom,
+    rgba(0,0,0,.0) 0%,
+    rgba(0,0,0,.0) 35%,
+    rgba(10,28,46,.45) 60%,
+    rgba(10,28,46,.88) 100%
+  );
+  mask-image:none;-webkit-mask-image:none;
+}
 </style>
 </head>
 <body>
@@ -114,15 +140,17 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
   </div>
 </nav>
 
-<div class="article-hero">
+<div class="article-hero" style="background-image:url('images/hero-whatsapp.webp');background-size:cover;background-position:center 30%">
   <div class="hero-inner">
     <div class="atag">💬 WhatsApp Marketing · 7 min read</div>
     <h1 class="atitle">WhatsApp Is Your CRM, Your Sales Floor, and Your Customer Service Desk. Are You Using It Like One?</h1>
-    <p class="asub">Most Kenyan businesses are losing leads on WhatsApp right now — not because they respond slowly, but because they have no system. Once the message arrives, there is no funnel, no follow-up, no close. Just a chat that dies.</p>
+  </div>
+</div>
+<div class="hero-below">
+  <div class="hero-inner">
+    <p class="asub">Most Kenyan businesses are losing leads on WhatsApp right now: not because they respond slowly, but because they have no system. Once the message arrives, there is no funnel, no follow-up, no close. Just a chat that dies.</p>
     <div class="ameta">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="av">MM</div>
-        <div><div class="anm">Joemark Mureithi</div><div class="arl">Founder, Redolense</div></div>
+      <div><div class="anm">Joemark Mureithi</div><div class="arl">Redolense</div>
       </div>
       <div class="adiv"></div>
       <div class="ainfo">May 2026 · Nairobi, Kenya</div>
@@ -145,7 +173,7 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
 
   <p>By 8am Wednesday, when you finally reply, they've already booked with someone else. Not a better competitor. Just a faster one. Someone whose WhatsApp sent an automatic acknowledgment at 10:48pm and followed up with a price list at 10:50pm.</p>
 
-  <p>This scenario plays out hundreds of times per day across Nairobi. The leads are there. The interest is real. The business is lost not to competition but to silence — because the company has no WhatsApp system, only a WhatsApp number.</p>
+  <p>This scenario plays out hundreds of times per day across Nairobi. The leads are there. The interest is real. The business is lost not to competition but to silence: because the company has no WhatsApp system, only a WhatsApp number.</p>
 
   <div class="hr-div"></div>
 
@@ -153,9 +181,9 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
 
   <p>There are two versions of WhatsApp. Most Kenyan SMEs are using the wrong one.</p>
 
-  <p><strong>WhatsApp Messenger</strong> — the personal app — was designed for conversations between friends and family. It has no business features, no analytics, no catalog, no auto-reply, and no separation between your personal and professional life. Using it as your business number is the digital equivalent of giving clients your personal mobile number and answering it at dinner.</p>
+  <p><strong>WhatsApp Messenger</strong>, the personal app: was designed for conversations between friends and family. It has no business features, no analytics, no catalog, no auto-reply, and no separation between your personal and professional life. Using it as your business number is the digital equivalent of giving clients your personal mobile number and answering it at dinner.</p>
 
-  <p><strong>WhatsApp Business</strong> — the free download on every app store — was designed specifically for businesses. It gives you a verified business profile with hours, website, description, and address. It gives you a product catalog your customers can browse inside the chat. It gives you auto-replies for when you're unavailable, a greeting message for first-time enquirers, and quick replies for your most common questions. It gives you labels to organize your conversations by stage (new enquiry, quote sent, awaiting payment, client).</p>
+  <p><strong>WhatsApp Business</strong>, the free download on every app store: was designed specifically for businesses. It gives you a verified business profile with hours, website, description, and address. It gives you a product catalog your customers can browse inside the chat. It gives you auto-replies for when you're unavailable, a greeting message for first-time enquirers, and quick replies for your most common questions. It gives you labels to organize your conversations by stage (new enquiry, quote sent, awaiting payment, client).</p>
 
   <div class="hi"><p><strong>Action:</strong> If you're running your business on personal WhatsApp, switch to WhatsApp Business today. It's free, your number stays the same, and your existing chats transfer over. This single change makes your business look twice as professional before you send a single message.</p></div>
 
@@ -170,7 +198,7 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
       <div class="mk-x">✕</div>
       <div>
         <div class="mk-t">No greeting message or auto-reply</div>
-        <div class="mk-d">A new customer messages you at 11pm. Nothing happens. They wake up assuming you don't care. A greeting message that says "Thanks for reaching out to [Business]. We're currently closed but will respond by 8am tomorrow — here's our catalog in the meantime" costs nothing to set up and saves every overnight enquiry.</div>
+        <div class="mk-d">A new customer messages you at 11pm. Nothing happens. They wake up assuming you don't care. A greeting message that says "Thanks for reaching out to [Business]. We're currently closed but will respond by 8am tomorrow: here's our catalog in the meantime" costs nothing to set up and saves every overnight enquiry.</div>
       </div>
     </div>
     <div class="mk">
@@ -184,14 +212,14 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
       <div class="mk-x">✕</div>
       <div>
         <div class="mk-t">Broadcasting without segmenting</div>
-        <div class="mk-d">Sending the same broadcast to 400 contacts — existing clients, cold prospects, suppliers, and your cousin — is not marketing. It's noise. Your broadcast list needs at minimum two segments: people who have already paid you (send loyalty offers and updates) and people who enquired but didn't convert (send proof and gentle follow-up). Same message to both groups alienates both.</div>
+        <div class="mk-d">Sending the same broadcast to 400 contacts: existing clients, cold prospects, suppliers, and your cousin: is not marketing. It's noise. Your broadcast list needs at minimum two segments: people who have already paid you (send loyalty offers and updates) and people who enquired but didn't convert (send proof and gentle follow-up). Same message to both groups alienates both.</div>
       </div>
     </div>
     <div class="mk">
       <div class="mk-x">✕</div>
       <div>
         <div class="mk-t">No follow-up system for unconverted enquiries</div>
-        <div class="mk-d">Someone messaged three weeks ago, you sent a quote, they went quiet. Most businesses write this off. The data says 80% of sales happen between the 5th and 12th follow-up touchpoint. One message from you three days after the quote, another at one week, another at two weeks — this sequence alone recovers 20–30% of what looked like dead leads.</div>
+        <div class="mk-d">Someone messaged three weeks ago, you sent a quote, they went quiet. Most businesses write this off. The data says 80% of sales happen between the 5th and 12th follow-up touchpoint. One message from you three days after the quote, another at one week, another at two weeks: this sequence alone recovers 20–30% of what looked like dead leads.</div>
       </div>
     </div>
     <div class="mk">
@@ -222,22 +250,22 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
   </div>
 
   <div class="steps">
-    <div class="step"><div class="step-n">1</div><div><div class="step-t">Capture — the right entry point</div><div class="step-d">Every piece of content you post should end with a direct WhatsApp link (wa.me/254XXXXXXXXX with a pre-filled message). Not "DM us." Not "visit our website." The link opens a WhatsApp conversation with a message already typed. One tap from the customer. Your WhatsApp Business greeting message fires immediately.</div></div></div>
-    <div class="step"><div class="step-n">2</div><div><div class="step-t">Qualify — three questions, that's it</div><div class="step-d">Your greeting message (or auto-reply) should ask three qualifying questions: What type of business do you run? What's the main thing you're trying to solve? What's your budget range? These three answers tell you whether to pursue the conversation and which package to recommend. Stop asking "how can I help you" — it opens too many directions and creates work.</div></div></div>
-    <div class="step"><div class="step-n">3</div><div><div class="step-t">Educate — send proof, not promises</div><div class="step-d">After qualification, send one piece of evidence: a case study result, a before/after, a client testimonial, a short video. Not a brochure. Not a capabilities deck. One specific piece of proof that is directly relevant to the problem they described. This is the trust-building step. It should take 90 seconds to consume.</div></div></div>
-    <div class="step"><div class="step-n">4</div><div><div class="step-t">Convert — state the offer plainly</div><div class="step-d">Present the recommendation with price, what's included, and a clear call to action. In Kenya, the psychology of WhatsApp means shorter is better here — one message, clearly formatted, price stated without apology, M-Pesa payment link at the bottom. "Reply YES to confirm and I'll send the invoice." That's it.</div></div></div>
-    <div class="step"><div class="step-n">5</div><div><div class="step-t">Onboard — don't let payment be the end</div><div class="step-d">Payment confirmed → automated welcome message → brief questionnaire → calendar link for first call. The experience after payment is what determines whether this client refers others. Most businesses go cold after payment. The businesses that systematize the onboarding experience convert one-time clients into recurring referral sources.</div></div></div>
+    <div class="step"><div class="step-n">1</div><div><div class="step-t">Capture: the right entry point</div><div class="step-d">Every piece of content you post should end with a direct WhatsApp link (wa.me/254XXXXXXXXX with a pre-filled message). Not "DM us." Not "visit our website." The link opens a WhatsApp conversation with a message already typed. One tap from the customer. Your WhatsApp Business greeting message fires immediately.</div></div></div>
+    <div class="step"><div class="step-n">2</div><div><div class="step-t">Qualify: three questions, that's it</div><div class="step-d">Your greeting message (or auto-reply) should ask three qualifying questions: What type of business do you run? What's the main thing you're trying to solve? What's your budget range? These three answers tell you whether to pursue the conversation and which package to recommend. Stop asking "how can I help you", it opens too many directions and creates work.</div></div></div>
+    <div class="step"><div class="step-n">3</div><div><div class="step-t">Educate: send proof, not promises</div><div class="step-d">After qualification, send one piece of evidence: a case study result, a before/after, a client testimonial, a short video. Not a brochure. Not a capabilities deck. One specific piece of proof that is directly relevant to the problem they described. This is the trust-building step. It should take 90 seconds to consume.</div></div></div>
+    <div class="step"><div class="step-n">4</div><div><div class="step-t">Convert: state the offer plainly</div><div class="step-d">Present the recommendation with price, what's included, and a clear call to action. In Kenya, the psychology of WhatsApp means shorter is better here: one message, clearly formatted, price stated without apology, M-Pesa payment link at the bottom. "Reply YES to confirm and I'll send the invoice." That's it.</div></div></div>
+    <div class="step"><div class="step-n">5</div><div><div class="step-t">Onboard: don't let payment be the end</div><div class="step-d">Payment confirmed → automated welcome message → brief questionnaire → calendar link for first call. The experience after payment is what determines whether this client refers others. Most businesses go cold after payment. The businesses that systematize the onboarding experience convert one-time clients into recurring referral sources.</div></div></div>
   </div>
 
   <div class="pull">
-    <p>"Your WhatsApp number is not the system. The system is the sequence of conversations that happens after the first message arrives — whether you're awake or not."</p>
+    <p>"Your WhatsApp number is not the system. The system is the sequence of conversations that happens after the first message arrives: whether you're awake or not."</p>
   </div>
 
   <h2>This Is Automatable. You Don't Have to Do It Manually.</h2>
 
   <p>Everything described above can be partially or fully automated using WhatsApp Business's built-in tools at zero cost, or using Africa's Talking, Twilio, or similar services for a more sophisticated flow at KES 2,000–5,000/month.</p>
 
-  <p>The manual version — where you personally respond to every message, send every follow-up, and issue every payment link — works for one or two clients. It doesn't scale beyond that, and it means your business stops functioning the moment you take a day off.</p>
+  <p>The manual version: where you personally respond to every message, send every follow-up, and issue every payment link: works for one or two clients. It doesn't scale beyond that, and it means your business stops functioning the moment you take a day off.</p>
 
   <p>The automated version runs the qualification, sends the proof, presents the offer, and confirms the payment without your involvement for the first 48 hours of every conversation. Your job enters at the point where the customer is already qualified, has seen the evidence, and is asking for a meeting.</p>
 
@@ -248,11 +276,10 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
 </article>
 
 <div class="author-bio" style="margin-left:auto;margin-right:auto">
-  <div class="bio-av">MM</div>
   <div>
     <div class="bio-nm">Joemark Mureithi</div>
-    <div class="bio-rl">Founder, Redolense</div>
-    <div class="bio-tx">Design Engineer and Technical Program Manager with six years of cross-industry execution. PMP Certified. Founder of Redolense — execution systems for growing businesses.</div>
+    <div class="bio-rl">Redolense</div>
+    <div class="bio-tx">Product Builder and Design Engineer. Six years, nine industries, PMP Certified. I apply the same discipline I use to design physical products to building digital growth infrastructure; structured, testable, built to last.</div>
     <div class="bio-links">
       <a href="https://wa.me/254726900026" class="bio-link" target="_blank">💬 WhatsApp</a>
       <a href="https://www.linkedin.com/in/joemark-mureithi/" class="bio-link" target="_blank">🔗 LinkedIn</a>
@@ -281,7 +308,7 @@ footer{border-top:1px solid var(--div);padding:24px 32px;display:flex;align-item
 
 <div class="cta-band">
   <h2>Your WhatsApp is losing leads<br>every night while you sleep.</h2>
-  <p>We build WhatsApp sales systems that qualify, educate, and present offers automatically — ending with an M-Pesa payment link. No CRM required.</p>
+  <p>We build WhatsApp sales systems that qualify, educate, and present offers automatically: ending with an M-Pesa payment link. No CRM required.</p>
   <a href="https://wa.me/254726900026?text=Hi%20Redolense%20%F0%9F%91%8B%20I%20read%20your%20WhatsApp%20article%20and%20I%20want%20to%20fix%20my%20WhatsApp%20system" class="cta-btn" target="_blank">💬 Let's fix it on WhatsApp →</a>
 </div>
 
@@ -299,6 +326,38 @@ applyTheme(saved?saved==='dark':window.matchMedia('(prefers-color-scheme: dark)'
 tBtn.addEventListener('click',()=>{const g=!root.classList.contains('dark');applyTheme(g);localStorage.setItem('rdl-theme',g?'dark':'light')});
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+/* ── Counter animation ─────────────────────────────── */
+(function(){
+  function animateCount(el){
+    const raw = el.dataset.target || el.textContent.trim();
+    el.dataset.target = raw;
+    const num = parseFloat(raw);
+    if(isNaN(num)) return;
+    const suffix = raw.replace(/[\d.]/g,'');
+    const isFloat = raw.includes('.');
+    const dur = 1600;
+    const start = performance.now();
+    function tick(now){
+      const p = Math.min((now-start)/dur,1);
+      const e = 1-Math.pow(1-p,3); // ease-out cubic
+      const v = num*e;
+      el.textContent = (isFloat ? v.toFixed(1) : Math.round(v)) + suffix;
+      if(p<1) requestAnimationFrame(tick);
+    }
+    el.textContent = (isFloat?'0.0':'0')+suffix;
+    requestAnimationFrame(tick);
+  }
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.sb-n').forEach(animateCount);
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.35});
+  document.querySelectorAll('.stat-row').forEach(r=>io.observe(r));
+})();
 </script>
 </body>
 </html>
