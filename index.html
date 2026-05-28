@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0E0EBJNPJD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0E0EBJNPJD');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Redolense · Execution Systems for Growing Businesses</title>
@@ -198,7 +206,8 @@ html.dark .i-sun{opacity:0} html.dark .i-moon{opacity:1}
 .kenya-card{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:32px;position:relative;overflow:hidden;transition:box-shadow .25s,transform .2s}
 .kenya-card:hover{box-shadow:var(--s-out);transform:translateY(-2px)}
 .kenya-card::before{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:var(--blue-dim);border-radius:50%}
-.kenya-icon{font-size:2rem;margin-bottom:12px;position:relative;z-index:1}
+.kenya-icon{width:48px;height:48px;margin-bottom:16px;position:relative;z-index:1;display:flex;align-items:center;justify-content:flex-start}
+.kenya-icon img,.kenya-icon svg{width:44px;height:44px;display:block}
 .kenya-num{font-family:'Bricolage Grotesque',sans-serif;font-size:2.8rem;font-weight:800;letter-spacing:-.04em;color:var(--blue);line-height:1;margin-bottom:8px}
 .kenya-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:10px;color:var(--t0)}
 .kenya-body{font-size:13.5px;color:var(--t1);line-height:1.7}
@@ -206,7 +215,7 @@ html.dark .i-sun{opacity:0} html.dark .i-moon{opacity:1}
 /* ============================================================
    PROBLEM
 ============================================================ */
-.prob-grid{display:grid;grid-template-columns:.42fr .58fr;gap:48px;align-items:center},2.3rem);font-weight:800;letter-spacing:-.03em;margin-top:14px;line-height:1.15}
+.prob-grid{display:grid;grid-template-columns:.42fr .58fr;gap:48px;align-items:start},2.3rem);font-weight:800;letter-spacing:-.03em;margin-top:14px;line-height:1.15}
 .prob-intro{font-size:15px;color:var(--t1);line-height:1.85;margin-bottom:12px}
 .prob-cards{margin-top:28px;display:flex;flex-direction:column;gap:13px}
 .prob-card{display:flex;gap:15px;padding:19px 21px;background:var(--bg-lift);border-radius:var(--r2);box-shadow:var(--s-sm);transition:box-shadow .25s}
@@ -282,7 +291,7 @@ html.dark .svc-num{color:rgba(61,155,255,.12)}
 /* ============================================================
    PROCESS
 ============================================================ */
-.proc-h{margin-bottom:60px}
+.proc-h{margin-bottom:60px;text-align:left}
 .proc-h h2{font-size:clamp(2rem,3.8vw,2.7rem);letter-spacing:-.035em;margin-top:14px;max-width:580px}
 .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .proc-card{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:28px;transition:box-shadow .25s,transform .2s}
@@ -467,7 +476,7 @@ html.dark .b-url{background:var(--bg-deep)}
 .c-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:620px;height:400px;pointer-events:none;background:radial-gradient(ellipse,var(--blue-dim) 0%,transparent 65%)}
 .c-dots{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,var(--dot-c) 1.5px,transparent 1.5px);background-size:36px 36px;mask-image:radial-gradient(ellipse 55% 65% at 50% 55%,black,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 55% 65% at 50% 55%,black,transparent 75%)}
 .c-h{font-size:clamp(2.6rem,5.5vw,4.2rem);font-weight:800;letter-spacing:-.045em;line-height:1.0;margin-bottom:18px}
-.c-h span{color:var(--blue)}
+
 .c-sub{font-size:1.05rem;color:var(--t1);max-width:400px;margin:0 auto 48px;line-height:1.8;font-weight:300}
 
 /* Contact card */
@@ -626,8 +635,8 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
 }
 html.dark .hero-overlay{background:linear-gradient(135deg,rgba(7,17,31,.72) 0%,rgba(7,17,31,.42) 55%,rgba(7,17,31,.68) 100%)}
 html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242,.82) 0%,rgba(220,232,242,.55) 55%,rgba(220,232,242,.82) 100%)}
-.prob-img-wrap{border-radius:var(--r);overflow:hidden;box-shadow:var(--s-out);position:relative}
-.prob-img{width:100%;height:100%;min-height:420px;object-fit:cover;object-position:center;display:block}
+.prob-img-wrap{border-radius:var(--r);overflow:hidden;box-shadow:var(--s-out);position:relative;align-self:stretch}
+.prob-img{width:100%;height:100%;min-height:480px;object-fit:cover;object-position:center;display:block}
 .prob-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(18,104,204,.08),transparent 60%);pointer-events:none}
 </style>
 </head>
@@ -644,11 +653,11 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
     <button class="mob-close" id="mobClose">✕</button>
   </div>
   <ul class="mob-nav">
-    <li><a href="#why-kenya" class="mob-link">Why us</a></li>
     <li><a href="#services" class="mob-link">Services</a></li>
+    <li><a href="#why-kenya" class="mob-link">Why us</a></li>
     <li><a href="#work" class="mob-link">Work</a></li>
-    <li><a href="#about" class="mob-link">About</a></li>
     <li><a href="#insights" class="mob-link">Insights</a></li>
+    <li><a href="#about" class="mob-link">About</a></li>
     <li><a href="#tools" class="mob-link">Tools</a></li>
     <li><a href="#contact" class="mob-link">Contact</a></li>
   </ul>
@@ -664,11 +673,11 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
   <div class="nav-inner">
     <a href="#" class="nav-logo">Redo<em>lense</em></a>
     <ul class="nav-links">
-      <li><a href="#why-kenya">Why us</a></li>
       <li><a href="#services">Services</a></li>
+      <li><a href="#why-kenya">Why us</a></li>
       <li><a href="#work">Work</a></li>
-      <li><a href="#about">About</a></li>
       <li><a href="#insights">Insights</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
@@ -752,43 +761,6 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
 </div>
 
 <!-- ================================================================
-     WHY KENYA IS DIFFERENT  [page: why-kenya]
-================================================================ -->
-<section class="section-alt" id="why-kenya">
-  <div class="container">
-    <p class="label fi">Why platform matters</p>
-    <h2 class="fi" style="font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-.035em;margin-top:14px;max-width:680px">The channels your customers actually use: most agencies don't know this. We live it.</h2>
-    <p class="muted fi" style="margin-top:14px;max-width:540px;line-height:1.8;font-size:15px">Your customers are on specific platforms, with specific behaviours and economics. Generic agencies guess. We build for where they actually are.</p>
-    <div class="kenya-grid">
-      <div class="kenya-card fi">
-        <div class="kenya-icon">🎵</div>
-        <div class="kenya-num">#1</div>
-        <div class="kenya-title">TikTok is your distribution</div>
-        <div class="kenya-body">TikTok has surpassed Facebook in daily active users in the 18–34 demographic: your primary spending cohort. Your next 1,000 customers are on their For You page right now, not waiting for a Google ad.</div>
-      </div>
-      <div class="kenya-card fi">
-        <div class="kenya-icon">💬</div>
-        <div class="kenya-num">67%</div>
-        <div class="kenya-title">WhatsApp is your CRM</div>
-        <div class="kenya-body">Most B2B deals close on WhatsApp: not email, not in a boardroom. Your follow-up system needs to live in the chat thread, not a spreadsheet you'll never open again.</div>
-      </div>
-      <div class="kenya-card fi">
-        <div class="kenya-icon">🤝</div>
-        <div class="kenya-num">3×</div>
-        <div class="kenya-title">Referral is your media</div>
-        <div class="kenya-body">Consumers trust a recommendation from their network 3× more than any ad or Google review. We build systems that activate that referral loop at scale: automatically, not manually.</div>
-      </div>
-      <div class="kenya-card fi">
-        <div class="kenya-icon">📱</div>
-        <div class="kenya-num">60%</div>
-        <div class="kenya-title">Mobile money is your checkout</div>
-        <div class="kenya-body">Mobile money dominates digital payments across high-growth markets. If your funnel doesn't end where your customers actually pay, you're losing them at the last and most important step.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================================================================
      PROBLEM
 ================================================================ -->
 <section class="section" id="problem">
@@ -800,40 +772,13 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
       <div>
         <p class="label fi">The problem</p>
         <h2 class="prob-h fi">Most businesses are invisible online: not because they're bad at business, but because no one built them a system.</h2>
-      </div>
-      <div>
-        <p class="prob-intro fi">Most growing businesses are running on hustle: chasing leads manually, posting inconsistently, and hoping the website does something. It's not a discipline problem. It's a systems problem.</p>
+        <p class="prob-intro fi" style="margin-top:20px">Most growing businesses are running on hustle: chasing leads manually, posting inconsistently, and hoping the website does something. It's not a discipline problem. It's a systems problem.</p>
         <p class="prob-intro fi" style="margin-bottom:0">Redolense builds the infrastructure that turns scattered effort into compounding results.</p>
-        <div class="prob-cards">
-          <div class="prob-card fi"><div class="p-icon">✕</div><div><div class="p-t">No funnel, no system</div><div class="p-d">You're following up manually on WhatsApp, losing leads between conversations you never recorded anywhere.</div></div></div>
-          <div class="prob-card fi"><div class="p-icon">✕</div><div><div class="p-t">No content machine</div><div class="p-d">You post when you remember, go silent for weeks, and wonder why your engagement dropped to zero.</div></div></div>
-          <div class="prob-card fi"><div class="p-icon">✕</div><div><div class="p-t">No digital presence</div><div class="p-d">Your Google result is a Facebook page from 2020 you forgot existed. That's your first impression.</div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================================================================
-     TESTIMONIALS
-================================================================ -->
-<section class="section-alt" id="testimonials">
-  <div class="container">
-    <p class="label fi">Social proof</p>
-    <h2 class="fi" style="font-size:clamp(1.9rem,3.8vw,2.6rem);letter-spacing:-.035em;margin-top:14px">Results our clients are seeing.</h2>
-    <div class="testi-grid">
-
-      <div class="testi-card fi">
-        <div class="testi-q">"</div>
-        <div class="testi-text">The WhatsApp automation changed how we handle leads entirely. We went from losing inquiries in old chats to closing them systematically, same day.</div>
-        <div class="testi-metric">34% reduction in lost leads</div>
-        <div class="testi-client">Confidential · Nairobi Restaurant Group 🇰🇪</div>
-      </div>
-      <div class="testi-card fi">
-        <div class="testi-q">"</div>
-        <div class="testi-text">In 60 days of TikTok content we generated more qualified inquiries than the entire previous year of word-of-mouth referrals combined.</div>
-        <div class="testi-metric">15+ qualified leads/month from TikTok</div>
-        <div class="testi-client">Confidential · Kenyan Fintech 🇰🇪</div>
+          <div class="prob-cards">
+          <div class="prob-card fi"><div class="p-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/><line x1="2" y1="2" x2="22" y2="22"/></svg></div><div><div class="p-t">No funnel, no system</div><div class="p-d">You're following up manually on WhatsApp, losing leads between conversations you never recorded anywhere.</div></div></div>
+          <div class="prob-card fi"><div class="p-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></div><div><div class="p-t">No content machine</div><div class="p-d">You post when you remember, go silent for weeks, and wonder why your engagement dropped to zero.</div></div></div>
+          <div class="prob-card fi"><div class="p-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg></div><div><div class="p-t">No digital presence</div><div class="p-d">Your Google result is a Facebook page from 2020 you forgot existed. That's your first impression.</div></div></div>
+          </div>
       </div>
     </div>
   </div>
@@ -842,7 +787,7 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
 <!-- ================================================================
      SERVICES  [page: services]
 ================================================================ -->
-<section class="section" id="services">
+<section class="section-alt" id="services">
   <div class="container">
     <div class="svc-top">
       <p class="label fi">What we build</p>
@@ -920,7 +865,7 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
 <!-- ================================================================
      PROCESS
 ================================================================ -->
-<section class="section-alt" id="process">
+<section class="section" id="process">
   <div class="container">
     <div class="proc-h">
       <p class="label fi">How we work</p>
@@ -928,10 +873,47 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
       <p class="muted fi" style="margin-top:14px;max-width:360px;line-height:1.8">First call to first deliverable in under two weeks.</p>
     </div>
     <div class="proc-grid">
-      <div class="proc-card fi"><div class="pn">01</div><div class="pt-c">Discovery Call</div><div class="pd">30 minutes. We understand your business, your customer, and your revenue gap. No pitch: just honest diagnosis.</div></div>
-      <div class="proc-card fi"><div class="pn">02</div><div class="pt-c">System Audit</div><div class="pd">We audit your digital presence, content, and lead flow. Plain-language report: what's broken, what to fix first.</div></div>
-      <div class="proc-card fi"><div class="pn">03</div><div class="pt-c">Build & Deploy</div><div class="pd">We build your systems: website, content, automation. Everything documented and handed to you as a permanent asset.</div></div>
-      <div class="proc-card fi"><div class="pn">04</div><div class="pt-c">Measure & Refine</div><div class="pd">Monthly data reviews. We track what moves: leads, conversions, reach: and adjust the system accordingly.</div></div>
+      <div class="proc-card fi"><div class="pn count-proc" data-target="1">01</div><div class="pt-c">Discovery Call</div><div class="pd">30 minutes. We understand your business, your customer, and your revenue gap. No pitch: just honest diagnosis.</div></div>
+      <div class="proc-card fi"><div class="pn count-proc" data-target="2">02</div><div class="pt-c">System Audit</div><div class="pd">We audit your digital presence, content, and lead flow. Plain-language report: what's broken, what to fix first.</div></div>
+      <div class="proc-card fi"><div class="pn count-proc" data-target="3">03</div><div class="pt-c">Build & Deploy</div><div class="pd">We build your systems: website, content, automation. Everything documented and handed to you as a permanent asset.</div></div>
+      <div class="proc-card fi"><div class="pn count-proc" data-target="4">04</div><div class="pt-c">Measure & Refine</div><div class="pd">Monthly data reviews. We track what moves: leads, conversions, reach: and adjust the system accordingly.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     WHY KENYA IS DIFFERENT  [page: why-kenya]
+================================================================ -->
+<section class="section-alt" id="why-kenya">
+  <div class="container">
+    <p class="label fi">Why platform matters</p>
+    <h2 class="fi" style="font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-.035em;margin-top:14px;max-width:680px">The channels your customers actually use: most agencies don't know this. We live it.</h2>
+    <p class="muted fi" style="margin-top:14px;max-width:540px;line-height:1.8;font-size:15px">Your customers are on specific platforms, with specific behaviours and economics. Generic agencies guess. We build for where they actually are.</p>
+    <div class="kenya-grid">
+      <div class="kenya-card fi">
+        <div class="kenya-icon"><svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.2-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></div>
+        <div class="kenya-num">#1</div>
+        <div class="kenya-title">TikTok is your distribution</div>
+        <div class="kenya-body">TikTok has surpassed Facebook in daily active users in the 18–34 demographic: your primary spending cohort. Your next 1,000 customers are on their For You page right now, not waiting for a Google ad.</div>
+      </div>
+      <div class="kenya-card fi">
+        <div class="kenya-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#25D366"/></svg></div>
+        <div class="kenya-num">67%</div>
+        <div class="kenya-title">WhatsApp is your CRM</div>
+        <div class="kenya-body">Most B2B deals close on WhatsApp: not email, not in a boardroom. Your follow-up system needs to live in the chat thread, not a spreadsheet you'll never open again.</div>
+      </div>
+      <div class="kenya-card fi">
+        <div class="kenya-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6.5 8L12 16M17.5 8L12 16"/></svg></div>
+        <div class="kenya-num">3×</div>
+        <div class="kenya-title">Referral is your media</div>
+        <div class="kenya-body">Consumers trust a recommendation from their network 3× more than any ad or Google review. We build systems that activate that referral loop at scale: automatically, not manually.</div>
+      </div>
+      <div class="kenya-card fi">
+        <div class="kenya-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke="#60BB47" stroke-width="1.6"/><path d="M9 7h6M9 11h6M9 15h3" stroke="#60BB47" stroke-width="1.6" stroke-linecap="round"/><circle cx="15.5" cy="15.5" r="1.5" fill="#60BB47"/><path d="M8 19h2.5" stroke="#60BB47" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <div class="kenya-num">60%</div>
+        <div class="kenya-title">Mobile money is your checkout</div>
+        <div class="kenya-body">Mobile money dominates digital payments across high-growth markets. If your funnel doesn't end where your customers actually pay, you're losing them at the last and most important step.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -951,43 +933,27 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
         <div class="work-feat-content">
           <div class="wf-lbl">Industrial Hygiene Forensics of Americus, LLC · Georgia, USA 🇺🇸</div>
           <h3 class="wf-title">From invisible to credible: a full digital rebuild for a US forensic consultancy.</h3>
-          <p class="wf-desc">IH-FoA had deep technical expertise. Their old Wix site didn't reflect it: generic, cluttered, zero hierarchy. We rebuilt everything from brief to live in 12 days.</p>
+          <p class="wf-desc">IH-FoA had deep technical expertise. Their old Wix site didn't reflect it: generic, cluttered, zero hierarchy. We rebuilt everything from brief to live in 15 days.</p>
 
-          <!-- PageSpeed Score Badges -->
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px">
-            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:10px;padding:10px 14px;text-align:center;min-width:62px">
-              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:#00B34A;line-height:1">100</div>
-              <div style="font-size:9px;color:var(--t2);margin-top:3px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Performance</div>
+          <!-- 3 headline stats -->
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px">
+            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:14px;padding:18px 16px;text-align:center">
+              <div class="count-stat" data-target="487" style="font-family:'Bricolage Grotesque',sans-serif;font-size:2.2rem;font-weight:800;color:var(--blue);line-height:1">487</div>
+              <div style="font-size:10px;color:var(--t2);margin-top:6px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;line-height:1.4">Organic visits<br>Month 1</div>
             </div>
-            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:10px;padding:10px 14px;text-align:center;min-width:62px">
-              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:#00B34A;line-height:1">94</div>
-              <div style="font-size:9px;color:var(--t2);margin-top:3px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Accessibility</div>
+            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:14px;padding:18px 16px;text-align:center">
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2.2rem;font-weight:800;color:var(--blue);line-height:1">15d</div>
+              <div style="font-size:10px;color:var(--t2);margin-top:6px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;line-height:1.4">Brief<br>to live</div>
             </div>
-            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:10px;padding:10px 14px;text-align:center;min-width:62px">
-              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:#00B34A;line-height:1">100</div>
-              <div style="font-size:9px;color:var(--t2);margin-top:3px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Best Practices</div>
-            </div>
-            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:10px;padding:10px 14px;text-align:center;min-width:62px">
-              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:#00B34A;line-height:1">100</div>
-              <div style="font-size:9px;color:var(--t2);margin-top:3px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">SEO</div>
-            </div>
-            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:10px;padding:10px 14px;text-align:center;min-width:62px">
-              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:var(--blue);line-height:1">12d</div>
-              <div style="font-size:9px;color:var(--t2);margin-top:3px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Brief to Live</div>
-            </div>
-            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:10px;padding:10px 14px;text-align:center;min-width:62px">
-              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.5rem;font-weight:800;color:var(--blue);line-height:1">9</div>
-              <div style="font-size:9px;color:var(--t2);margin-top:3px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Pages Built</div>
+            <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:14px;padding:18px 16px;text-align:center">
+              <div class="count-stat" data-target="100" style="font-family:'Bricolage Grotesque',sans-serif;font-size:2.2rem;font-weight:800;color:#00B34A;line-height:1">100</div>
+              <div style="font-size:10px;color:var(--t2);margin-top:6px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;line-height:1.4">PageSpeed<br>score</div>
             </div>
           </div>
 
-          <img src="images/pagespeed.webp" alt="Google PageSpeed Insights, 100 Performance, 94 Accessibility, 100 Best Practices, 100 SEO" loading="lazy" style="width:100%;max-width:420px;border-radius:10px;box-shadow:var(--s-sm);margin-bottom:20px;display:block">
-
           <div class="wf-outcomes">
-            <div class="wf-out"><span class="wf-arr">→</span>Full 9-page site: technically precise, professionally authoritative, 100/100 Google score on first build</div>
-            <div class="wf-out"><span class="wf-arr">→</span>OSHA crystalline silica blog ranking on Google, 487 organic visits in Month 1</div>
-            <div class="wf-out"><span class="wf-arr">→</span>Intelligence dashboard: live GEO score, AI visibility tracker, Lighthouse history, content analytics</div>
-            <div class="wf-out"><span class="wf-arr">→</span>6-month content &amp; LinkedIn authority programme in delivery</div>
+            <div class="wf-out"><span class="wf-arr">→</span>OSHA crystalline silica content ranked Page 1 on Google; 487 organic visits with zero paid ads in Month 1</div>
+            <div class="wf-out"><span class="wf-arr">→</span>9-page site scoring 100/100 Performance, Best Practices, and SEO; 94 Accessibility; on the first build</div>
           </div>
           <div style="display:flex;gap:12px;flex-wrap:wrap">
             <a href="https://ih-foa.com" class="btn-fill" style="font-size:13px;padding:12px 24px;display:inline-flex;align-items:center;gap:8px" target="_blank">View live site →</a>
@@ -1076,36 +1042,25 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
 </section>
 
 <!-- ================================================================
-     ABOUT  [page: about]
+     TESTIMONIALS
 ================================================================ -->
-<section class="section-alt" id="about">
+<section class="section-alt" id="testimonials">
   <div class="container">
-    <div class="about-grid">
-      <div>
-        <p class="label fi">The founder</p>
-        <div class="about-card fi" style="margin-top:20px">
-          <img src="images/mark-mureithi.webp" alt="Joemark Mureithi; Founder, Redolense" style="width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:12px;margin-bottom:20px;display:block;box-shadow:var(--s-sm)">
-          <div class="about-nm">Joemark Mureithi</div>
-          <div class="about-role">Founder, Redolense</div>
-          <div class="about-links">
-            <a href="https://www.linkedin.com/in/joemark-mureithi/" class="about-link" target="_blank">
-              <span>🔗</span> LinkedIn; Joemark Mureithi
-            </a>
-            <a href="https://wa.me/254726900026" class="about-link" target="_blank">
-              <span>💬</span> WhatsApp, +254 726 900 026
-            </a>
-          </div>
-        </div>
-      </div>
-      <div>
-        <p class="label fi">About Redolense</p>
-        <h2 class="about-h fi">Built for businesses<br>that scale.</h2>
-        <div class="about-body fi">
-          <p>Product Builder and Design Engineer. Six years, nine industries, PMP Certified. I apply the same discipline I use to design physical products to building digital growth infrastructure; structured, testable, built to last.</p>
-          <p>The name draws from Latin: <em>redolens</em>, to carry the essence of something, to give off the scent of what you are. Your brand radiates an impression whether you engineer it or not. Redolense engineers it with precision.</p>
-          <p>Engineering discipline applied to growth: requirements analysis, process design, iterative testing, measurement.</p>
-        </div>
+    <p class="label fi">Social proof</p>
+    <h2 class="fi" style="font-size:clamp(1.9rem,3.8vw,2.6rem);letter-spacing:-.035em;margin-top:14px">Results our clients are seeing.</h2>
+    <div class="testi-grid">
 
+      <div class="testi-card fi">
+        <div class="testi-q">"</div>
+        <div class="testi-text">The WhatsApp automation changed how we handle leads entirely. We went from losing inquiries in old chats to closing them systematically, same day.</div>
+        <div class="testi-metric">34% reduction in lost leads</div>
+        <div class="testi-client">Confidential · Nairobi Restaurant Group 🇰🇪</div>
+      </div>
+      <div class="testi-card fi">
+        <div class="testi-q">"</div>
+        <div class="testi-text">In 60 days of TikTok content we generated more qualified inquiries than the entire previous year of word-of-mouth referrals combined.</div>
+        <div class="testi-metric">15+ qualified leads/month from TikTok</div>
+        <div class="testi-client">Confidential · Kenyan Fintech 🇰🇪</div>
       </div>
     </div>
   </div>
@@ -1203,9 +1158,49 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
 </section>
 
 <!-- ================================================================
+     ABOUT  [page: about]
+================================================================ -->
+<section class="section-alt" id="about">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+      <div>
+        <p class="label fi">About Redolense</p>
+        <h2 class="about-h fi">Built for businesses<br>that scale.</h2>
+        <div class="about-body fi">
+          <p>Product Builder and Design Engineer. Six years, nine industries, PMP Certified. The same discipline used to design physical products: applied to building digital growth infrastructure. Structured, testable, built to last.</p>
+          <p>The name draws from Latin: <em>redolens</em>, to carry the essence of something. Your brand radiates an impression whether you engineer it or not. Redolense engineers it with precision.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px">
+          <a href="https://www.linkedin.com/in/joemark-mureithi/" class="btn-ghost" style="font-size:13px;padding:10px 20px" target="_blank">Connect on LinkedIn →</a>
+          <a href="https://wa.me/254726900026" class="btn-ghost" style="font-size:13px;padding:10px 20px" target="_blank">WhatsApp us →</a>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div style="background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:28px 24px">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2rem;font-weight:800;color:var(--blue)">6</div>
+          <div style="font-size:12px;color:var(--t2);margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Years<br>experience</div>
+        </div>
+        <div style="background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:28px 24px">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2rem;font-weight:800;color:var(--blue)">9</div>
+          <div style="font-size:12px;color:var(--t2);margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Industries<br>across</div>
+        </div>
+        <div style="background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:28px 24px">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2rem;font-weight:800;color:var(--blue)">PMP</div>
+          <div style="font-size:12px;color:var(--t2);margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Certified<br>PM</div>
+        </div>
+        <div style="background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:28px 24px">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2rem;font-weight:800;color:var(--blue)">SDG</div>
+          <div style="font-size:12px;color:var(--t2);margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Soli Deo<br>Gloria</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
      TOOLS  [page: tools]
 ================================================================ -->
-<section class="section-alt" id="tools">
+<section class="section" id="tools">
   <div class="container">
     <p class="label fi">AI Tools</p>
     <h2 class="fi" style="font-size:clamp(1.9rem,3.8vw,2.7rem);letter-spacing:-.04em;margin-top:14px">The tools are catching up<br>to the strategy.</h2>
@@ -1229,7 +1224,7 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
   <div class="c-dots"></div>
   <div class="container" style="position:relative;z-index:1">
     <p class="label fi">Get started</p>
-    <h2 class="c-h fi" style="margin-top:14px">Ready to build your<br><span>execution system</span>?</h2>
+    <h2 class="c-h fi" style="margin-top:14px">Ready to build your<br>execution system?</h2>
     <p class="c-sub fi">Start with a discovery call. 30 minutes. No pitch: just an honest conversation about where your business is and what it needs.</p>
 
     <div class="c-card fi">
@@ -1278,11 +1273,11 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
       <div>
         <div class="ft-col-title">Navigate</div>
         <ul class="ft-col-links">
-          <li><a href="#why-kenya">Why us</a></li>
           <li><a href="#services">Services</a></li>
+          <li><a href="#why-kenya">Why us</a></li>
           <li><a href="#work">Work</a></li>
-          <li><a href="#about">About</a></li>
           <li><a href="#insights">Insights</a></li>
+          <li><a href="#about">About</a></li>
           <li><a href="#tools">Tools</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -1292,7 +1287,7 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
         <div class="ft-socials">
           <a href="https://www.linkedin.com/in/joemark-mureithi/" class="ft-social" target="_blank">
             <div class="ft-social-icon" style="background:#0A66C2;color:#fff">in</div>
-            Joemark Mureithi
+            Connect on LinkedIn
           </a>
           <a href="mailto:joemarkmureithi@gmail.com" class="ft-social">
             <div class="ft-social-icon" style="background:var(--blue);color:#fff;font-size:12px">✉</div>
@@ -1447,7 +1442,48 @@ const io = new IntersectionObserver(entries => {
 }, {threshold:0.08, rootMargin:'0px 0px -28px 0px'});
 document.querySelectorAll('.fi').forEach(el => io.observe(el));
 
-/* ---- Bot chat ---- */
+/* ---- Process step counter ---- */
+const pnEls = document.querySelectorAll('.pn[data-target]');
+const pnObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const target = parseInt(e.target.dataset.target);
+    let current = 0;
+    const duration = 700;
+    const steps = target;
+    const interval = duration / steps;
+    const timer = setInterval(() => {
+      current++;
+      e.target.textContent = String(current).padStart(2, '0');
+      if (current >= target) clearInterval(timer);
+    }, interval);
+    pnObserver.unobserve(e.target);
+  });
+}, {threshold: 0.5});
+pnEls.forEach(el => pnObserver.observe(el));
+
+/* ---- Work stat counters ---- */
+const statEls = document.querySelectorAll('.count-stat[data-target]');
+const statObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const target = parseInt(e.target.dataset.target);
+    const suffix = e.target.dataset.suffix || '';
+    const duration = 1400;
+    const steps = 40;
+    const interval = duration / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current = Math.min(current + Math.ceil(target / steps), target);
+      e.target.textContent = current + suffix;
+      if (current >= target) clearInterval(timer);
+    }, interval);
+    statObserver.unobserve(e.target);
+  });
+}, {threshold: 0.6});
+statEls.forEach(el => statObserver.observe(el));
+
+
 const chatWin = document.getElementById('chatWin');
 const chatMsgs = document.getElementById('chatMsgs');
 const chatInp = document.getElementById('chatInp');
@@ -1457,7 +1493,7 @@ botBtn.addEventListener('click', () => chatWin.classList.toggle('open'));
 document.getElementById('chatClose').addEventListener('click', () => chatWin.classList.remove('open'));
 
 /* ── Anthropic API key: add yours from console.anthropic.com ── */
-const BOT_KEY = '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';
+/* API key lives in Netlify environment variable — never in this file */
 
 const BOT_SYSTEM = `You are the Redolense assistant: concise, warm, and execution-focused. Built in Nairobi, delivering globally.
 
@@ -1514,17 +1550,10 @@ async function sendBotMsg() {
   showTyping();
   chatSend.disabled = true;
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('/.netlify/functions/chat', {
       method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'x-api-key': BOT_KEY,
-        'anthropic-version':'2023-06-01',
-        'anthropic-dangerous-direct-browser-access':'true'
-      },
+      headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        model:'claude-3-haiku-20240307',
-        max_tokens:300,
         system:BOT_SYSTEM,
         messages:history.slice(-10)
       })
