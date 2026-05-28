@@ -1,19 +1,24 @@
 const https = require('https');
 
 exports.handler = async function (event) {
+  console.log('Function invoked, method:', event.httpMethod);
+
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
+    console.error('ANTHROPIC_API_KEY is not set');
     return { statusCode: 500, body: JSON.stringify({ error: 'API key not configured' }) };
   }
+  console.log('API key present, length:', apiKey.length);
 
   let body;
   try {
     body = JSON.parse(event.body);
-  } catch {
+  } catch (e) {
+    console.error('JSON parse error:', e.message);
     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid JSON' }) };
   }
 
@@ -39,21 +44,23 @@ exports.handler = async function (event) {
 
     const req = https.request(options, (res) => {
       let data = '';
+      console.log('Anthropic response status:', res.statusCode);
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
-        try {
-          resolve({
-            statusCode: 200,
-            headers: { 'Content-Type': 'application/json' },
-            body: data
-          });
-        } catch (e) {
-          resolve({ statusCode: 500, body: JSON.stringify({ error: 'Parse error' }) });
-        }
+        console.log('Response received, length:', data.length);
+        resolve({
+          statusCode: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          body: data
+        });
       });
     });
 
     req.on('error', (err) => {
+      console.error('HTTPS request error:', err.message);
       resolve({ statusCode: 500, body: JSON.stringify({ error: err.message }) });
     });
 
