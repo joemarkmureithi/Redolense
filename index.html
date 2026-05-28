@@ -1560,7 +1560,7 @@ async function sendBotMsg() {
     });
     const data = await res.json();
     removeTyping();
-    const reply = data.content?.[0]?.text || "Sorry, I'm having a moment. Reach us directly on WhatsApp: link at the bottom right of the page.";
+    const reply = data.content?.[0]?.text || (data.error ? `Error: ${typeof data.error === 'object' ? data.error.message : data.error}` : "Sorry, I'm having a moment. Reach us directly on WhatsApp: link at the bottom right of the page.");
     addMsg(reply, false);
     history.push({role:'assistant', content:reply});
   } catch {
