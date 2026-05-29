@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0E0EBJNPJD"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0E0EBJNPJD');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baseline — Survey Platform · by Redolense</title>
+<meta name="description" content="Baseline by Redolense. Survey builder, submission analysis, enumerator management.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B1422;--bg-lift:#121E30;--bg-deep:#070D18;
+  --blue:#3D9BFF;--blue-b:#55ABFF;
+  --blue-dim:rgba(61,155,255,.10);--blue-mid:rgba(61,155,255,.24);
+  --btn-grad:linear-gradient(140deg,#1878E0,#2A9AFF);
+  --btn-h:linear-gradient(140deg,#2A9AFF,#42B4FF);
+  --t0:#E2EEF8;--t1:#6688A4;--t2:#2E445C;
+  --div:rgba(26,56,108,.42);
+  --s-out:-6px -6px 15px rgba(26,56,108,.40),6px 6px 20px rgba(0,0,0,.74);
+  --s-sm:-4px -4px 9px rgba(26,56,108,.32),4px 4px 11px rgba(0,0,0,.64);
+  --s-btn:-3px -3px 7px rgba(18,48,104,.44),3px 3px 11px rgba(0,0,0,.64);
+  --green:#00B34A;--green-dim:rgba(0,179,74,.12);--green-mid:rgba(0,179,74,.28);
+  --amber:#F0A500;--amber-dim:rgba(240,165,0,.11);--amber-mid:rgba(240,165,0,.26);
+  --red:#E05252;--red-dim:rgba(224,82,82,.11);--red-mid:rgba(224,82,82,.26);
+  --r:16px;--r2:10px;--r3:8px;--sb:224px;
+}
+html.light{
+  --bg:#DCE8F2;--bg-lift:#E7F0F9;--bg-deep:#CED9E5;
+  --blue:#1268CC;--blue-b:#1880EE;
+  --blue-dim:rgba(18,104,204,.08);--blue-mid:rgba(18,104,204,.20);
+  --btn-grad:linear-gradient(140deg,#1268CC,#1880EE);
+  --btn-h:linear-gradient(140deg,#1880EE,#1E96FF);
+  --t0:#0A1C2E;--t1:#3C5870;--t2:#789AB6;
+  --div:rgba(132,170,208,.28);
+  --s-out:-7px -7px 16px rgba(255,255,255,.92),7px 7px 20px rgba(132,170,208,.62);
+  --s-sm:-4px -4px 9px rgba(255,255,255,.90),4px 4px 11px rgba(132,170,208,.56);
+  --s-btn:-3px -3px 7px rgba(255,255,255,.55),3px 3px 11px rgba(16,82,172,.44);
+  --green:#007A30;--green-dim:rgba(0,122,48,.10);--green-mid:rgba(0,122,48,.25);
+  --amber:#B87800;--amber-dim:rgba(184,120,0,.10);--amber-mid:rgba(184,120,0,.25);
+  --red:#C43232;--red-dim:rgba(196,50,50,.10);--red-mid:rgba(196,50,50,.25);
+}
+html,html.light *,html.light *::before,html.light *::after{transition:background-color .25s,color .2s,box-shadow .25s,border-color .2s}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--t0);font-size:14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+h1,h2,h3,h4,.font-disp{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;line-height:1.1;color:var(--t0)}
+button,input,select,textarea{font-family:'DM Sans',system-ui,sans-serif}
+.app{display:flex;height:100vh;overflow:hidden}
+.sidebar{width:var(--sb);flex-shrink:0;background:var(--bg-deep);border-right:1px solid var(--div);display:flex;flex-direction:column;padding:20px 14px 16px;overflow-y:auto;transition:width .22s ease}
+.app.sb-closed .sidebar{width:58px;padding:20px 8px 16px;overflow:hidden}
+.app.sb-closed .sb-sub,.app.sb-closed .nav-section,.app.sb-closed .nav-label,.app.sb-closed .nav-badge,.app.sb-closed .sb-footer{display:none}
+.app.sb-closed .nav-btn{justify-content:center;padding:10px}
+.app.sb-closed .nav-icon{width:auto;font-size:16px;opacity:1}
+.app.sb-closed .sb-brand{display:flex;align-items:center;justify-content:space-between}
+.app.sb-closed .sb-logo-text{display:none}
+.sb-brand{padding-bottom:18px;border-bottom:1px solid var(--div);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.sb-logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:19px;color:var(--blue);letter-spacing:-.02em}
+.sb-sub{font-size:11px;color:var(--t1);margin-top:3px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.sb-sub a{color:var(--t1);text-decoration:none}.sb-sub a:hover{color:var(--blue)}
+.sb-toggle{background:none;border:none;color:var(--t1);cursor:pointer;padding:4px 6px;border-radius:6px;font-size:16px;line-height:1;flex-shrink:0;transition:all .15s}
+.sb-toggle:hover{color:var(--t0);background:var(--blue-dim)}
+.nav-list{display:flex;flex-direction:column;gap:2px;flex:1}
+.nav-section{font-size:11px;color:var(--t2);font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:14px 10px 6px}
+.nav-btn{display:flex;align-items:center;gap:10px;width:100%;padding:9px 12px;border-radius:var(--r3);border:none;cursor:pointer;background:transparent;color:var(--t1);font-weight:500;font-size:13px;transition:all .15s;text-align:left}
+.nav-btn.active{background:var(--blue-dim);color:var(--blue);font-weight:700;box-shadow:inset 2px 0 0 var(--blue)}
+.nav-btn:hover:not(.active){background:rgba(61,155,255,.06);color:var(--t0)}
+.nav-icon{font-size:15px;width:18px;text-align:center;flex-shrink:0;opacity:.85}
+.nav-label{flex:1}
+.nav-badge{background:var(--red);color:#fff;font-size:10px;font-weight:800;border-radius:100px;padding:2px 7px;margin-left:auto}
+.sb-footer{border-top:1px solid var(--div);padding-top:14px;margin-top:12px;font-size:11px;color:var(--t2);line-height:1.9}
+.sb-sync{font-size:11px;margin-top:4px}
+.sb-refresh{background:none;border:none;color:var(--t1);font-size:11px;cursor:pointer;padding:0;margin-top:4px;display:block}
+.sb-refresh:hover{color:var(--blue)}
+.banner{border-radius:var(--r3);padding:9px 12px;margin-bottom:12px;font-size:11px;line-height:1.6}
+.banner-err{background:var(--red-dim);border:1px solid var(--red-mid);color:var(--red)}
+.main{flex:1;overflow-y:auto;padding:32px 36px;background:var(--bg)}
+.pg-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:5px}
+.pg-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.03em;margin-bottom:4px}
+.pg-sub{font-size:14px;color:var(--t1);margin-bottom:28px;line-height:1.5}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:24px}
+.stat{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:20px 24px;flex:1;min-width:110px}
+.stat-lbl{font-size:11px;color:var(--t1);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.stat-val{font-family:'Bricolage Grotesque',sans-serif;font-size:2rem;font-weight:800;letter-spacing:-.04em;line-height:1}
+.stat-sub{font-size:11px;color:var(--t1);margin-top:6px;line-height:1.4}
+.card{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:22px;margin-bottom:16px}
+.card-ttl{font-size:11px;color:var(--t1);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.cg{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;margin-bottom:16px;align-items:start}
+.toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px;flex-wrap:wrap}
+.tl{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tabs{display:flex;gap:4px;background:var(--bg-deep);border-radius:100px;padding:3px}
+.tab{padding:6px 16px;border-radius:100px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:transparent;color:var(--t1);transition:all .15s}
+.tab.active{background:var(--btn-grad);color:#fff;box-shadow:var(--s-btn)}
+.btn{padding:9px 20px;border-radius:var(--r3);border:none;cursor:pointer;font-size:13px;font-weight:700;transition:all .18s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;line-height:1}
+.btn-primary{background:var(--btn-grad);color:#fff;box-shadow:var(--s-btn)}
+.btn-primary:hover{background:var(--btn-h);transform:translateY(-1px)}
+.btn-ghost{background:var(--bg-lift);color:var(--t1);box-shadow:var(--s-sm);border:1px solid var(--div)}
+.btn-ghost:hover{color:var(--t0);border-color:var(--blue-mid)}
+.btn-danger{background:var(--red-dim);color:var(--red);border:1px solid var(--red-mid)}
+.btn-danger:hover{background:var(--red);color:#fff}
+.btn-sm{padding:5px 13px;font-size:11.5px}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.inp{background:var(--bg-deep);border:1px solid var(--div);border-radius:var(--r3);padding:9px 14px;color:var(--t0);font-size:13px;outline:none;transition:border-color .15s}
+.inp:focus{border-color:var(--blue-mid);box-shadow:0 0 0 3px var(--blue-dim)}
+.inp-full{width:100%}
+textarea.inp{resize:vertical;min-height:100px;line-height:1.6}
+select.inp{cursor:pointer}
+.fr{display:grid;gap:10px;margin-bottom:12px}
+.fr2{grid-template-columns:1fr 1fr}
+.fr3{grid-template-columns:1fr 1fr 1fr}
+.tbw{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);overflow:hidden;margin-bottom:18px}
+table{width:100%;border-collapse:collapse}
+thead tr{border-bottom:1px solid var(--div);background:var(--bg-deep)}
+th{padding:11px 16px;text-align:left;font-size:11px;color:var(--t2);font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+td{padding:12px 16px;font-size:13px;border-bottom:1px solid var(--div);color:var(--t1);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(61,155,255,.03)}
+.td-strong{font-weight:600;color:var(--t0)}
+.badge{padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700}
+.tag{padding:2px 8px;border-radius:100px;font-size:10px;font-weight:700;margin:2px;white-space:nowrap;display:inline-block}
+.pill-green{background:var(--green-dim);color:var(--green);border:1px solid var(--green-mid)}
+.pill-amber{background:var(--amber-dim);color:var(--amber);border:1px solid var(--amber-mid)}
+.pill-red{background:var(--red-dim);color:var(--red);border:1px solid var(--red-mid)}
+.pill-blue{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue-mid)}
+.pill-muted{background:rgba(61,155,255,.05);color:var(--t1);border:1px solid var(--div)}
+.fb-box{background:var(--bg-lift);border:1px solid var(--blue-mid);border-radius:var(--r);padding:22px;margin-bottom:20px;box-shadow:var(--s-sm)}
+.sc{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:18px 20px;display:flex;align-items:flex-start;gap:16px;margin-bottom:10px;border:1px solid var(--div);transition:border-color .15s}
+.sc:hover{border-color:var(--blue-mid)}
+.sc-body{flex:1}
+.sc-title{font-size:15px;font-weight:700;color:var(--t0);margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sc-desc{font-size:13px;color:var(--t1);margin-bottom:8px;line-height:1.5}
+.sc-meta{display:flex;gap:16px;font-size:12px;color:var(--t1)}
+.sc-acts{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap}
+.qc{background:var(--bg-lift);border:1px solid var(--div);border-radius:var(--r2);padding:16px;margin-bottom:10px;transition:border-color .15s}
+.qc:hover{border-color:var(--blue-mid)}
+.qch{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.dh{color:var(--t2);font-size:16px;cursor:grab;user-select:none;flex-shrink:0}
+.qn{font-size:11px;color:var(--t2);font-family:monospace;min-width:24px;font-weight:700}
+.qrm{background:none;border:none;color:var(--red);cursor:pointer;font-size:14px;margin-left:auto;opacity:.6}
+.qrm:hover{opacity:1}
+.mg{display:grid;grid-template-columns:1fr 280px;gap:16px}
+.msvg{background:var(--bg-lift);border-radius:var(--r);overflow:hidden;box-shadow:var(--s-sm)}
+.mroster{background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:18px;overflow-y:auto}
+.ac{padding:12px 14px;border-radius:var(--r2);cursor:pointer;border:1px solid var(--div);margin-bottom:8px;transition:all .15s}
+.ac:hover{border-color:var(--blue-mid)}
+.ac.sel{background:var(--blue-dim);border-color:var(--blue-mid)}
+.chat-wrap{display:flex;flex-direction:column;height:calc(100vh - 240px)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.chip{padding:6px 16px;border-radius:100px;border:1px solid var(--div);background:var(--bg-lift);color:var(--t1);font-size:12.5px;cursor:pointer;transition:all .15s}
+.chip:hover{color:var(--t0);border-color:var(--blue-mid);background:var(--blue-dim)}
+.msgs{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.msg{max-width:82%;padding:13px 17px;border-radius:14px;font-size:13.5px;line-height:1.65}
+.msg-u{align-self:flex-end;background:var(--btn-grad);color:#fff;border-bottom-right-radius:4px;box-shadow:var(--s-btn)}
+.msg-b{align-self:flex-start;background:var(--bg-lift);border:1px solid var(--div);border-bottom-left-radius:4px}
+.ci{display:flex;gap:10px}
+.ai-result{background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:var(--r);padding:22px;margin-bottom:16px}
+.ai-result .card-ttl{color:var(--blue)}
+.empty-card{background:var(--bg-lift);border:1px dashed var(--div);border-radius:var(--r);padding:60px;text-align:center;color:var(--t1);font-size:13px}
+.rq{padding:10px 14px;background:var(--bg-deep);border-radius:var(--r3);border:1px solid var(--div);margin-bottom:8px}
+.mp{width:300px;background:#fff;border-radius:24px;padding:22px;border:8px solid var(--bg-deep);margin:0 auto;box-shadow:var(--s-out)}
+.mpq{margin-bottom:14px}
+.mpql{font-size:12px;font-weight:600;color:#0A1628;margin-bottom:6px}
+.mpqinp{background:#F2F4F8;border-radius:6px;padding:8px 12px;font-size:11px;color:#7A8A9E}
+.loading-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;height:50vh;gap:16px;color:var(--t1);font-size:13px}
+.spin{display:inline-block;width:28px;height:28px;border:3px solid var(--div);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}
+.spin-sm{width:16px;height:16px;border-width:2px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:960px){.main{padding:20px 18px}.cg{grid-template-columns:1fr}.mg{grid-template-columns:1fr}}
+@media(max-width:700px){.fr2,.fr3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="sidebar" id="sidebar"></div>
+  <div class="main" id="main"></div>
+</div>
+<script>
+const FB={
+  k:"AIzaSyBOvvCdEUNayhvQ54XIXyXuiN2K73yZ71E",p:"baseline-ke",
+  b(){return`https://firestore.googleapis.com/v1/projects/${this.p}/databases/(default)/documents`},
+  parse(doc){const id=doc.name?.split("/").pop()||"",o={_id:id};for(const[k,v]of Object.entries(doc.fields||{}))o[k]=v.stringValue!==undefined?v.stringValue:v.integerValue!==undefined?Number(v.integerValue):v.doubleValue!==undefined?v.doubleValue:v.booleanValue!==undefined?v.booleanValue:null;return o},
+  flds(obj){const f={};for(const[k,v]of Object.entries(obj)){if(v===null||v===undefined)f[k]={nullValue:null};else if(typeof v==="boolean")f[k]={booleanValue:v};else if(typeof v==="number"&&Number.isInteger(v))f[k]={integerValue:String(v)};else if(typeof v==="number")f[k]={doubleValue:v};else f[k]={stringValue:String(v)}}return{fields:f}},
+  async list(col){const r=await fetch(`${this.b()}/${col}?pageSize=200&key=${this.k}`);if(!r.ok)throw new Error(`FB ${r.status}`);const d=await r.json();return(d.documents||[]).map(x=>this.parse(x))},
+  async create(col,obj){const r=await fetch(`${this.b()}/${col}?key=${this.k}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(this.flds(obj))});if(!r.ok)throw new Error(`FB ${r.status}`);return this.parse(await r.json())},
+  async patch(col,id,obj){const f=this.flds(obj).fields,mask=Object.keys(f).map(k=>`updateMask.fieldPaths=${k}`).join("&");const r=await fetch(`${this.b()}/${col}/${id}?${mask}&key=${this.k}`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({fields:f})});if(!r.ok)throw new Error(`FB ${r.status}`);return this.parse(await r.json())}
+};
+
+async function aiCall(system,messages,max_tokens=1000){
+  const res=await fetch("/.netlify/functions/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system,messages,max_tokens})});
+  if(!res.ok)throw new Error(`Proxy ${res.status}`);
+  const data=await res.json();
+  return data.content?.[0]?.text||"";
+}
+
+const SEED={
+  surveys:[
+    {_id:"s1",title:"ECOA Char Black Value — CLT Study",status:"Published",version:"v2.1",submissions:47,questions:24,created:"2026-04-01",description:"CLT comparing Vented vs Non-Vented ECOA cookstove variants."},
+    {_id:"s2",title:"Kenya Entrepreneur Pain Points Survey",status:"Published",version:"v1.0",submissions:0,questions:13,created:"2026-05-18",description:"Research challenge: real operational problems facing Kenyan SME founders."},
+    {_id:"s3",title:"WhatsApp Business Adoption Study",status:"Published",version:"v1.3",submissions:23,questions:18,created:"2026-03-15",description:"WhatsApp Business adoption across Nairobi SMEs."},
+  ],
+  submissions:[
+    {_id:"u1",survey:"ECOA Char Black Value — CLT Study",enumerator:"Kelly Wanjiku",date:"2026-05-12",sentiment:78,tags:"incomplete_combustion,ventilation_adequate",flagged:false,location:"Nairobi",OPS_SLOW:1},
+    {_id:"u2",survey:"ECOA Char Black Value — CLT Study",enumerator:"Vincent Omondi",date:"2026-05-12",sentiment:42,tags:"structural_collapse_risk,user_satisfaction_low",flagged:true,location:"Kisumu",OPS_SLOW:4},
+    {_id:"u3",survey:"Kenya Entrepreneur Pain Points Survey",enumerator:"Self-admin",date:"2026-05-18",sentiment:65,tags:"profit_visibility_gap,manual_followup",flagged:false,location:"Nairobi",source:"whatsapp_selfadmin",OPS_SLOW:4,WTP_WILLING:2},
+    {_id:"u4",survey:"WhatsApp Business Adoption Study",enumerator:"Grace Muthoni",date:"2026-05-11",sentiment:65,tags:"manual_followup,no_automation",flagged:false,location:"Nakuru",OPS_SLOW:3},
+    {_id:"u5",survey:"ECOA Char Black Value — CLT Study",enumerator:"James Kipchoge",date:"2026-05-10",sentiment:55,tags:"incomplete_combustion,safety_concern",flagged:true,location:"Eldoret",OPS_SLOW:1},
+  ],
+  enumerators:[
+    {_id:"e1",name:"Kelly Wanjiku",email:"kelly.w@field.ke",status:"Active",region:"Nairobi",submissions:28,joined:"2026-02-01",lat:-1.286,lon:36.817},
+    {_id:"e2",name:"Vincent Omondi",email:"vincent.o@field.ke",status:"Active",region:"Kisumu",submissions:19,joined:"2026-02-01",lat:-0.091,lon:34.768},
+    {_id:"e3",name:"Grace Muthoni",email:"grace.m@field.ke",status:"Active",region:"Nakuru",submissions:23,joined:"2026-03-10",lat:-0.303,lon:36.080},
+    {_id:"e4",name:"James Kipchoge",email:"james.k@field.ke",status:"Inactive",region:"Eldoret",submissions:15,joined:"2026-03-10",lat:0.521,lon:35.270},
+    {_id:"e5",name:"Amina Hassan",email:"amina.h@field.ke",status:"Active",region:"Mombasa",submissions:31,joined:"2026-01-15",lat:-4.043,lon:39.668},
+  ]
+};
+
+const OT={1:"stock_tracking_issue",2:"customer_followup_gap",3:"multichannel_chaos",4:"profit_visibility_gap",5:"staff_management",6:"acquisition_problem",7:"supplier_issue",8:"cash_flow_problem",9:"recordkeeping_chaos"};
+const TC={stock_tracking_issue:"#F0A500",customer_followup_gap:"#F0A500",multichannel_chaos:"#F0A500",profit_visibility_gap:"#3D9BFF",cash_flow_problem:"#3D9BFF",recordkeeping_chaos:"#3D9BFF",incomplete_combustion:"#E05252",structural_collapse_risk:"#E05252",safety_concern:"#E05252",user_satisfaction_low:"#F0A500",user_satisfaction_high:"#00B34A",clean_burn:"#00B34A",ventilation_adequate:"#3D9BFF",manual_followup:"#F0A500",no_automation:"#F0A500"};
+const CC=["#3D9BFF","#F0A500","#E05252"];
+
+const S={
+  page:"overview",surveys:[],submissions:[],enumerators:[],loading:true,syncing:false,lastSynced:null,fbError:null,
+  tab:"All",filter:"all",search:"",showNS:false,showAE:false,
+  nst:"",nsd:"",nen:"",nee:"",ner:"Nairobi",
+  bqs:[],bsv:null,bpv:false,
+  aint:"",ares:null,ald:false,aerr:"",asv:false,
+  ansel:"",anrep:null,anld:false,anerr:"",
+  chat:[{r:"b",t:"Hi. I have access to your live Firebase data. Ask me anything about your surveys, submissions, or enumerators."}],
+  ci:"",cld:false,msel:null,stk:0
+};
+function ss(u){Object.assign(S,typeof u==="function"?u(S):u);render();}
+function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function ntags(s){const raw=s.tags||(s.OPS_SLOW?OT[s.OPS_SLOW]:"");return typeof raw==="string"?raw.split(",").filter(Boolean):(raw||[]);}
+function sc(v){return Number(v)>=70?"var(--green)":Number(v)>=40?"var(--amber)":"var(--red)";}
+function bc(st){return st==="Published"?"pill-green":st==="Draft"?"pill-amber":"pill-muted";}
+function bdg(label,cls){return`<span class="badge ${cls}">${esc(label)}</span>`;}
+function tpill(label){const c=TC[label]||"#6688A4";return`<span class="tag" style="background:${c}18;color:${c};border:1px solid ${c}35">${esc(label.replace(/_/g," "))}</span>`;}
+function B(lbl,fn,v="primary",sm=false,dis=false){const cls=v==="primary"?"btn-primary":v==="danger"?"btn-danger":"btn-ghost";return`<button class="btn ${cls}${sm?" btn-sm":""}" onclick="${fn}"${dis?" disabled":""}>${lbl}</button>`;}
+
+function barchart(data,vk,lk,col,h){
+  if(!data.length)return`<div style="height:${h}px;display:flex;align-items:center;justify-content:center;color:var(--t1);font-size:12px">No data yet</div>`;
+  const W=500,pL=28,pB=28,pT=8,pR=8,cW=W-pL-pR,cH=h-pT-pB,max=Math.max(...data.map(d=>d[vk]||0),1);
+  const bW=(cW/data.length)*.65,bG=cW/data.length;
+  let s=`<svg viewBox="0 0 ${W} ${h}" style="width:100%;height:${h}px;display:block" preserveAspectRatio="none">`;
+  [0,.5,1].forEach(p=>{const y=pT+cH-p*cH;s+=`<line x1="${pL}" y1="${y}" x2="${W-pR}" y2="${y}" stroke="rgba(26,56,108,.5)" stroke-width=".5" stroke-dasharray="3 3"/><text x="${pL-3}" y="${y+4}" text-anchor="end" font-size="8" fill="#6688A4">${Math.round(p*max)}</text>`;});
+  data.forEach((d,i)=>{const val=d[vk]||0,bh=val>0?(val/max)*cH:0,x=pL+i*bG+(bG-bW)/2,y=pT+cH-bh,lbl=String(d[lk]||"").slice(0,7);if(bh>0)s+=`<rect x="${x}" y="${y}" width="${bW}" height="${bh}" fill="${col}" rx="3" opacity=".9"/>`;s+=`<text x="${x+bW/2}" y="${h-pB+14}" text-anchor="middle" font-size="8.5" fill="#6688A4">${esc(lbl)}</text>`;});
+  return s+"</svg>";
+}
+function hbarchart(data,vk,lk,col,h){
+  if(!data.length)return"";
+  const W=500,lW=170,pR=40,pT=4,bAW=W-lW-pR,rH=(h-pT)/data.length,max=Math.max(...data.map(d=>d[vk]||0),1);
+  let s=`<svg viewBox="0 0 ${W} ${h}" style="width:100%;height:${h}px;display:block" preserveAspectRatio="none">`;
+  data.forEach((d,i)=>{const val=d[vk]||0,bw=val>0?(val/max)*bAW:0,y=pT+i*rH,lbl=String(d[lk]||"").replace(/_/g," ").slice(0,22);s+=`<text x="${lW-4}" y="${y+rH/2+4}" text-anchor="end" font-size="9" fill="#6688A4">${esc(lbl)}</text>`;if(bw>0)s+=`<rect x="${lW}" y="${y+rH*.2}" width="${bw}" height="${rH*.6}" fill="${col}" rx="2" opacity=".9"/>`;s+=`<text x="${lW+bw+4}" y="${y+rH/2+4}" font-size="9" fill="${col}">${val}</text>`;});
+  return s+"</svg>";
+}
+function donut(data,colors,h){
+  const total=data.reduce((s,d)=>s+(d.value||0),0);
+  if(!total)return`<div style="height:${h}px;display:flex;align-items:center;justify-content:center;color:var(--t1);font-size:12px">No data</div>`;
+  const R=52,r=32,CX=75,CY=h/2;
+  let angle=-Math.PI/2,s=`<svg viewBox="0 0 280 ${h}" style="width:100%;max-width:300px;height:${h}px;display:block" preserveAspectRatio="xMidYMid meet">`;
+  data.forEach((d,i)=>{if(!d.value)return;const pct=d.value/total,sa=angle;angle+=pct*2*Math.PI;const ea=angle,lg=pct>.5?1:0,ox1=CX+R*Math.cos(sa),oy1=CY+R*Math.sin(sa),ox2=CX+R*Math.cos(ea),oy2=CY+R*Math.sin(ea),ix1=CX+r*Math.cos(sa),iy1=CY+r*Math.sin(sa),ix2=CX+r*Math.cos(ea),iy2=CY+r*Math.sin(ea);s+=`<path d="M ${ox1} ${oy1} A ${R} ${R} 0 ${lg} 1 ${ox2} ${oy2} L ${ix2} ${iy2} A ${r} ${r} 0 ${lg} 0 ${ix1} ${iy1} Z" fill="${colors[i]}" opacity=".9"/>`;});
+  data.forEach((d,i)=>{s+=`<circle cx="145" cy="${h/2-20+i*28}" r="5" fill="${colors[i]}"/><text x="154" y="${h/2-15+i*28}" font-size="9" fill="#6688A4">${esc(d.name)}: <tspan fill="#E2EEF8">${d.value}</tspan></text>`;});
+  return s+"</svg>";
+}
+
+function pOverview(){
+  const subs=S.submissions,fl=subs.filter(s=>s.flagged).length,sa=subs.filter(s=>s.enumerator==="Self-admin"||s.source==="whatsapp_selfadmin").length;
+  const dm={};for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);dm[d.toLocaleDateString("en-KE",{month:"short",day:"numeric"})]=0;}
+  subs.forEach(s=>{const k=new Date(s.date||s.TIMESTAMP||Date.now()).toLocaleDateString("en-KE",{month:"short",day:"numeric"});if(k in dm)dm[k]++;});
+  const bd=Object.entries(dm).map(([date,count])=>({date,count}));
+  const tm={};subs.forEach(s=>ntags(s).forEach(t=>{tm[t]=(tm[t]||0)+1;}));
+  const id=Object.entries(tm).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([issue,count])=>({issue,count}));
+  const sd=[{name:"Positive (>70)",value:subs.filter(s=>Number(s.sentiment)>=70).length},{name:"Neutral (40-70)",value:subs.filter(s=>Number(s.sentiment)>=40&&Number(s.sentiment)<70).length},{name:"Negative (<40)",value:subs.filter(s=>Number(s.sentiment)<40).length}];
+  return`<div class="pg-label">Dashboard</div><div class="pg-title">Overview</div><div class="pg-sub">Live data — Firebase syncing every 15 seconds.</div>
+  <div class="stats">
+    <div class="stat"><div class="stat-lbl">Submissions</div><div class="stat-val" style="color:var(--green)">${subs.length}</div><div class="stat-sub">All surveys</div></div>
+    <div class="stat"><div class="stat-lbl">Safety Flags</div><div class="stat-val" style="color:${fl>0?"var(--red)":"var(--green)"}">${fl}</div><div class="stat-sub">Need review</div></div>
+    <div class="stat"><div class="stat-lbl">Active Surveys</div><div class="stat-val" style="color:var(--blue)">${S.surveys.filter(s=>s.status==="Published").length}</div><div class="stat-sub">Collecting now</div></div>
+    <div class="stat"><div class="stat-lbl">Enumerators</div><div class="stat-val" style="color:var(--blue)">${S.enumerators.filter(e=>e.status==="Active").length}</div><div class="stat-sub">Active in field</div></div>
+    <div class="stat"><div class="stat-lbl">Self-Admin</div><div class="stat-val" style="color:var(--amber)">${sa}</div><div class="stat-sub">WhatsApp</div></div>
+  </div>
+  <div class="cg">
+    <div class="card"><div class="card-ttl">Submissions — Last 7 Days</div>${barchart(bd,"count","date","var(--blue)",180)}</div>
+    <div class="card"><div class="card-ttl">Sentiment Split</div>${donut(sd,CC,170)}</div>
+  </div>
+  ${id.length?`<div class="card"><div class="card-ttl">Top AI-Detected Tags</div>${hbarchart(id,"count","issue","var(--amber)",160)}</div>`:""}`;
+}
+
+function pSurveys(){
+  const fl=S.surveys.filter(s=>(S.tab==="All"||s.status===S.tab)&&s.title.toLowerCase().includes(S.search.toLowerCase()));
+  return`<div class="toolbar"><div><div class="pg-label">Surveys</div><div class="pg-title">Survey Management</div></div>${B("+ New Survey","openNS()")}</div>
+  ${S.showNS?`<div class="fb-box"><div style="font-size:13px;font-weight:700;margin-bottom:14px">Create New Survey</div><div class="fr fr2"><input class="inp inp-full" placeholder="Survey title" value="${esc(S.nst)}" oninput="S.nst=this.value"><input class="inp inp-full" placeholder="Description (optional)" value="${esc(S.nsd)}" oninput="S.nsd=this.value"></div><div style="display:flex;gap:10px">${B("Create","crtSurvey()")}${B("Cancel","ss({showNS:false})","ghost")}</div></div>`:""}
+  <div class="toolbar" style="margin-top:0"><div class="tabs">${["All","Published","Draft","Archived"].map(t=>`<button class="tab${S.tab===t?" active":""}" onclick="ss({tab:'${t}'})">${t}</button>`).join("")}</div><input class="inp" style="max-width:220px" placeholder="Search surveys..." value="${esc(S.search)}" oninput="S.search=this.value;render()"></div>
+  <div>${fl.map(s=>`<div class="sc"><div class="sc-body"><div class="sc-title">${esc(s.title)} ${bdg(s.status,bc(s.status))} <span style="font-size:11px;color:var(--t1);font-family:monospace">${esc(s.version||"")}</span></div>${s.description?`<div class="sc-desc">${esc(s.description)}</div>`:""}<div class="sc-meta"><span>Questions: ${s.questions||0}</span><span>Submissions: ${s.submissions||0}</span><span>Created: ${esc(s.created||"")}</span></div></div><div class="sc-acts">${B("Edit","openBld('"+s._id+"')","ghost",true)}${s.status==="Draft"?B("Publish","pubSurvey('"+s._id+"')","primary",true):""}${s.status!=="Archived"?B("Archive","archSurvey('"+s._id+"')","ghost",true):""}${B("Duplicate","dupSurvey('"+s._id+"')","ghost",true)}</div></div>`).join("")}${!fl.length?`<div class="empty-card">No surveys found.</div>`:""}</div>`;
+}
+
+function pSubmissions(){
+  const subs=S.submissions.map(s=>({...s,_tg:ntags(s)}));
+  const fl=subs.filter(s=>(S.filter==="flagged"?s.flagged:S.filter==="safe"?!s.flagged:true)&&(s.survey||"").toLowerCase().includes(S.search.toLowerCase()));
+  return`<div class="toolbar"><div><div class="pg-label">Submissions</div><div class="pg-title">Submission Log</div></div><div class="tl"><select class="inp" style="width:auto" onchange="S.filter=this.value;render()"><option value="all"${S.filter==="all"?" selected":""}>All</option><option value="flagged"${S.filter==="flagged"?" selected":""}>Flagged</option><option value="safe"${S.filter==="safe"?" selected":""}>Safe</option></select><input class="inp" style="max-width:180px" placeholder="Search..." value="${esc(S.search)}" oninput="S.search=this.value;render()"></div></div>
+  <div class="tbw"><table><thead><tr><th>Survey</th><th>Enumerator</th><th>Location</th><th>Date</th><th>Sentiment</th><th>Tags</th><th>Flag</th></tr></thead><tbody>
+  ${fl.map(s=>`<tr><td style="max-width:200px"><div class="td-strong" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px">${esc(s.survey||"")}</div>${s.source==="whatsapp_selfadmin"?`<span class="badge pill-green" style="font-size:9px">self-admin</span>`:""}</td><td class="td-strong">${esc(s.enumerator||"—")}</td><td>${s.location?"📍 "+esc(s.location):"—"}</td><td style="font-family:monospace;font-size:11px">${(s.date||s.TIMESTAMP||"").slice(0,10)}</td><td><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:800;color:${sc(s.sentiment)}">${s.sentiment?Number(s.sentiment).toFixed(0)+"%":"—"}</span></td><td>${s._tg.slice(0,2).map(tpill).join("")}</td><td>${s.flagged?B("Clear","togFlag('"+s._id+"',false)","danger",true):B("Flag","togFlag('"+s._id+"',true)","ghost",true)}</td></tr>`).join("")}
+  ${!fl.length?`<tr><td colspan="7" style="text-align:center;color:var(--t1);padding:40px">No submissions match filter.</td></tr>`:""}
+  </tbody></table></div>`;
+}
+
+function pMap(){
+  function xy(lat,lon){return[Math.round(((lon-34)/8)*500),Math.round(((5-lat)/9.5)*360)]}
+  const kp="M 120,10 L 160,5 L 200,15 L 260,8 L 320,20 L 380,12 L 430,30 L 460,60 L 490,100 L 500,140 L 490,180 L 470,210 L 450,240 L 420,270 L 380,300 L 340,340 L 300,360 L 260,355 L 220,340 L 190,310 L 170,280 L 150,250 L 120,230 L 90,200 L 60,180 L 30,160 L 10,130 L 5,100 L 20,70 L 50,40 L 80,20 Z";
+  const cities=[{n:"Nairobi",lat:-1.286,lon:36.817},{n:"Mombasa",lat:-4.043,lon:39.668},{n:"Kisumu",lat:-0.091,lon:34.768},{n:"Nakuru",lat:-0.303,lon:36.080},{n:"Eldoret",lat:0.521,lon:35.270}];
+  const gps=S.submissions.filter(s=>Number(s.GPS_LAT||0)!==0);
+  let mapSVG=`<svg viewBox="0 0 500 360" style="width:100%;display:block"><rect width="500" height="360" fill="#0B1422"/>`;
+  [100,200,300,400].forEach(x=>mapSVG+=`<line x1="${x}" y1="0" x2="${x}" y2="360" stroke="rgba(26,56,108,.4)" stroke-width=".5"/>`);
+  [90,180,270].forEach(y=>mapSVG+=`<line x1="0" y1="${y}" x2="500" y2="${y}" stroke="rgba(26,56,108,.4)" stroke-width=".5"/>`);
+  mapSVG+=`<path d="${kp}" fill="rgba(61,155,255,.07)" stroke="rgba(61,155,255,.35)" stroke-width="1.5"/>`;
+  cities.forEach(c=>{const[x,y]=xy(c.lat,c.lon);mapSVG+=`<circle cx="${x}" cy="${y}" r="2" fill="#2E445C"/><text x="${x+5}" y="${y+4}" font-size="9" fill="#6688A4">${c.n}</text>`;});
+  gps.forEach(s=>{const[x,y]=xy(Number(s.GPS_LAT),Number(s.GPS_LON));mapSVG+=`<circle cx="${x}" cy="${y}" r="5" fill="#3D9BFF" opacity=".7"/>`;});
+  S.enumerators.forEach(e=>{const[x,y]=xy(e.lat||0,e.lon||0),col=e.status==="Active"?"#3D9BFF":"#384E66",sel=S.msel===e._id;mapSVG+=`<g onclick="ss({msel:'${S.msel===e._id?"null":e._id}'})" style="cursor:pointer">${sel?`<circle cx="${x}" cy="${y}" r="14" fill="${col}" fill-opacity=".12"/>`:""}<circle cx="${x}" cy="${y}" r="8" fill="${col}" opacity=".2"/><circle cx="${x}" cy="${y}" r="5" fill="${col}"/>${e.status==="Active"?`<circle cx="${x}" cy="${y}" r="8" fill="none" stroke="${col}" stroke-width="1" stroke-dasharray="2 2"><animateTransform attributeName="transform" type="rotate" from="0 ${x} ${y}" to="360 ${x} ${y}" dur="4s" repeatCount="indefinite"/></circle>`:""}<text x="${x+8}" y="${y-6}" font-size="9" fill="#E2EEF8" font-weight="700">${(e.name||"").split(" ")[0]}</text></g>`;});
+  mapSVG+="</svg>";
+  return`<div class="pg-label">Field Map</div><div class="pg-title">Geolocation</div><div class="pg-sub"><span style="color:var(--blue)">●</span> Active &nbsp;<span style="color:var(--t2)">●</span> Inactive &nbsp;<span style="color:#8BC4FF">●</span> Self-admin GPS</div>
+  <div class="mg"><div class="msvg">${mapSVG}</div><div class="mroster"><div style="font-size:10px;color:var(--t1);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px">Field Agents</div>
+  ${S.enumerators.map(e=>{const col=e.status==="Active"?"var(--blue)":"var(--t2)";return`<div class="ac${S.msel===e._id?" sel":""}" onclick="ss({msel:'${S.msel===e._id?"null":e._id}'})"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="width:7px;height:7px;border-radius:50%;background:${col};flex-shrink:0;display:inline-block"></span><span style="font-size:13px;font-weight:700;color:var(--t0)">${esc(e.name)}</span> ${bdg(e.status,e.status==="Active"?"pill-blue":"pill-muted")}</div><div style="font-size:11px;color:var(--t1);padding-left:15px">📍 ${esc(e.region)} · ${e.submissions||0} submissions</div></div>`;}).join("")}
+  ${gps.length?`<div style="margin-top:10px;padding:10px 14px;background:var(--blue-dim);border-radius:var(--r3);border:1px solid var(--blue-mid)"><div style="font-size:11px;color:var(--blue);font-weight:700;margin-bottom:4px">Self-admin GPS</div><div style="font-size:11px;color:var(--t1)">${gps.length} location${gps.length!==1?"s":""}</div></div>`:""}
+  </div></div>`;
+}
+
+function pEnumerators(){
+  return`<div class="toolbar"><div><div class="pg-label">Team</div><div class="pg-title">Enumerator Management</div></div>${B("+ Add Enumerator","openAE()")}</div>
+  ${S.showAE?`<div class="fb-box"><div style="font-size:13px;font-weight:700;margin-bottom:14px">New Enumerator</div><div class="fr fr3"><input class="inp" placeholder="Full name" value="${esc(S.nen)}" oninput="S.nen=this.value"><input class="inp" placeholder="Email" value="${esc(S.nee)}" oninput="S.nee=this.value"><select class="inp" onchange="S.ner=this.value">${["Nairobi","Mombasa","Kisumu","Nakuru","Eldoret","Thika","Nyeri","Kisii","Embu"].map(r=>`<option${S.ner===r?" selected":""}>${r}</option>`).join("")}</select></div><div style="display:flex;gap:10px">${B("Add Enumerator","addEnum()")}${B("Cancel","ss({showAE:false})","ghost")}</div></div>`:""}
+  <div class="tbw"><table><thead><tr><th>Name</th><th>Email</th><th>Region</th><th>Status</th><th>Submissions</th><th>Joined</th><th>Actions</th></tr></thead><tbody>
+  ${S.enumerators.map(e=>`<tr><td><div style="display:flex;align-items:center;gap:8px"><span style="width:7px;height:7px;border-radius:50%;background:${e.status==="Active"?"var(--blue)":"var(--t2)"};flex-shrink:0;display:inline-block"></span><span class="td-strong">${esc(e.name)}</span></div></td><td style="font-size:12px">${esc(e.email)}</td><td class="td-strong">📍 ${esc(e.region)}</td><td>${bdg(e.status,e.status==="Active"?"pill-blue":"pill-muted")}</td><td class="td-strong">${e.submissions||0}</td><td style="font-family:monospace;font-size:11px">${esc(e.joined||"")}</td><td>${e.status==="Active"?B("Disable","togEnum('"+e._id+"','Inactive')","ghost",true):B("Enable","togEnum('"+e._id+"','Active')","primary",true)}</td></tr>`).join("")}
+  </tbody></table></div>`;
+}
+
+function pAIBuilder(){
+  const ex=["Research the operational problems Kenyan restaurant owners face with WhatsApp follow-up","Survey to understand why Kenyan entrepreneurs fail to convert TikTok viewers into paying clients","Kenya entrepreneur pain points: stock tracking, cash flow, staff, WhatsApp overload"];
+  return`<div class="pg-label">AI</div><div class="pg-title">AI Survey Builder</div><div class="pg-sub">Describe your research intent. AI generates a field-ready survey schema.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+  <div>
+    <div style="font-size:10px;color:var(--t1);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px">Quick starts</div>
+    ${ex.map((e,i)=>`<div onclick="setAIIntent(${i})" style="background:var(--bg-lift);border:1px solid var(--div);border-radius:var(--r2);padding:11px 14px;color:var(--t1);font-size:12px;cursor:pointer;margin-bottom:8px;line-height:1.5;transition:all .15s" onmouseover="this.style.borderColor='var(--blue-mid)'" onmouseout="this.style.borderColor='var(--div)'">${esc(e)}</div>`).join("")}
+    <div style="font-size:10px;color:var(--t1);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin:14px 0 8px">Research intent</div>
+    <textarea class="inp inp-full" placeholder="Describe what you want to research..." oninput="S.aint=this.value" style="min-height:120px">${esc(S.aint)}</textarea>
+    <div style="margin-top:12px">${B(S.ald?"Generating...":"Generate Survey","genSurvey()",undefined,false,S.ald)}</div>
+    ${S.aerr?`<div style="margin-top:10px;color:var(--red);font-size:12px">${esc(S.aerr)}</div>`:""}
+  </div>
+  <div>
+    ${S.ald?`<div class="empty-card"><div class="spin"></div><div style="margin-top:14px">Generating survey schema...</div></div>`:""}
+    ${S.ares&&!S.ald?`<div class="ai-result"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px"><div><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:800;margin-bottom:4px">${esc(S.ares.title)}</div><div style="font-size:12px;color:var(--t1);margin-bottom:8px">${esc(S.ares.description||"")}</div>${bdg(S.ares.questions.length+" questions","pill-blue")}</div>${B(S.asv?"Saved":"Save Survey","saveAIRes()","primary",true)}</div><div style="max-height:360px;overflow-y:auto">${S.ares.questions.map((q,i)=>`<div class="rq"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:10px;color:var(--t1);font-family:monospace;min-width:20px">Q${i+1}</span><span style="font-size:10px;color:var(--blue);font-weight:700;background:var(--blue-dim);padding:2px 8px;border-radius:100px">${esc(q.type.replace(/_/g," "))}</span>${q.required?`<span style="font-size:10px;color:var(--red)">req</span>`:""}</div><div style="font-size:12px;color:var(--t0);padding-left:28px">${esc(q.label)}</div>${q.options&&q.options.length?`<div style="padding-left:28px;margin-top:4px;font-size:11px;color:var(--t1)">Options: ${esc(q.options.join(" · "))}</div>`:""}</div>`).join("")}</div></div>`:`<div class="empty-card">Generated survey will appear here</div>`}
+  </div></div>`;
+}
+
+const QT=["text","paragraph","multiple_choice","checkboxes","rating","yes_no","number","date","photo","gps","dropdown"];
+function pBuilder(){
+  if(!S.bsv)return`<div class="pg-label">Survey Builder</div><div class="pg-title">No survey selected</div><div style="margin-top:14px">${B("Back to Surveys","nav('surveys')","ghost")}</div>`;
+  const qs=S.bqs;
+  return`<div class="toolbar"><div><div class="pg-label">Survey Builder</div><div class="pg-title">${esc(S.bsv.title)}</div></div><div class="tl">${B(S.bpv?"Edit":"Preview","ss({bpv:!S.bpv})","ghost")}${B("Save Survey","saveBld()")}${B("Back","nav('surveys')","ghost")}</div></div>
+  ${!S.bpv?`<div id="qlist">${qs.map((q,i)=>`<div class="qc" draggable="true" data-i="${i}" ondragstart="dgs(event,${i})" ondragover="dgo(event,${i})" ondrop="ddr(event,${i})" ondragend="dge()"><div class="qch"><span class="dh">⋮⋮</span><span class="qn">Q${i+1}</span><select class="inp" style="width:auto;padding:4px 8px;font-size:11px" onchange="uQ(${i},'type',this.value)">${QT.map(t=>`<option${q.type===t?" selected":""}>${t}</option>`).join("")}</select><label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t1);margin-left:auto;cursor:pointer"><input type="checkbox"${q.required?" checked":""} onchange="uQ(${i},'required',this.checked)"> Required</label><button class="qrm" onclick="rmQ(${i})">x</button></div><input class="inp inp-full" value="${esc(q.label)}" placeholder="Question label..." oninput="uQ(${i},'label',this.value)">${["multiple_choice","checkboxes","dropdown"].includes(q.type)?`<div style="margin-top:8px"><span style="font-size:11px;color:var(--t1)">Options (comma-separated)</span><input class="inp inp-full" style="margin-top:5px" value="${esc((q.options||[]).join(", "))}" oninput="uQO(${i},this.value)"></div>`:""}</div>`).join("")}</div>${B("+ Add Question","addQ()","ghost")}`:
+  `<div class="mp"><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:800;color:#0A1628;margin-bottom:16px">${esc(S.bsv.title)}</div>${qs.map((q,i)=>`<div class="mpq"><div class="mpql">${i+1}. ${esc(q.label)}${q.required?`<span style="color:#E05252"> *</span>`:""}</div>${q.type==="text"?`<div class="mpqinp">Short answer...</div>`:q.type==="yes_no"?`<div style="display:flex;gap:8px"><div class="mpqinp" style="padding:6px 18px">Yes</div><div class="mpqinp" style="padding:6px 18px">No</div></div>`:q.type==="rating"?`<div style="font-size:18px">* * * * *</div>`:q.type==="gps"?`<div class="mpqinp" style="color:#007A58;background:#E8FAF5">📍 Auto-detect</div>`:`<div class="mpqinp">${esc(q.type)}</div>`}</div>`).join("")}${!qs.length?`<div style="text-align:center;color:#7A8A9E;font-size:12px;padding:20px">No questions yet.</div>`:""}</div>`}`;
+}
+
+function pAnalytics(){
+  const sel=S.ansel||S.surveys[0]?.title||"";
+  return`<div class="pg-label">Analytics</div><div class="pg-title">AI Analytics</div><div class="pg-sub">AI analyses all submissions including WhatsApp self-admin responses.</div>
+  <div style="display:flex;gap:12px;margin-bottom:18px"><select class="inp" style="flex:1;max-width:420px" onchange="S.ansel=this.value">${S.surveys.map(s=>`<option${(S.ansel||S.surveys[0]?.title)===s.title?" selected":""}>${esc(s.title)}</option>`).join("")}</select>${B(S.anld?"Analysing...":"Analyse","runAn()",undefined,false,S.anld)}</div>
+  <div style="font-size:12px;color:var(--t1);margin-bottom:16px">${S.submissions.filter(s=>s.survey===sel).length} submissions for this survey</div>
+  ${S.anerr?`<div style="color:var(--red);font-size:12px;margin-bottom:16px">${esc(S.anerr)}</div>`:""}
+  ${S.anld?`<div class="empty-card"><div class="spin"></div><div style="margin-top:14px">Analysing submissions...</div></div>`:""}
+  ${S.anrep&&!S.anld?`<div class="ai-result" style="margin-bottom:16px"><div class="card-ttl">Executive Summary</div><p style="font-size:14px;color:var(--t0);line-height:1.75">${esc(S.anrep.summary)}</p>${S.anrep.regional_pattern?`<p style="font-size:13px;color:var(--t1);margin-top:8px;font-style:italic">📍 ${esc(S.anrep.regional_pattern)}</p>`:""}</div>
+  <div style="display:flex;gap:14px;margin-bottom:16px"><div class="stat"><div class="stat-lbl">Avg Sentiment</div><div class="stat-val" style="color:${sc(S.anrep.avg_sentiment)}">${S.anrep.avg_sentiment}%</div></div><div class="stat"><div class="stat-lbl">Safety Issues</div><div class="stat-val" style="color:${S.anrep.safety_issues>0?"var(--red)":"var(--green)"}">${S.anrep.safety_issues}</div></div></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><div class="card"><div class="card-ttl">Key Findings</div>${S.anrep.key_findings.map((f,i)=>`<div style="display:flex;gap:10px;margin-bottom:12px;font-size:13px;color:var(--t0);line-height:1.6"><span style="color:var(--blue);font-weight:800;flex-shrink:0;font-family:'Bricolage Grotesque',sans-serif">0${i+1}</span>${esc(f)}</div>`).join("")}</div><div class="card"><div class="card-ttl">Recommendations</div>${S.anrep.recommendations.map(r=>`<div style="display:flex;gap:10px;margin-bottom:12px;font-size:13px;color:var(--t0);line-height:1.6"><span style="color:var(--amber);font-weight:800;flex-shrink:0">→</span>${esc(r)}</div>`).join("")}</div></div>`:""}`;
+}
+
+function pAskData(){
+  const dc=`Surveys: ${S.surveys.map(s=>`"${s.title}"(${s.status},${s.submissions||0}sub)`).join("|")}\nSubmissions: ${S.submissions.length} total, ${S.submissions.filter(s=>s.source==="whatsapp_selfadmin"||s.enumerator==="Self-admin").length} self-admin, ${S.submissions.filter(s=>s.flagged).length} flagged\nEnumerators: ${S.enumerators.map(e=>`${e.name}(${e.region},${e.status})`).join("|")}`;
+  window._dc=dc;
+  const sugg=["Which survey has the most responses?","How many self-admin responses?","Most common operational challenge?","Summarise entrepreneur research findings so far"];
+  return`<div class="pg-label">Ask Data</div><div class="pg-title">Natural Language Query</div><div class="pg-sub">Ask questions about your field data in plain English.</div>
+  <div class="chips">${sugg.map(s=>`<button class="chip" onclick="askD(${JSON.stringify(s)})">${esc(s)}</button>`).join("")}</div>
+  <div class="chat-wrap"><div class="msgs" id="msgs">${S.chat.map(m=>`<div class="msg ${m.r==="user"?"msg-u":"msg-b"}" style="align-self:${m.r==="user"?"flex-end":"flex-start"}">${esc(m.t)}</div>`).join("")}${S.cld?`<div class="msg msg-b"><div class="spin" style="width:16px;height:16px;border-width:2px"></div></div>`:""}</div>
+  <div class="ci"><input class="inp" id="ci" placeholder="Ask anything about your field data..." value="${esc(S.ci)}" oninput="S.ci=this.value" onkeydown="if(event.key==='Enter')askD()" style="flex:1">${B("Send","askD()")}</div></div>`;
+}
+
+function rSidebar(){
+  const flc=S.submissions.filter(s=>s.flagged).length;
+  const syncStatus=()=>{
+    if(S.fbError)return`<span style="color:var(--red)">Error syncing</span>`;
+    if(S.syncing)return`<span style="color:var(--amber)">Syncing...</span>`;
+    if(S.lastSynced){const sec=Math.round((Date.now()-S.lastSynced)/1000);return`<span style="color:var(--green)">Synced ${sec<5?"just now":sec+"s ago"}</span>`;}
+    return"";
+  };
+  const navs=[
+    {id:"overview",ic:"◈",lb:"Overview",g:"Main"},
+    {id:"surveys",ic:"📋",lb:"Surveys"},
+    {id:"submissions",ic:"📥",lb:"Submissions",bdg:flc},
+    {id:"map",ic:"🗺",lb:"Field Map"},
+    {id:"enumerators",ic:"👥",lb:"Enumerators"},
+    {id:"aibuilder",ic:"✦",lb:"AI Builder",g:"AI Tools"},
+    {id:"builder",ic:"✏",lb:"Survey Builder"},
+    {id:"analytics",ic:"◉",lb:"AI Analytics"},
+    {id:"askdata",ic:"💬",lb:"Ask Data"},
+  ];
+  let html=`<div class="sb-brand"><div class="sb-logo-text"><div class="sb-logo">Baseline</div><div class="sb-sub"><a href="https://redolense.com" target="_blank">by Redolense</a></div></div><div style="display:flex;gap:4px"><button class="sb-toggle" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">☀</button><button class="sb-toggle" onclick="toggleSb()" title="Collapse sidebar">&#8644;</button></div></div>`;
+  if(S.fbError)html+=`<div class="banner banner-err"><strong>Firebase error</strong><div style="font-size:10px;margin-top:2px">${esc(S.fbError)}</div></div>`;
+  html+=`<div class="nav-list">`;
+  let lastG="";
+  navs.forEach(n=>{
+    if(n.g&&n.g!==lastG){html+=`<div class="nav-section">${n.g}</div>`;lastG=n.g;}
+    html+=`<button class="nav-btn${S.page===n.id?" active":""}" onclick="nav('${n.id}')"><span class="nav-icon">${n.ic}</span><span class="nav-label">${n.lb}</span>${n.bdg?`<span class="nav-badge">${n.bdg}</span>`:""}</button>`;
+  });
+  html+=`</div><div class="sb-footer"><div>A Redolense product</div><div class="sb-sync">${syncStatus()}</div><button class="sb-refresh" onclick="fetchAll()">Refresh now</button></div>`;
+  return html;
+}
+
+function toggleSb(){document.querySelector('.app').classList.toggle('sb-closed');}
+function toggleTheme(){
+  const isLight=document.documentElement.classList.toggle('light');
+  document.getElementById('themeBtn').textContent=isLight?'☽':'☀';
+  localStorage.setItem('bl-theme',isLight?'light':'dark');
+}
+// Restore saved theme
+if(localStorage.getItem('bl-theme')==='light'){
+  document.documentElement.classList.add('light');
+  document.addEventListener('DOMContentLoaded',()=>{const b=document.getElementById('themeBtn');if(b)b.textContent='☽';});
+}
+function render(){
+  document.getElementById("sidebar").innerHTML=rSidebar();
+  document.getElementById("main").innerHTML=renderPage();
+  const msgs=document.getElementById("msgs");if(msgs)msgs.scrollTop=msgs.scrollHeight;
+}
+function renderPage(){
+  if(S.loading)return`<div class="loading-wrap"><div class="spin"></div><div>Connecting to Firebase...</div></div>`;
+  switch(S.page){case"overview":return pOverview();case"surveys":return pSurveys();case"submissions":return pSubmissions();case"map":return pMap();case"enumerators":return pEnumerators();case"aibuilder":return pAIBuilder();case"builder":return pBuilder();case"analytics":return pAnalytics();case"askdata":return pAskData();}return"";
+}
+
+function nav(pg){Object.assign(S,{page:pg,search:"",filter:"all",tab:"All"});render();}
+function openNS(){Object.assign(S,{showNS:true,nst:"",nsd:""});render();}
+function openAE(){Object.assign(S,{showAE:true,nen:"",nee:"",ner:"Nairobi"});render();}
+async function crtSurvey(){if(!S.nst.trim())return;const o={title:S.nst,description:S.nsd,status:"Draft",version:"v1.0",submissions:0,questions:0,created:new Date().toISOString().split("T")[0]};try{const sv=await FB.create("surveys",o);S.surveys.push(sv);}catch{S.surveys.push({...o,_id:Date.now().toString()});}Object.assign(S,{showNS:false,nst:"",nsd:""});render();}
+async function pubSurvey(id){try{await FB.patch("surveys",id,{status:"Published"});}catch{}S.surveys=S.surveys.map(s=>s._id===id?{...s,status:"Published"}:s);render();}
+async function archSurvey(id){try{await FB.patch("surveys",id,{status:"Archived"});}catch{}S.surveys=S.surveys.map(s=>s._id===id?{...s,status:"Archived"}:s);render();}
+function dupSurvey(id){const s=S.surveys.find(x=>x._id===id);if(!s)return;const c={...s,title:s.title+" (copy)",status:"Draft",submissions:0,_id:undefined};FB.create("surveys",c).then(sv=>{S.surveys.push(sv);render();}).catch(()=>{S.surveys.push({...c,_id:Date.now().toString()});render();});}
+function openBld(id){const s=S.surveys.find(x=>x._id===id);Object.assign(S,{page:"builder",bsv:s,bqs:[],bpv:false});render();}
+function addQ(){S.bqs.push({id:Date.now(),type:"text",label:"New question",required:false,options:[]});render();}
+function rmQ(i){S.bqs.splice(i,1);render();}
+function uQ(i,k,v){S.bqs[i][k]=v;render();}
+function uQO(i,v){S.bqs[i].options=v.split(",").map(s=>s.trim()).filter(Boolean);render();}
+let _di=null;
+function dgs(e,i){_di=i;}
+function dgo(e,i){e.preventDefault();if(_di===null||_di===i)return;const[m]=S.bqs.splice(_di,1);S.bqs.splice(i,0,m);_di=i;render();}
+function ddr(e,i){e.preventDefault();}
+function dge(){_di=null;}
+async function saveBld(){const s=S.bsv;if(s&&s._id){try{await FB.patch("surveys",s._id,{questions:S.bqs.length});}catch{}}S.surveys=S.surveys.map(sv=>sv._id===s?._id?{...sv,questions:S.bqs.length}:sv);render();alert("Saved");}
+async function togFlag(id,val){try{await FB.patch("submissions",id,{flagged:val});}catch{}S.submissions=S.submissions.map(s=>s._id===id?{...s,flagged:val}:s);render();}
+async function togEnum(id,status){try{await FB.patch("enumerators",id,{status});}catch{}S.enumerators=S.enumerators.map(e=>e._id===id?{...e,status}:e);render();}
+async function addEnum(){if(!S.nen||!S.nee)return;const o={name:S.nen,email:S.nee,region:S.ner,status:"Active",submissions:0,joined:new Date().toISOString().split("T")[0],lat:-1.286,lon:36.817};try{const sv=await FB.create("enumerators",o);S.enumerators.push(sv);}catch{S.enumerators.push({...o,_id:Date.now().toString()});}Object.assign(S,{showAE:false,nen:"",nee:""});render();}
+function setAIIntent(i){const ex=["Research the operational problems Kenyan restaurant owners face with WhatsApp follow-up","Survey to understand why Kenyan entrepreneurs fail to convert TikTok viewers into paying clients","Kenya entrepreneur pain points: stock tracking, cash flow, staff, WhatsApp overload"];S.aint=ex[i];render();}
+
+async function genSurvey(){
+  if(!S.aint.trim())return;
+  Object.assign(S,{ald:true,aerr:"",ares:null,asv:false});render();
+  try{
+    const text=await aiCall(`You are a Kenya/East Africa field research survey designer. Return ONLY a raw JSON object, no markdown: {"title":"string","description":"string","questions":[{"type":"text","label":"string","required":true,"options":[]}]} Types: text paragraph multiple_choice checkboxes rating yes_no number date photo gps dropdown. Options only for multiple_choice/checkboxes/dropdown. Include one gps question. 8-14 questions. Kenya context.`,[{role:"user",content:S.aint}],2000);
+    const raw=text.trim().replace(/^```[a-z]*\n?/i,"").replace(/\n?```$/i,"").trim();
+    const s=raw.indexOf("{"),e=raw.lastIndexOf("}");
+    const parsed=JSON.parse(raw.slice(s,e+1));
+    if(!parsed.questions||!Array.isArray(parsed.questions))throw new Error("Invalid response");
+    Object.assign(S,{ares:parsed,ald:false});
+  }catch(e){Object.assign(S,{aerr:e.message,ald:false});}
+  render();
+}
+
+async function saveAIRes(){
+  if(!S.ares)return;
+  const o={title:S.ares.title,description:S.ares.description||"",status:"Draft",version:"v1.0",submissions:0,questions:S.ares.questions.length,created:new Date().toISOString().split("T")[0]};
+  try{const sv=await FB.create("surveys",o);S.surveys.push(sv);}catch{S.surveys.push({...o,_id:Date.now().toString()});}
+  S.asv=true;render();
+}
+
+async function runAn(){
+  const sel=S.ansel||S.surveys[0]?.title||"";S.ansel=sel;
+  Object.assign(S,{anld:true,anerr:"",anrep:null});render();
+  const subs=S.submissions.filter(s=>s.survey===sel);
+  const ctx=subs.map(s=>`Enumerator:${s.enumerator||"Self-admin"},Location:${s.location||"Unknown"},Sentiment:${s.sentiment||"N/A"}%,Tags:${ntags(s).join(",")},OPS_SLOW:${s.OPS_SLOW||"?"},WTP:${s.WTP_WILLING||"?"}`).join("\n");
+  try{
+    const text=await aiCall(`You are a field research analyst for East Africa. Return ONLY raw JSON: {"summary":"string","avg_sentiment":number,"top_finding":"string","safety_issues":number,"key_findings":["string","string","string"],"recommendations":["string","string","string"],"regional_pattern":"string"}`,[{role:"user",content:`Survey: ${sel}\n\nSubmissions (${subs.length}):\n${ctx||"No submissions yet."}`}],1200);
+    const raw=text.trim().replace(/^```[a-z]*\n?/i,"").replace(/\n?```$/i,"").trim();
+    const s=raw.indexOf("{"),e=raw.lastIndexOf("}");
+    Object.assign(S,{anrep:JSON.parse(raw.slice(s,e+1)),anld:false});
+  }catch(e){Object.assign(S,{anerr:e.message,anld:false});}
+  render();
+}
+
+async function askD(q){
+  const question=q||S.ci.trim();if(!question)return;
+  S.ci="";S.chat.push({r:"user",t:question});
+  Object.assign(S,{cld:true});render();
+  const msgs=S.chat.filter((m,i)=>m.r!=="b"||i>0).map(m=>({role:m.r==="user"?"user":"assistant",content:m.t}));
+  try{
+    const text=await aiCall(`You are a field research analyst for the Baseline platform. Answer concisely using this data:\n${window._dc||""}`,msgs,400);
+    S.chat.push({r:"b",t:text||"No response."});
+  }catch(e){S.chat.push({r:"b",t:`Error: ${e.message}`});}
+  Object.assign(S,{cld:false});render();
+}
+
+async function fetchAll(initial=false){
+  if(!initial)S.syncing=true;
+  try{
+    const[survs,subs,enums]=await Promise.all([FB.list("surveys"),FB.list("submissions"),FB.list("enumerators")]);
+    S.surveys=survs.length?survs:SEED.surveys;
+    S.submissions=subs.length?subs:SEED.submissions;
+    S.enumerators=enums.length?enums:SEED.enumerators;
+    S.lastSynced=Date.now();S.fbError=null;
+  }catch(e){console.error("FB:",e);S.fbError=e.message;if(initial){S.surveys=SEED.surveys;S.submissions=SEED.submissions;S.enumerators=SEED.enumerators;}}
+  S.syncing=false;S.loading=false;render();
+}
+
+render();
+fetchAll(true).then(()=>{
+  setInterval(()=>fetchAll(),15000);
+  setInterval(()=>{S.stk++;document.getElementById("sidebar").innerHTML=rSidebar();},5000);
+});
+</script>
+</body>
+</html>

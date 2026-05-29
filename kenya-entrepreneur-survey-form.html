@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#DCE8F2">
+<title>Kenya Entrepreneur Research Challenge — Baseline by Redolens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!--
+  ══════════════════════════════════════════════════════════
+  GOOGLE SHEETS INTEGRATION SETUP
+  ══════════════════════════════════════════════════════════
+  1. Go to script.google.com → New project
+  2. Paste the Code.gs contents from the bottom of this file
+  3. Click Deploy → New deployment → Web app
+  4. Execute as: Me | Who has access: Anyone
+  5. Copy the deployment URL
+  6. Replace APPS_SCRIPT_URL below with your URL
+  ══════════════════════════════════════════════════════════
+-->
+<script>
+/* ═══════════════════════════════════════════════════════════
+   FIREBASE CONFIG — same values as the platform
+   1. Go to console.firebase.google.com
+   2. Project Settings → Your apps → Web app config
+   3. Paste apiKey and projectId below
+═══════════════════════════════════════════════════════════ */
+const FB_CONFIG = {
+  apiKey:    "AIzaSyBOvvCdEUNayhvQ54XIXyXuiN2K73yZ71E",
+  projectId: "baseline-ke",
+};
+const FB_READY = !FB_CONFIG.apiKey.startsWith("REPLACE");
+
+async function fbCreate(data) {
+  const fields = {};
+  Object.entries(data).forEach(([k, v]) => {
+    if (v === null || v === undefined) fields[k] = { nullValue: null };
+    else if (typeof v === "number" && Number.isInteger(v)) fields[k] = { integerValue: String(v) };
+    else if (typeof v === "number") fields[k] = { doubleValue: v };
+    else if (typeof v === "boolean") fields[k] = { booleanValue: v };
+    else fields[k] = { stringValue: String(v) };
+  });
+  const url = `https://firestore.googleapis.com/v1/projects/${FB_CONFIG.projectId}/databases/(default)/documents/submissions?key=${FB_CONFIG.apiKey}`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ fields }),
+  });
+  if (!res.ok) {
+    const e = await res.json().catch(() => ({}));
+    throw new Error(e.error?.message || `Firebase error ${res.status}`);
+  }
+  return res.json();
+}
+</script>
+
+<style>
+/* ════════════════════════════════════
+   TOKENS
+════════════════════════════════════ */
+:root {
+  --bg:      #DCE8F2;
+  --surface: #E7F0F9;
+  --deep:    #CED9E5;
+  --blue:    #1268CC;
+  --blue-b:  #1880EE;
+  --blue-dim:rgba(18,104,204,.09);
+  --blue-mid:rgba(18,104,204,.20);
+  --grad:    linear-gradient(140deg,#1268CC,#1880EE);
+  --text:    #0A1C2E;
+  --muted:   #6A88A4;
+  --faint:   #A8C0D4;
+
+  --neu-out: -5px -5px 12px rgba(255,255,255,.88),
+              5px  5px 14px rgba(128,165,198,.55);
+  --neu-sm:  -3px -3px  8px rgba(255,255,255,.85),
+              3px  3px  9px rgba(128,165,198,.50);
+  --neu-in:  inset -3px -3px 8px rgba(255,255,255,.85),
+             inset  3px  3px 8px rgba(116,155,192,.48);
+  --neu-btn: -2px -2px  6px rgba(255,255,255,.50),
+              2px  2px  9px rgba(14, 78,168,.42);
+}
+
+/* ════════════════════════════════════
+   RESET + BASE
+════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent }
+html, body { height:100%; background:var(--bg); overflow:hidden }
+body {
+  font-family:'DM Sans',sans-serif;
+  font-size:15px; color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  display:flex; justify-content:center; align-items:center;
+}
+
+h1,h2,h3 { font-family:'Bricolage Grotesque',sans-serif; font-optical-sizing:auto }
+
+/* ════════════════════════════════════
+   PHONE SHELL
+════════════════════════════════════ */
+.shell {
+  width:100%; max-width:430px; height:100%;
+  max-height:900px; position:relative;
+  display:flex; flex-direction:column;
+  background:var(--bg); overflow:hidden;
+}
+
+/* ════════════════════════════════════
+   PROGRESS BAR
+════════════════════════════════════ */
+.progress-wrap {
+  padding:16px 24px 0; flex-shrink:0;
+  display:flex; align-items:center; gap:12px;
+}
+.progress-bar {
+  flex:1; height:3px; background:var(--deep);
+  border-radius:100px; box-shadow:var(--neu-in);
+  overflow:hidden;
+}
+.progress-fill {
+  height:100%; background:var(--grad);
+  border-radius:100px;
+  transition:width .45s cubic-bezier(.4,0,.2,1);
+}
+.progress-label {
+  font-size:11px; font-weight:700; color:var(--muted);
+  letter-spacing:.08em; white-space:nowrap;
+}
+
+/* ════════════════════════════════════
+   SCREEN VIEWPORT
+════════════════════════════════════ */
+.viewport {
+  flex:1; position:relative; overflow:hidden;
+}
+.screen {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  padding:24px 24px 0;
+  overflow-y:auto; overflow-x:hidden;
+  transition:transform .38s cubic-bezier(.4,0,.2,1),
+             opacity   .28s ease;
+}
+.screen.hidden-left  { transform:translateX(-100%); opacity:0; pointer-events:none }
+.screen.hidden-right { transform:translateX( 100%); opacity:0; pointer-events:none }
+.screen.active       { transform:translateX(0);     opacity:1 }
+
+/* ════════════════════════════════════
+   QUESTION TYPOGRAPHY
+════════════════════════════════════ */
+.q-meta {
+  font-size:10px; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--blue);
+  margin-bottom:10px;
+}
+.q-title {
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(1.2rem,5vw,1.6rem);
+  font-weight:800; letter-spacing:-.03em;
+  line-height:1.15; color:var(--text);
+  margin-bottom:6px;
+}
+.q-sub {
+  font-size:12.5px; color:var(--muted);
+  margin-bottom:20px; line-height:1.55;
+}
+
+/* ════════════════════════════════════
+   OPTION CARDS
+════════════════════════════════════ */
+.options { display:flex; flex-direction:column; gap:9px; padding-bottom:24px }
+
+.opt {
+  background:var(--surface);
+  border-radius:14px;
+  box-shadow:var(--neu-sm);
+  padding:14px 18px;
+  display:flex; align-items:center; gap:14px;
+  cursor:pointer; user-select:none;
+  transition:all .2s;
+  border:2px solid transparent;
+  -webkit-user-select:none;
+}
+.opt:active { transform:scale(.98) }
+.opt.selected {
+  background:var(--blue-dim);
+  border-color:var(--blue);
+  box-shadow:var(--neu-in);
+}
+.opt-dot {
+  width:22px; height:22px; flex-shrink:0;
+  border-radius:50%; border:2px solid var(--faint);
+  background:var(--surface);
+  box-shadow:var(--neu-sm);
+  transition:all .2s;
+  display:flex; align-items:center; justify-content:center;
+}
+.opt.selected .opt-dot {
+  background:var(--grad);
+  border-color:var(--blue);
+  box-shadow:var(--neu-btn);
+}
+.opt-dot::after {
+  content:''; width:8px; height:8px;
+  background:#fff; border-radius:50%;
+  opacity:0; transition:opacity .15s;
+}
+.opt.selected .opt-dot::after { opacity:1 }
+
+.opt-sq {
+  width:22px; height:22px; flex-shrink:0;
+  border-radius:6px; border:2px solid var(--faint);
+  background:var(--surface);
+  box-shadow:var(--neu-sm);
+  transition:all .2s;
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; color:transparent;
+}
+.opt.selected .opt-sq {
+  background:var(--grad); border-color:var(--blue);
+  box-shadow:var(--neu-btn); color:#fff;
+}
+
+.opt-label { font-size:14px; font-weight:500; color:var(--text); line-height:1.35; flex:1 }
+.opt.selected .opt-label { color:var(--blue); font-weight:600 }
+
+/* Other input */
+.other-input {
+  margin-top:8px;
+  background:var(--deep); border:none; border-radius:10px;
+  box-shadow:var(--neu-in); padding:11px 14px;
+  font-size:13.5px; color:var(--text); font-family:'DM Sans';
+  width:100%; outline:none; display:none;
+}
+.other-input.show { display:block }
+
+/* ════════════════════════════════════
+   SEVERITY GRID
+════════════════════════════════════ */
+.severity-list { display:flex; flex-direction:column; gap:14px; padding-bottom:24px }
+.sev-item {
+  background:var(--surface); border-radius:14px;
+  box-shadow:var(--neu-sm); padding:14px 16px;
+}
+.sev-label { font-size:13px; font-weight:600; color:var(--text); margin-bottom:10px; line-height:1.3 }
+.sev-scale {
+  display:flex; align-items:center; gap:0;
+}
+.sev-anchor {
+  font-size:9px; color:var(--faint); font-weight:600;
+  letter-spacing:.04em; width:52px; flex-shrink:0;
+  line-height:1.2;
+}
+.sev-anchor.right { text-align:right }
+.sev-dots { display:flex; flex:1; justify-content:space-between; gap:4px }
+.sev-dot {
+  flex:1; height:36px; border-radius:10px;
+  background:var(--deep); box-shadow:var(--neu-in);
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700; color:var(--faint);
+  cursor:pointer; transition:all .18s;
+}
+.sev-dot:active { transform:scale(.93) }
+.sev-dot.selected {
+  background:var(--grad); color:#fff;
+  box-shadow:var(--neu-btn);
+}
+
+/* ════════════════════════════════════
+   TEXT INPUT
+════════════════════════════════════ */
+.text-area {
+  background:var(--surface); border:none; border-radius:14px;
+  box-shadow:var(--neu-in); padding:16px 18px;
+  font-size:14.5px; color:var(--text); font-family:'DM Sans';
+  width:100%; min-height:120px; outline:none;
+  resize:none; line-height:1.6;
+}
+.text-area::placeholder { color:var(--faint) }
+
+/* ════════════════════════════════════
+   GPS CARD
+════════════════════════════════════ */
+.gps-card {
+  background:var(--surface); border-radius:18px;
+  box-shadow:var(--neu-out); padding:24px;
+  text-align:center; margin-bottom:16px;
+}
+.gps-icon { font-size:2.8rem; margin-bottom:10px }
+.gps-status { font-size:13px; color:var(--muted); margin-bottom:16px; line-height:1.5 }
+.gps-coords {
+  font-family:monospace; font-size:12px; color:var(--blue);
+  background:var(--blue-dim); border-radius:8px; padding:8px 12px;
+  margin-top:10px; display:none;
+}
+.gps-coords.show { display:block }
+
+/* ════════════════════════════════════
+   BUTTONS
+════════════════════════════════════ */
+.btn-primary {
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  width:100%; padding:16px;
+  background:var(--grad); color:#fff;
+  border:none; border-radius:14px;
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:15px; font-weight:700;
+  cursor:pointer; box-shadow:var(--neu-btn);
+  transition:all .2s; letter-spacing:.01em;
+}
+.btn-primary:hover { filter:brightness(1.08) }
+.btn-primary:active { transform:scale(.97); box-shadow:var(--neu-in) }
+.btn-primary:disabled {
+  background:var(--deep); color:var(--faint);
+  box-shadow:var(--neu-in); cursor:not-allowed; filter:none;
+}
+
+.btn-ghost {
+  display:flex; align-items:center; justify-content:center;
+  padding:14px; background:var(--surface);
+  border:none; border-radius:12px;
+  font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500;
+  color:var(--muted); cursor:pointer;
+  box-shadow:var(--neu-sm); transition:all .2s;
+}
+.btn-ghost:active { box-shadow:var(--neu-in) }
+
+/* ════════════════════════════════════
+   BOTTOM NAV
+════════════════════════════════════ */
+.bottom-nav {
+  flex-shrink:0; padding:14px 24px 24px;
+  display:flex; gap:12px;
+}
+.bottom-nav.centered { justify-content:center }
+
+/* ════════════════════════════════════
+   INTRO SCREEN
+════════════════════════════════════ */
+.intro-logo {
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:800; font-size:1.1rem; color:var(--text);
+  letter-spacing:-.02em; margin-bottom:4px;
+}
+.intro-logo em { font-style:normal; color:var(--blue) }
+.intro-hero {
+  margin:28px 0 24px;
+  background:var(--surface); border-radius:20px;
+  box-shadow:var(--neu-out); padding:28px 24px;
+}
+.intro-hero-icon { font-size:2.4rem; margin-bottom:14px }
+.intro-hero h1 {
+  font-size:clamp(1.5rem,6vw,2rem); font-weight:800;
+  letter-spacing:-.04em; line-height:1.1; margin-bottom:12px;
+}
+.intro-hero h1 span { color:var(--blue) }
+.intro-hero p { font-size:14px; color:var(--muted); line-height:1.7; font-weight:300 }
+.intro-meta { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px }
+.intro-pill {
+  padding:5px 14px; background:var(--blue-dim); border-radius:100px;
+  font-size:11.5px; font-weight:700; color:var(--blue);
+  letter-spacing:.04em;
+}
+.intro-confidential {
+  background:var(--surface); border-radius:12px; box-shadow:var(--neu-sm);
+  padding:12px 16px; font-size:12.5px; color:var(--muted);
+  line-height:1.6; margin-bottom:8px;
+}
+
+/* ════════════════════════════════════
+   MULTI-SELECT BADGE
+════════════════════════════════════ */
+.multi-badge {
+  display:inline-flex; align-items:center;
+  padding:4px 12px; background:var(--blue-dim);
+  border-radius:100px; font-size:11px;
+  font-weight:700; color:var(--blue); margin-bottom:16px;
+}
+
+/* ════════════════════════════════════
+   FOLLOW-UP CONTACT
+════════════════════════════════════ */
+.contact-input {
+  background:var(--surface); border:none; border-radius:14px;
+  box-shadow:var(--neu-in); padding:14px 18px;
+  font-size:14.5px; color:var(--text); font-family:'DM Sans';
+  width:100%; outline:none; margin-top:10px;
+}
+.contact-input::placeholder { color:var(--faint) }
+
+/* ════════════════════════════════════
+   SUCCESS SCREEN
+════════════════════════════════════ */
+.success-screen {
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; padding:40px 32px; gap:20px;
+  height:100%;
+}
+.success-icon {
+  width:80px; height:80px; background:var(--grad);
+  border-radius:50%; box-shadow:var(--neu-btn);
+  display:flex; align-items:center; justify-content:center;
+  font-size:2.2rem;
+  animation:pop .5s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes pop { from{transform:scale(0)} to{transform:scale(1)} }
+.success-title {
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:800; font-size:1.6rem; letter-spacing:-.04em;
+}
+.success-sub { font-size:14px; color:var(--muted); line-height:1.7; max-width:280px }
+.success-brand {
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:800; font-size:.95rem; color:var(--muted);
+  margin-top:8px;
+}
+.success-brand em { font-style:normal; color:var(--blue) }
+
+/* ════════════════════════════════════
+   ERROR / LOADING OVERLAY
+════════════════════════════════════ */
+.overlay {
+  position:absolute; inset:0; display:none;
+  background:rgba(220,232,242,.85);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  flex-direction:column; align-items:center; justify-content:center;
+  z-index:100; gap:14px; text-align:center; padding:40px;
+}
+.overlay.show { display:flex }
+.overlay-icon { font-size:2.2rem }
+.overlay-title { font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:1.2rem }
+.overlay-sub { font-size:13px; color:var(--muted); line-height:1.6 }
+
+/* Scrollbar (webkit) */
+.screen::-webkit-scrollbar { width:3px }
+.screen::-webkit-scrollbar-thumb { background:var(--blue-mid); border-radius:2px }
+
+/* ════════════════════════════════════
+   RESPONSIVE: full mobile bleed
+════════════════════════════════════ */
+@media(max-width:430px) {
+  .shell { max-height:100%; border-radius:0 }
+}
+</style>
+</head>
+<body>
+
+<div class="shell" id="app">
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap" id="progressWrap" style="display:none">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+
+  <!-- VIEWPORT -->
+  <div class="viewport" id="viewport">
+    <!-- screens injected by JS -->
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav" id="bottomNav" style="display:none">
+    <button class="btn-ghost" id="backBtn" onclick="goBack()" style="width:52px;flex-shrink:0">←</button>
+    <button class="btn-primary" id="nextBtn" onclick="goNext()">Continue →</button>
+  </div>
+
+  <!-- LOADING OVERLAY -->
+  <div class="overlay" id="loadingOverlay">
+    <div class="overlay-icon">⟳</div>
+    <div class="overlay-title">Submitting your responses…</div>
+    <div class="overlay-sub">Sending your data securely. This takes just a moment.</div>
+  </div>
+
+  <!-- ERROR OVERLAY -->
+  <div class="overlay" id="errorOverlay">
+    <div class="overlay-icon">⚠️</div>
+    <div class="overlay-title">Submission failed</div>
+    <div class="overlay-sub" id="errorMsg">Please check your connection and try again.</div>
+    <button class="btn-primary" onclick="retrySubmit()" style="max-width:220px;margin-top:8px">Try again</button>
+    <button class="btn-ghost" onclick="document.getElementById('errorOverlay').classList.remove('show')" style="max-width:220px">Cancel</button>
+  </div>
+
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   SURVEY DEFINITION
+   Edit questions here to customise the form.
+════════════════════════════════════════════════════════════ */
+const SURVEY = {
+  title: "Kenya Entrepreneur Research Challenge",
+  subtitle: "Redolens Digital",
+  questions: [
+
+    // ── INTRO ──────────────────────────────────────────
+    {
+      id: "intro",
+      type: "intro",
+    },
+
+    // ── Q1: SECTOR ─────────────────────────────────────
+    {
+      id: "SECTOR",
+      type: "single",
+      title: "What type of business do you run?",
+      sub: "Choose the option that fits best.",
+      options: [
+        { code:1,  label:"Retail / kiosk / duka / hardware" },
+        { code:2,  label:"Food & hospitality (restaurant / café / catering)" },
+        { code:3,  label:"Beauty & personal care (salon / barbershop / spa)" },
+        { code:4,  label:"Transport / logistics (boda boda / delivery / matatu)" },
+        { code:5,  label:"Agriculture / agro-trading (produce / inputs)" },
+        { code:6,  label:"Small manufacturing / fabrication (furniture / garments)" },
+        { code:7,  label:"Professional services (consulting / accounting / training)" },
+        { code:8,  label:"Technology / digital / cyber / printing" },
+        { code:9,  label:"Healthcare / pharmacy / clinic" },
+        { code:88, label:"Other", other:true },
+      ],
+    },
+
+    // ── Q2: BIZ_AGE ────────────────────────────────────
+    {
+      id: "BIZ_AGE",
+      type: "single",
+      title: "How long has this business been running?",
+      options: [
+        { code:1, label:"Less than 1 year" },
+        { code:2, label:"1–3 years" },
+        { code:3, label:"4–7 years" },
+        { code:4, label:"8–15 years" },
+        { code:5, label:"Over 15 years" },
+      ],
+    },
+
+    // ── Q3: STAFF_TOT ──────────────────────────────────
+    {
+      id: "STAFF_TOT",
+      type: "single",
+      title: "How many people work in this business?",
+      sub: "Include yourself and any casual workers.",
+      options: [
+        { code:1, label:"Solo — just me" },
+        { code:2, label:"2–5 people" },
+        { code:3, label:"6–15 people" },
+        { code:4, label:"16–50 people" },
+        { code:5, label:"More than 50" },
+      ],
+    },
+
+    // ── Q4: REV_CH ─────────────────────────────────────
+    {
+      id: "REV_CH",
+      type: "multi",
+      max: 2,
+      title: "How do most of your customers reach you?",
+      sub: "Choose up to 2 main ways.",
+      options: [
+        { code:1, label:"Walk-in (people come to my premises)" },
+        { code:2, label:"WhatsApp (orders or enquiries via WhatsApp)" },
+        { code:3, label:"Referrals / word of mouth" },
+        { code:4, label:"Social media (Facebook / Instagram / TikTok)" },
+        { code:5, label:"Online store / website / Jiji / Jumia" },
+        { code:6, label:"Direct sales (I go to the customer)" },
+        { code:7, label:"Agent or distributor" },
+        { code:88, label:"Other", other:true },
+      ],
+    },
+
+    // ── Q4b: MPESA ─────────────────────────────────────
+    {
+      id: "MPESA",
+      type: "single",
+      title: "Do you use M-Pesa or mobile money to receive payments?",
+      options: [
+        { code:1, label:"Yes — I use it regularly" },
+        { code:2, label:"Yes — sometimes" },
+        { code:3, label:"No — I don't use it" },
+      ],
+    },
+
+    // ── Q5: OPS_SLOW (CORE) ────────────────────────────
+    {
+      id: "OPS_SLOW",
+      type: "single",
+      title: "What is the single biggest thing slowing your business down right now?",
+      sub: "Choose the one that fits most.",
+      core: true,
+      options: [
+        { code:1, label:"Tracking stock — knowing what I have and what's running low" },
+        { code:2, label:"Following up customers who haven't paid or haven't returned" },
+        { code:3, label:"Managing orders across WhatsApp, phone, and walk-in" },
+        { code:4, label:"Knowing my real profit — I'm not sure how much I'm making" },
+        { code:5, label:"Managing staff — attendance, tasks, accountability" },
+        { code:6, label:"Getting new customers — marketing and visibility" },
+        { code:7, label:"Supplier problems — late deliveries or price changes" },
+        { code:8, label:"Cash flow — having money available when I need it" },
+        { code:9, label:"Record keeping — receipts, invoices, M-Pesa reconciliation" },
+        { code:88, label:"Other", other:true },
+      ],
+    },
+
+    // ── Q6: LOSS (CORE) ────────────────────────────────
+    {
+      id: "LOSS",
+      type: "multi",
+      max: 2,
+      title: "Where do you lose money or time unnecessarily?",
+      sub: "Choose your top 2 areas.",
+      core: true,
+      options: [
+        { code:1, label:"Buying too much stock that expires or doesn't sell" },
+        { code:2, label:"Customers who take goods on credit and don't pay" },
+        { code:3, label:"Staff who are not productive or honest" },
+        { code:4, label:"Errors when pricing or giving change" },
+        { code:5, label:"Time spent on WhatsApp answering the same questions" },
+        { code:6, label:"Reconciling M-Pesa payments manually at end of day" },
+        { code:7, label:"Travelling to make deliveries or payments in person" },
+        { code:8, label:"Waiting for late suppliers or contractors" },
+        { code:88, label:"Other", other:true },
+      ],
+    },
+
+    // ── Q7: MANUAL (CORE) ──────────────────────────────
+    {
+      id: "MANUAL",
+      type: "multi",
+      max: 12,
+      title: "Which tasks do you do manually that you wish were automatic?",
+      sub: "Tick everything that applies.",
+      core: true,
+      options: [
+        { code:1,  label:"Writing invoices or receipts" },
+        { code:2,  label:"Tracking stock and inventory" },
+        { code:3,  label:"Scheduling appointments or deliveries" },
+        { code:4,  label:"Following up customers who haven't paid" },
+        { code:5,  label:"Reconciling M-Pesa / mobile money payments" },
+        { code:6,  label:"Setting or updating prices" },
+        { code:7,  label:"Forecasting what stock to order next" },
+        { code:8,  label:"Tracking staff attendance or tasks" },
+        { code:9,  label:"Managing deliveries and riders" },
+        { code:10, label:"Preparing financial reports / profit & loss" },
+        { code:11, label:"Responding to customer WhatsApp messages" },
+        { code:12, label:"Posting on social media for marketing" },
+      ],
+    },
+
+    // ── Q8: SEVERITY GRID (CORE) ───────────────────────
+    {
+      id: "SEV",
+      type: "rating_grid",
+      title: "How severe is each problem for your business?",
+      sub: "1 = doesn't affect me · 5 = serious daily problem",
+      core: true,
+      items: [
+        { id:"SEV_1", label:"Stock tracking & inventory" },
+        { id:"SEV_2", label:"Customer follow-up & credit collection" },
+        { id:"SEV_3", label:"M-Pesa & payment reconciliation" },
+        { id:"SEV_4", label:"Knowing real profit / financial visibility" },
+        { id:"SEV_5", label:"Staff performance & attendance" },
+        { id:"SEV_6", label:"WhatsApp & customer communication overload" },
+        { id:"SEV_7", label:"Getting new customers (marketing)" },
+      ],
+    },
+
+    // ── Q9: IDEAL_TOOL (CORE) ──────────────────────────
+    {
+      id: "IDEAL_TOOL",
+      type: "single",
+      title: "If one tool could do one thing perfectly — what would you want it to do?",
+      core: true,
+      options: [
+        { code:1, label:"Track my stock and tell me when to reorder — automatically" },
+        { code:2, label:"Send payment reminders to customers who owe me money" },
+        { code:3, label:"Show my real profit and expenses daily, from M-Pesa data" },
+        { code:4, label:"Handle customer WhatsApp messages and bookings automatically" },
+        { code:5, label:"Help me post on social media and get more customers" },
+        { code:6, label:"Manage staff — attendance, tasks, and payroll" },
+        { code:7, label:"Handle deliveries and track riders automatically" },
+        { code:8, label:"Issue invoices and receipts instantly" },
+        { code:88, label:"Something else", other:true },
+      ],
+    },
+
+    // ── Q10: TRIED + FAIL ──────────────────────────────
+    {
+      id: "TRIED",
+      type: "multi",
+      max: 8,
+      title: "Have you tried any solution before to fix these problems?",
+      sub: "Tick all you have tried.",
+      core: true,
+      options: [
+        { code:1, label:"Manual Excel or Google Sheets" },
+        { code:2, label:"A local accounting app (QuickBooks / Wave / Duka Smart)" },
+        { code:3, label:"WhatsApp group to manage customers or staff" },
+        { code:4, label:"Hired a bookkeeper or data entry person" },
+        { code:5, label:"A physical notebook / manual records" },
+        { code:6, label:"POS machine from a bank or telco" },
+        { code:7, label:"Nothing — I have not tried anything" },
+        { code:88, label:"Other", other:true },
+      ],
+    },
+
+    // ── Q10b: FAIL_REASON ──────────────────────────────
+    {
+      id: "FAIL_REASON",
+      type: "single",
+      title: "Why didn't it work well enough?",
+      sub: "Choose the main reason.",
+      skip: (a) => {
+        const tried = a["TRIED"] || [];
+        return tried.includes(7) || tried.length === 0;
+      },
+      options: [
+        { code:1, label:"Too expensive — subscription cost too high" },
+        { code:2, label:"Too complicated — I couldn't understand it" },
+        { code:3, label:"Internet was unreliable or data was expensive" },
+        { code:4, label:"Not in Swahili — language was a barrier" },
+        { code:5, label:"Didn't fit my type of business" },
+        { code:6, label:"I didn't trust it with my data" },
+        { code:7, label:"Staff didn't adopt it / stopped using it" },
+        { code:8, label:"No training or support available" },
+        { code:9, label:"It still works — I'm currently using it" },
+      ],
+    },
+
+    // ── Q11: SMARTPHONE + INTERNET ─────────────────────
+    {
+      id: "SMARTPHONE",
+      type: "single",
+      title: "What type of phone do you primarily use for business?",
+      options: [
+        { code:1, label:"Android smartphone (Samsung / Tecno / Infinix / etc.)" },
+        { code:2, label:"iPhone" },
+        { code:3, label:"Basic / feature phone only" },
+        { code:4, label:"I use someone else's phone" },
+      ],
+    },
+
+    // ── Q11b: INTERNET ─────────────────────────────────
+    {
+      id: "INTERNET",
+      type: "single",
+      title: "How reliable is your internet for running a business app?",
+      options: [
+        { code:1, label:"Good — I have reliable daily data" },
+        { code:2, label:"Okay — sometimes slow or expensive" },
+        { code:3, label:"Poor — very unreliable or mostly offline" },
+        { code:4, label:"No regular internet access" },
+      ],
+    },
+
+    // ── Q12: WTP_WILLING ───────────────────────────────
+    {
+      id: "WTP_WILLING",
+      type: "single",
+      title: "If a simple app solved your main problem — would you pay for it monthly?",
+      options: [
+        { code:1, label:"Yes — definitely willing to pay if it works" },
+        { code:2, label:"Maybe — depends on the cost and whether it actually helps" },
+        { code:3, label:"No — I would only use it if it's free" },
+        { code:4, label:"No — I don't trust paying for apps" },
+      ],
+    },
+
+    // ── Q12b: WTP_AMOUNT ───────────────────────────────
+    {
+      id: "WTP_AMOUNT",
+      type: "single",
+      title: "What monthly price would feel fair?",
+      sub: "In Kenyan Shillings, per month.",
+      skip: (a) => [3,4].includes(a["WTP_WILLING"]?.[0] || a["WTP_WILLING"]),
+      options: [
+        { code:1, label:"Under KES 200" },
+        { code:2, label:"KES 200–500" },
+        { code:3, label:"KES 500–1,000" },
+        { code:4, label:"KES 1,000–2,500" },
+        { code:5, label:"Over KES 2,500" },
+      ],
+    },
+
+    // ── GPS + FOLLOWUP ─────────────────────────────────
+    {
+      id: "GPS",
+      type: "gps_followup",
+      title: "Almost done — two quick things.",
+    },
+
+    // ── SUBMIT → SUCCESS ───────────────────────────────
+    {
+      id: "success",
+      type: "success",
+    },
+
+  ]
+};
+
+/* ════════════════════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════════════════════ */
+let currentIdx = 0;
+let answers    = {};
+let gpsData    = { lat: null, lon: null };
+let direction  = 1; // 1 = forward, -1 = back
+
+/* ════════════════════════════════════════════════════════════
+   HELPERS
+════════════════════════════════════════════════════════════ */
+function isSkipped(q) {
+  return typeof q.skip === "function" && q.skip(answers);
+}
+
+function getVisibleQuestions() {
+  return SURVEY.questions.filter(q => !isSkipped(q));
+}
+
+function getProgress() {
+  const visible = getVisibleQuestions();
+  const idx = visible.findIndex(q => q.id === SURVEY.questions[currentIdx]?.id);
+  const total = visible.filter(q => q.type !== "intro" && q.type !== "success").length;
+  const current = Math.max(0, idx);
+  return { pct: Math.round((current / total) * 100), label: `${current} / ${total}` };
+}
+
+function canProceed(q) {
+  if (!q) return true;
+  if (q.type === "intro" || q.type === "success") return true;
+  if (q.type === "gps_followup") return true;
+  if (q.type === "rating_grid") {
+    return q.items.every(item => answers[item.id] !== undefined);
+  }
+  const val = answers[q.id];
+  if (q.type === "single" && val === undefined) return false;
+  if (q.type === "multi" && (!val || val.length === 0)) return false;
+  return true;
+}
+
+/* ════════════════════════════════════════════════════════════
+   RENDER
+════════════════════════════════════════════════════════════ */
+function render() {
+  const q = SURVEY.questions[currentIdx];
+  const viewport = document.getElementById("viewport");
+  const progressWrap = document.getElementById("progressWrap");
+  const bottomNav = document.getElementById("bottomNav");
+  const backBtn = document.getElementById("backBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  // Remove old screens
+  const prev = viewport.querySelector(".screen.active");
+  if (prev) {
+    prev.classList.remove("active");
+    prev.classList.add(direction > 0 ? "hidden-left" : "hidden-right");
+    setTimeout(() => prev.remove(), 400);
+  }
+
+  // Build new screen
+  const screen = document.createElement("div");
+  screen.className = "screen hidden-right";
+  screen.innerHTML = buildScreen(q);
+  viewport.appendChild(screen);
+
+  requestAnimationFrame(() => {
+    screen.classList.remove("hidden-right", "hidden-left");
+    screen.classList.add("active");
+  });
+
+  // Progress
+  if (q.type === "intro" || q.type === "success") {
+    progressWrap.style.display = "none";
+    bottomNav.style.display = "none";
+  } else {
+    const prog = getProgress();
+    progressWrap.style.display = "flex";
+    document.getElementById("progressFill").style.width = prog.pct + "%";
+    document.getElementById("progressLabel").textContent = prog.label;
+    bottomNav.style.display = "flex";
+    backBtn.style.visibility = currentIdx > 0 ? "visible" : "hidden";
+    updateNextBtn(q);
+  }
+}
+
+function updateNextBtn(q) {
+  const nextBtn = document.getElementById("nextBtn");
+  const isLast = SURVEY.questions[currentIdx + 1]?.type === "success"
+    || currentIdx === SURVEY.questions.length - 2;
+  nextBtn.disabled = !canProceed(q);
+  nextBtn.textContent = q.type === "gps_followup" ? "Submit →" : "Continue →";
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN BUILDERS
+════════════════════════════════════════════════════════════ */
+function buildScreen(q) {
+  switch (q.type) {
+    case "intro":         return buildIntro();
+    case "single":        return buildSingle(q);
+    case "multi":         return buildMulti(q);
+    case "rating_grid":   return buildRatingGrid(q);
+    case "gps_followup":  return buildGpsFollowup(q);
+    case "success":       return buildSuccess();
+    default:              return "";
+  }
+}
+
+function buildIntro() {
+  return `
+    <div class="intro-logo">Base<em>line</em></div>
+    <div class="intro-hero">
+      <div class="intro-hero-icon">🧩</div>
+      <h1>Kenya Entrepreneur<br><span>Research Challenge</span></h1>
+      <p>We're building tools for Kenyan businesses. Help us understand the real challenges you face — so what we build actually solves them.</p>
+      <div class="intro-meta">
+        <span class="intro-pill">⏱ ~8 minutes</span>
+        <span class="intro-pill">🔒 Confidential</span>
+        <span class="intro-pill">🇰🇪 Kenya-specific</span>
+      </div>
+    </div>
+    <div class="intro-confidential">
+      Your answers are completely private. No business name or personal details will be shared. You can stop at any time.
+    </div>
+    <button class="btn-primary" onclick="startSurvey()" style="margin-bottom:24px">
+      Start survey →
+    </button>
+  `;
+}
+
+function buildSingle(q) {
+  const val = answers[q.id];
+  const otherVal = answers[q.id + "_OTHER"] || "";
+  return `
+    ${q.core ? '<div class="q-meta">🎯 Core research question</div>' : '<div style="height:4px"></div>'}
+    <h2 class="q-title">${q.title}</h2>
+    ${q.sub ? `<p class="q-sub">${q.sub}</p>` : ""}
+    <div class="options" id="opts_${q.id}">
+      ${q.options.map(o => `
+        <div class="opt ${val === o.code ? "selected" : ""}"
+             onclick="selectSingle('${q.id}', ${o.code}, ${!!o.other})"
+             data-code="${o.code}">
+          <div class="opt-dot"></div>
+          <div class="opt-label">${o.label}</div>
+        </div>
+        ${o.other ? `<input class="other-input ${val === o.code ? "show" : ""}"
+          id="other_${q.id}" placeholder="Please specify…"
+          value="${otherVal}"
+          oninput="answers['${q.id}_OTHER']=this.value"
+        />` : ""}
+      `).join("")}
+    </div>
+  `;
+}
+
+function buildMulti(q) {
+  const val = answers[q.id] || [];
+  const otherVal = answers[q.id + "_OTHER"] || "";
+  const isCheckbox = q.max > 4;
+  return `
+    ${q.core ? '<div class="q-meta">🎯 Core research question</div>' : '<div style="height:4px"></div>'}
+    <h2 class="q-title">${q.title}</h2>
+    ${q.sub ? `<p class="q-sub">${q.sub}</p>` : ""}
+    ${q.max <= 4 ? `<div class="multi-badge" id="multiBadge_${q.id}">Select up to ${q.max} · ${val.length} chosen</div>` : ""}
+    <div class="options" id="opts_${q.id}">
+      ${q.options.map(o => `
+        <div class="opt ${val.includes(o.code) ? "selected" : ""}"
+             onclick="${isCheckbox ? `toggleCheckbox` : `toggleMulti`}('${q.id}', ${o.code}, ${q.max}, ${!!o.other})"
+             data-code="${o.code}">
+          <div class="${isCheckbox ? "opt-sq" : "opt-dot"}">
+            ${isCheckbox && val.includes(o.code) ? "✓" : ""}
+          </div>
+          <div class="opt-label">${o.label}</div>
+        </div>
+        ${o.other ? `<input class="other-input ${val.includes(o.code) ? "show" : ""}"
+          id="other_${q.id}" placeholder="Please specify…"
+          value="${otherVal}"
+          oninput="answers['${q.id}_OTHER']=this.value"
+        />` : ""}
+      `).join("")}
+    </div>
+  `;
+}
+
+function buildRatingGrid(q) {
+  return `
+    ${q.core ? '<div class="q-meta">🎯 Core research question</div>' : ''}
+    <h2 class="q-title">${q.title}</h2>
+    <p class="q-sub">${q.sub}</p>
+    <div class="severity-list">
+      ${q.items.map(item => `
+        <div class="sev-item">
+          <div class="sev-label">${item.label}</div>
+          <div class="sev-scale">
+            <div class="sev-anchor">Not a<br>problem</div>
+            <div class="sev-dots">
+              ${[1,2,3,4,5].map(n => `
+                <div class="sev-dot ${answers[item.id] === n ? "selected" : ""}"
+                     onclick="rateSeverity('${item.id}', ${n})">
+                  ${n}
+                </div>
+              `).join("")}
+            </div>
+            <div class="sev-anchor right">Very<br>severe</div>
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+function buildGpsFollowup(q) {
+  const followup = answers["FOLLOWUP"];
+  const contact = answers["CONTACT"] || "";
+  const hasGps = gpsData.lat !== null;
+  return `
+    <h2 class="q-title" style="margin-top:4px">${q.title}</h2>
+    <div style="padding-bottom:20px">
+      <!-- GPS -->
+      <div class="gps-card">
+        <div class="gps-icon">📍</div>
+        <div class="gps-status">Tap the button to capture your approximate location. This helps us understand which areas of Kenya face which challenges.</div>
+        <button class="btn-primary" onclick="captureGps()" style="${hasGps ? "background:var(--deep);color:var(--muted);box-shadow:var(--neu-in)" : ""}">
+          ${hasGps ? "✓ Location captured" : "Capture my location"}
+        </button>
+        <div class="gps-coords ${hasGps ? "show" : ""}" id="gpsCoords">
+          ${hasGps ? `${gpsData.lat.toFixed(4)}°, ${gpsData.lon.toFixed(4)}°` : ""}
+        </div>
+      </div>
+
+      <!-- Follow-up -->
+      <div class="q-meta" style="margin-top:4px">Optional</div>
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:-.02em;margin-bottom:8px">
+        Would you like to be contacted for a follow-up or to test a tool we build from this research?
+      </h3>
+      <div class="options" style="padding-bottom:0;margin-bottom:12px">
+        <div class="opt ${followup===1?"selected":""}" onclick="selectFollowup(1)">
+          <div class="opt-dot"></div>
+          <div class="opt-label">Yes — contact me</div>
+        </div>
+        <div class="opt ${followup===0?"selected":""}" onclick="selectFollowup(0)">
+          <div class="opt-dot"></div>
+          <div class="opt-label">No — keep me anonymous</div>
+        </div>
+      </div>
+      ${followup === 1 ? `
+        <input class="contact-input" id="contactInput"
+          type="tel" placeholder="Your WhatsApp number (e.g. 0712345678)"
+          value="${contact}"
+          oninput="answers['CONTACT']=this.value"
+        />
+      ` : ""}
+    </div>
+  `;
+}
+
+function buildSuccess() {
+  return `
+    <div class="success-screen">
+      <div class="success-icon">✓</div>
+      <div class="success-title">Asante sana!</div>
+      <div class="success-sub">
+        Your responses have been recorded. This research will directly shape the tools we build for Kenyan businesses.
+      </div>
+      <div class="success-brand">Base<em>line</em> · Kenya Entrepreneur Research Challenge</div>
+      <a href="https://wa.me/254726900026" target="_blank" style="margin-top:8px">
+        <button class="btn-primary" style="max-width:260px">💬 Connect on WhatsApp</button>
+      </a>
+    </div>
+  `;
+}
+
+/* ════════════════════════════════════════════════════════════
+   INTERACTION HANDLERS
+════════════════════════════════════════════════════════════ */
+function startSurvey() {
+  direction = 1;
+  currentIdx = 1;
+  render();
+}
+
+function goNext() {
+  const q = SURVEY.questions[currentIdx];
+  if (!canProceed(q)) return;
+
+  if (q.type === "gps_followup") {
+    submitSurvey();
+    return;
+  }
+
+  direction = 1;
+  let next = currentIdx + 1;
+  while (next < SURVEY.questions.length && isSkipped(SURVEY.questions[next])) next++;
+  if (next < SURVEY.questions.length) {
+    currentIdx = next;
+    render();
+  }
+}
+
+function goBack() {
+  direction = -1;
+  let prev = currentIdx - 1;
+  while (prev >= 0 && isSkipped(SURVEY.questions[prev])) prev--;
+  if (prev >= 0) {
+    currentIdx = prev;
+    render();
+  }
+}
+
+function selectSingle(id, code, isOther) {
+  answers[id] = code;
+  // Show/hide other inputs
+  document.querySelectorAll(`#opts_${id} .opt`).forEach(el => {
+    el.classList.toggle("selected", parseInt(el.dataset.code) === code);
+  });
+  const otherEl = document.getElementById(`other_${id}`);
+  if (otherEl) otherEl.classList.toggle("show", isOther && code === parseInt(otherEl.parentElement?.previousElementSibling?.dataset?.code || "0") || isOther);
+  updateNextBtn(SURVEY.questions[currentIdx]);
+}
+
+function toggleMulti(id, code, max, isOther) {
+  if (!answers[id]) answers[id] = [];
+  const arr = answers[id];
+  const idx = arr.indexOf(code);
+  if (idx >= 0) {
+    arr.splice(idx, 1);
+  } else {
+    if (arr.length >= max) return;
+    arr.push(code);
+  }
+  const q = SURVEY.questions[currentIdx];
+  const badge = document.getElementById(`multiBadge_${id}`);
+  if (badge) badge.textContent = `Select up to ${max} · ${arr.length} chosen`;
+  document.querySelectorAll(`#opts_${id} .opt`).forEach(el => {
+    el.classList.toggle("selected", arr.includes(parseInt(el.dataset.code)));
+  });
+  updateNextBtn(q);
+}
+
+function toggleCheckbox(id, code, max, isOther) {
+  if (!answers[id]) answers[id] = [];
+  const arr = answers[id];
+  const idx = arr.indexOf(code);
+  if (idx >= 0) {
+    arr.splice(idx, 1);
+  } else {
+    arr.push(code);
+  }
+  const q = SURVEY.questions[currentIdx];
+  document.querySelectorAll(`#opts_${id} .opt`).forEach(el => {
+    const c = parseInt(el.dataset.code);
+    el.classList.toggle("selected", arr.includes(c));
+    const sq = el.querySelector(".opt-sq");
+    if (sq) sq.textContent = arr.includes(c) ? "✓" : "";
+  });
+  const otherEl = document.getElementById(`other_${id}`);
+  if (otherEl) otherEl.classList.toggle("show", arr.includes(88));
+  updateNextBtn(q);
+}
+
+function rateSeverity(itemId, value) {
+  answers[itemId] = value;
+  document.querySelectorAll(`[onclick="rateSeverity('${itemId}', ${1})"]`)
+    .forEach((_, i) => {});
+  // Re-render the grid item
+  const allDots = document.querySelectorAll(`.sev-item`);
+  const q = SURVEY.questions[currentIdx];
+  if (!q || q.type !== "rating_grid") return;
+  const item = q.items.find(it => it.id === itemId);
+  if (!item) return;
+  const itemEls = Array.from(allDots).find(el =>
+    el.querySelector(".sev-label")?.textContent === item.label
+  );
+  if (!itemEls) return;
+  itemEls.querySelectorAll(".sev-dot").forEach((dot, i) => {
+    dot.classList.toggle("selected", i + 1 === value);
+  });
+  updateNextBtn(q);
+}
+
+function selectFollowup(val) {
+  answers["FOLLOWUP"] = val;
+  render(); // re-render to show/hide contact input
+}
+
+/* ════════════════════════════════════════════════════════════
+   GPS CAPTURE
+════════════════════════════════════════════════════════════ */
+function captureGps() {
+  if (!navigator.geolocation) {
+    alert("GPS not supported on this device.");
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      gpsData.lat = pos.coords.latitude;
+      gpsData.lon = pos.coords.longitude;
+      render();
+    },
+    err => {
+      console.warn("GPS error:", err);
+      gpsData.lat = 0;
+      gpsData.lon = 0;
+      render();
+    },
+    { enableHighAccuracy:true, timeout:10000 }
+  );
+}
+
+/* ════════════════════════════════════════════════════════════
+   SUBMIT
+════════════════════════════════════════════════════════════ */
+function formatAnswers() {
+  const d = { ...answers };
+  d.GPS_LAT   = gpsData.lat || "";
+  d.GPS_LON   = gpsData.lon || "";
+  d.TIMESTAMP = new Date().toISOString();
+  // Flatten arrays
+  ["REV_CH","LOSS","MANUAL","TRIED"].forEach(k => {
+    if (Array.isArray(d[k])) d[k] = d[k].join("|");
+  });
+  // Flatten severity items
+  const sevQ = SURVEY.questions.find(q => q.id === "SEV");
+  if (sevQ) sevQ.items.forEach(item => { d[item.id] = answers[item.id] || ""; });
+  delete d["SEV"];
+  return d;
+}
+
+async function retrySubmit() {
+  document.getElementById("errorOverlay").classList.remove("show");
+  await submitSurvey();
+}
+
+async function submitSurvey() {
+  const payload = formatAnswers();
+  payload.survey        = "Kenya Entrepreneur Research Challenge";
+  payload.survey_id     = "kenya-entrepreneur-research-challenge";
+  payload.source        = "whatsapp_selfadmin";
+  payload.enumerator    = "Self-admin";
+
+  // Derive a rough sentiment score from SEV ratings (lower avg severity = higher satisfaction)
+  const sevKeys = ["SEV_1","SEV_2","SEV_3","SEV_4","SEV_5","SEV_6","SEV_7"];
+  const sevVals = sevKeys.map(k=>Number(answers[k]||0)).filter(v=>v>0);
+  if (sevVals.length > 0) {
+    const avgSev = sevVals.reduce((a,b)=>a+b,0)/sevVals.length;
+    payload.sentiment = Math.round(((5-avgSev)/4)*100);
+  }
+
+  // Derive tags from OPS_SLOW
+  const OPS_TAG = {1:"stock_tracking_issue",2:"customer_followup_gap",3:"multichannel_chaos",4:"profit_visibility_gap",5:"staff_management",6:"acquisition_problem",7:"supplier_issue",8:"cash_flow_problem",9:"recordkeeping_chaos"};
+  const slowCode = answers["OPS_SLOW"];
+  payload.tags = slowCode && OPS_TAG[slowCode] ? OPS_TAG[slowCode] : "";
+  payload.flagged = false;
+  payload.media   = 0;
+
+  if (!FB_READY) {
+    // Demo mode — no Firebase configured yet
+    await new Promise(r => setTimeout(r, 1400));
+    direction = 1;
+    currentIdx = SURVEY.questions.length - 1;
+    render();
+    return;
+  }
+
+  document.getElementById("loadingOverlay").classList.add("show");
+  try {
+    await fbCreate(payload);
+    document.getElementById("loadingOverlay").classList.remove("show");
+    direction = 1;
+    currentIdx = SURVEY.questions.length - 1;
+    render();
+  } catch(e) {
+    document.getElementById("loadingOverlay").classList.remove("show");
+    document.getElementById("errorMsg").textContent = e.message || "Firebase submission failed.";
+    document.getElementById("errorOverlay").classList.add("show");
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════════════════════ */
+render();
+</script>
+
+<!--
+  ══════════════════════════════════════════════════════════════
+  GOOGLE APPS SCRIPT (Code.gs)
+  Paste this into a new Apps Script project.
+  Deploy as Web App: Execute as Me, Access Anyone.
+  ══════════════════════════════════════════════════════════════
+
+function doPost(e) {
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = ss.getSheetByName("Responses") || ss.insertSheet("Responses");
+
+    const data = JSON.parse(e.postData.contents);
+
+    // Write header row if sheet is empty
+    if (sheet.getLastRow() === 0) {
+      const headers = Object.keys(data);
+      sheet.appendRow(headers);
+    }
+
+    // Append data row in same column order as header
+    const headerRow = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    const row = headerRow.map(h => data[h] !== undefined ? data[h] : "");
+    sheet.appendRow(row);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ success: true, rows: sheet.getLastRow() }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch(err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ success: false, error: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  return ContentService
+    .createTextOutput("Redolens Field Intelligence — Survey Endpoint Active ✓")
+    .setMimeType(ContentService.MimeType.TEXT);
+}
+
+  ══════════════════════════════════════════════════════════════
+-->
+
+</body>
+</html>

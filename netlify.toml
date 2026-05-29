@@ -1,2 +1,12 @@
 [build]
   functions = "netlify/functions"
+
+[[redirects]]
+  from = "/kenya-entrepreneur-survey-form"
+  to = "/kenya-entrepreneur-survey-form.html"
+  status = 200
+
+[[redirects]]
+  from = "/baseline"
+  to = "/baseline-platform.html"
+  status = 200
