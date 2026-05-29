@@ -613,6 +613,9 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
   .testi-grid{grid-template-columns:1fr}
   .kenya-grid{grid-template-columns:1fr}
   .about-grid{grid-template-columns:1fr;gap:40px}
+  .about-outer{grid-template-columns:1fr!important;gap:40px!important}
+  .about-tiles{grid-template-columns:1fr 1fr!important}
+  .stat-tiles-3{grid-template-columns:repeat(3,1fr)}
   .oneoff-grid{grid-template-columns:1fr 1fr}
   .tools-grid{grid-template-columns:1fr 1fr}
   .blog-grid{grid-template-columns:1fr}
@@ -632,6 +635,9 @@ footer{background:var(--bg-deep);box-shadow:var(--s-in);padding:48px 0 32px}
   .container{padding:0 20px}
   .wa-label{display:none}
   .wa-btn{padding:14px;border-radius:50%;width:54px;height:54px}
+  .stat-tiles-3{grid-template-columns:1fr!important}
+  .about-outer{grid-template-columns:1fr!important;gap:32px!important}
+  .about-tiles{grid-template-columns:1fr 1fr!important}
 }
 html.dark .hero-overlay{background:linear-gradient(135deg,rgba(7,17,31,.72) 0%,rgba(7,17,31,.42) 55%,rgba(7,17,31,.68) 100%)}
 html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242,.82) 0%,rgba(220,232,242,.55) 55%,rgba(220,232,242,.82) 100%)}
@@ -936,7 +942,7 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
           <p class="wf-desc">IH-FoA had deep technical expertise. Their old Wix site didn't reflect it: generic, cluttered, zero hierarchy. We rebuilt everything from brief to live in 15 days.</p>
 
           <!-- 3 headline stats -->
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px">
+          <div class="stat-tiles-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px">
             <div style="background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:14px;padding:18px 16px;text-align:center">
               <div class="count-stat" data-target="487" style="font-family:'Bricolage Grotesque',sans-serif;font-size:2.2rem;font-weight:800;color:var(--blue);line-height:1">487</div>
               <div style="font-size:10px;color:var(--t2);margin-top:6px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;line-height:1.4">Organic visits<br>Month 1</div>
@@ -1162,7 +1168,7 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
 ================================================================ -->
 <section class="section-alt" id="about">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+    <div class="about-outer" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
       <div>
         <p class="label fi">About Redolense</p>
         <h2 class="about-h fi">Built for businesses<br>that scale.</h2>
@@ -1175,7 +1181,7 @@ html:not(.dark) .hero-overlay{background:linear-gradient(135deg,rgba(220,232,242
           <a href="https://wa.me/254726900026" class="btn-ghost" style="font-size:13px;padding:10px 20px" target="_blank">WhatsApp us →</a>
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="about-tiles" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
         <div style="background:var(--bg-lift);border-radius:var(--r);box-shadow:var(--s-sm);padding:28px 24px">
           <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:2rem;font-weight:800;color:var(--blue)">6</div>
           <div style="font-size:12px;color:var(--t2);margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em">Years<br>experience</div>
@@ -1495,33 +1501,50 @@ document.getElementById('chatClose').addEventListener('click', () => chatWin.cla
 /* ── Anthropic API key: add yours from console.anthropic.com ── */
 /* API key lives in Netlify environment variable — never in this file */
 
-const BOT_SYSTEM = `You are the Redolense assistant: concise, warm, and execution-focused. Built in Nairobi, delivering globally.
+const BOT_SYSTEM = `You are the Redolense assistant. Concise, warm, execution-focused. Built in Nairobi, delivering globally.
 
-Redolense is a digital growth practice founded by Joemark Mureithi; Design Engineer, TPM, PMP Certified. Engineering discipline applied to business growth.
+Redolense is a digital growth practice founded by Joemark Mureithi. Design Engineer, TPM, PMP Certified. Engineering discipline applied to business growth.
 
-SERVICES (send a quote for pricing):
-- Signal: Foundation: website, SEO, WhatsApp Business setup, 1 social channel, monthly report
-- Engine: Growth; Signal + TikTok/Instagram content (16 posts), 2 blog posts, WhatsApp automation, M-Pesa integration
-- System: Full infrastructure; Engine + brand videos, WhatsApp funnel, CRM, custom tools, weekly calls
-- One-off: Brand Identity | Website build | Corporate Video | WhatsApp Funnel
-- Payments: M-Pesa and online payments accepted
+SERVICES (all require a quote, no fixed prices):
+Signal tier: website, SEO setup, WhatsApp Business, one social channel, monthly report.
+Engine tier: everything in Signal plus TikTok/Instagram content (16 posts/month), two blog posts, WhatsApp automation, M-Pesa integration.
+System tier: everything in Engine plus brand videos, WhatsApp funnel, CRM, custom tools, weekly strategy calls.
+One-off projects: Brand Identity, Website build, Corporate Video, WhatsApp Funnel.
+Payments: M-Pesa and online payments accepted.
 
-RESULTS: IH-FoA (Georgia, USA), 100/100 Google Performance, 100 SEO, 94 Accessibility, 9 pages built in 12 days. Organic blog traffic generating qualified inbound leads.
+RESULTS: IH-FoA (Georgia USA) — 100/100 Google Performance, 100 SEO, 94 Accessibility, 9 pages built in 15 days. OSHA blog ranked Page 1 Google, 487 organic visits in Month 1.
 
-INSIGHTS: We publish on GEO (AI search visibility), LinkedIn SEO, WhatsApp systems, TikTok strategy, and M-Pesa funnels: all at redolense.com/insights.
+PROCESS: Discovery call, then Audit, then Build and Deploy, then Measure. First deliverable under 14 days.
 
-PROCESS: Discovery call → Audit → Build & Deploy → Measure. First deliverable under 14 days.
+CONTACT: WhatsApp on this site or joemarkmureithi@gmail.com
 
-CONTACT: WhatsApp on this site | joemarkmureithi@gmail.com | linkedin.com/in/joemark-mureithi
-
-STYLE: Under 120 words. Specific. End with a clear next step. Never invent details not in this prompt.`;
+STYLE RULES — strictly follow these:
+- Under 100 words per reply.
+- Plain sentences only. No asterisks, no bullet points, no dashes, no markdown of any kind.
+- Write in short paragraphs, two to three sentences each.
+- End every reply with one clear next step as a plain sentence.
+- Never invent details not in this prompt.`;
 
 let history = [];
+
+function parseBot(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/`(.*?)`/g, '<code>$1</code>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n/g, '<br>')
+    .replace(/^/, '<p>').replace(/$/, '</p>');
+}
 
 function addMsg(text, isUser) {
   const div = document.createElement('div');
   div.className = `msg ${isUser ? 'msg-usr' : 'msg-bot'}`;
-  div.textContent = text;
+  if (isUser) {
+    div.textContent = text;
+  } else {
+    div.innerHTML = parseBot(text);
+  }
   chatMsgs.appendChild(div);
   chatMsgs.scrollTop = chatMsgs.scrollHeight;
   return div;
