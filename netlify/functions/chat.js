@@ -12,19 +12,17 @@ exports.handler = async function (event) {
     console.error('ANTHROPIC_API_KEY is not set');
     return { statusCode: 500, body: JSON.stringify({ error: 'API key not configured' }) };
   }
-  console.log('API key present, length:', apiKey.length);
 
   let body;
   try {
     body = JSON.parse(event.body);
   } catch (e) {
-    console.error('JSON parse error:', e.message);
     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid JSON' }) };
   }
 
   const payload = JSON.stringify({
     model: 'claude-haiku-4-5-20251001',
-    max_tokens: 300,
+    max_tokens: body.max_tokens || 1000,
     system: body.system,
     messages: body.messages
   });
@@ -47,7 +45,6 @@ exports.handler = async function (event) {
       console.log('Anthropic response status:', res.statusCode);
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
-        console.log('Response received, length:', data.length);
         resolve({
           statusCode: 200,
           headers: {
@@ -60,7 +57,7 @@ exports.handler = async function (event) {
     });
 
     req.on('error', (err) => {
-      console.error('HTTPS request error:', err.message);
+      console.error('HTTPS error:', err.message);
       resolve({ statusCode: 500, body: JSON.stringify({ error: err.message }) });
     });
 
